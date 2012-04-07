@@ -25,7 +25,7 @@ public class ZooContainerTradingSpecial extends Container
         Block ablock[] =
             {
                 Block.blockDiamond, Block.blockGold, Block.blockLapis, Block.blockSnow, Block.blockSteel, Block.brick, Block.cobblestoneMossy, 
-                Block.enchantmentTable, Block.jukebox
+                Block.enchantmentTable, Block.jukebox, Block.blockClay
             };
         for(int i = 0; i < ablock.length; i++)
         {

@@ -2,11 +2,9 @@ package net.minecraft.src.zoo.core.entities;
 import net.minecraft.src.*;
 
 
-public class ZooVisitorMale extends ZooEntityAnimal
+public class ZooVisitorMale extends EntityCreature
 {
 	
-	public EntityLiving roped;
-
     public ZooVisitorMale(World world)
     {
         super(world);
@@ -48,16 +46,8 @@ public class ZooVisitorMale extends ZooEntityAnimal
     {
         return 287;
     }
-    
-    protected ZooEntityAnimal spawnBabyAnimal(ZooEntityAnimal entityanimal) {
-		return new ZooVisitorMale(worldObj);
-	}
 
 	public int getMaxHealth() {
-		return 10;
-	}
-	
-	public int getMaxHunger() {
 		return 10;
 	}
 }

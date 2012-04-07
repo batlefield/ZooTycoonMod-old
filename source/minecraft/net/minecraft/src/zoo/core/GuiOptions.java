@@ -10,6 +10,7 @@ import net.minecraft.src.GuiMainMenu;
 import net.minecraft.src.GuiScreen;
 import net.minecraft.src.GuiStats;
 import net.minecraft.src.MathHelper;
+import net.minecraft.src.ModLoader;
 import net.minecraft.src.StatCollector;
 import net.minecraft.src.StatList;
 import net.minecraft.src.World;
@@ -19,7 +20,8 @@ public class GuiOptions extends GuiScreen
     private int updateCounter2 = 0;
     private int updateCounter = 0;
     
-    private File options = new File(mc.getMinecraftDir(), "/Zoo/Options.txt");
+    private GuiButton biomesButton;
+    
     private ZooSettings settings = new ZooSettings();
 
     public void initGui()
@@ -28,7 +30,7 @@ public class GuiOptions extends GuiScreen
         controlList.clear();
         byte var1 = -16;
         
-        controlList.add(new GuiButton(5, width / 2 - 130, height / 4 + 48 + var1, 120, 20, "Generate biomes: " + settings.generateBiomesInOver));
+        controlList.add(biomesButton = new GuiButton(5, width / 2 - 130, height / 4 + 48 + var1, 120, 20, "Generate biomes: " + settings.generateBiomesInOver));
         controlList.add(new GuiButton(6, width / 2 + 10, height / 4 + 48 + var1, 120, 20, "Version check: " + settings.version));
         
         /*controlList.add(new GuiButton(5, width / 2 - 130, height / 4 + 68 + var1, 120, 20, "Generate biomes: " + settings.generateBiomesInOver));

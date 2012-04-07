@@ -1,24 +1,20 @@
 package net.minecraft.src.zoo.core;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.StatList;
 import net.minecraft.src.World;
-import net.minecraft.src.Zoo;
-import net.minecraft.src.forge.*;
+import net.minecraft.src.forge.ITextureProvider;
 import net.minecraft.src.zoo.api.Fence;
-import net.minecraft.src.zoo.core.*;
 import net.minecraft.src.zoo.core.gen.StructureGenerator;
 
 public class ZooBlockWall extends Block implements ITextureProvider{
 
+	private StructureGenerator generator = new StructureGenerator();
+	
 	public ZooBlockWall(int i) {
 		super(i, Material.wood);
 	}
@@ -115,30 +111,30 @@ public class ZooBlockWall extends Block implements ITextureProvider{
 	
 	public void generate(World world, int x, int y, int z, int size)
 	{
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x + size, y + 4, z + size, blockid);
-		StructureGenerator.generateCuboid(world, x + 1, y, z + 1, x + size - 1, y + 4, z + size - 1, 0);
-		StructureGenerator.generateCuboid(world, x, y + 5, z, x + size, y + 20, z + size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x + size, y + 4, z + size, blockid);
+		generator.generateCuboid(world, x + 1, y, z + 1, x + size - 1, y + 4, z + size - 1, 0);
+		generator.generateCuboid(world, x, y + 5, z, x + size, y + 20, z + size, 0);
 	}
 	
 	public void generateFrontLeft(World world, int x, int y, int z, int size)
 	{
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x + size, y + 4, z - size, blockid);
-		StructureGenerator.generateCuboid(world, x + 1, y, z - 1, x + size - 1, y + 4, z - size + 1, 0);
-		StructureGenerator.generateCuboid(world, x, y + 5, z, x + size, y + 20, z - size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x + size, y + 4, z - size, blockid);
+		generator.generateCuboid(world, x + 1, y, z - 1, x + size - 1, y + 4, z - size + 1, 0);
+		generator.generateCuboid(world, x, y + 5, z, x + size, y + 20, z - size, 0);
 	}
 	
 	public void generateBackRight(World world, int x, int y, int z, int size)
 	{
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x - size, y + 4, z + size, blockid);
-		StructureGenerator.generateCuboid(world, x - 1, y, z + 1, x - size + 1, y + 4, z + size - 1, 0);
-		StructureGenerator.generateCuboid(world, x, y + 5, z, x - size, y + 20, z + size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x - size, y + 4, z + size, blockid);
+		generator.generateCuboid(world, x - 1, y, z + 1, x - size + 1, y + 4, z + size - 1, 0);
+		generator.generateCuboid(world, x, y + 5, z, x - size, y + 20, z + size, 0);
 	}
 	
 	public void generateBackLeft(World world, int x, int y, int z, int size)
 	{
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x - size, y + 4, z - size, blockid);
-		StructureGenerator.generateCuboid(world, x - 1, y, z - 1, x - size + 1, y + 4, z - size + 1, 0);
-		StructureGenerator.generateCuboid(world, x, y + 5, z, x - size, y + 20, z - size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x - size, y + 4, z - size, blockid);
+		generator.generateCuboid(world, x - 1, y, z - 1, x - size + 1, y + 4, z - size + 1, 0);
+		generator.generateCuboid(world, x, y + 5, z, x - size, y + 20, z - size, 0);
 	}
 
 	public void addCreativeItems(ArrayList itemList)

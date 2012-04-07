@@ -2,25 +2,42 @@
 
 package net.minecraft.src;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.battlefield.API.BAPI;
 import net.minecraft.src.battlefield.API.IBiome;
 import net.minecraft.src.battlefield.API.VersionCheck;
-import net.minecraft.src.forge.Configuration;
-import net.minecraft.src.forge.IBucketHandler;
 import net.minecraft.src.forge.MinecraftForge;
-import net.minecraft.src.forge.MinecraftForgeClient;
-import net.minecraft.src.zoo.api.Trade;
 import net.minecraft.src.zoo.api.ZAPI;
-import net.minecraft.src.zoo.core.*;
-import net.minecraft.src.zoo.core.entities.*;
-import net.minecraft.src.zoo.trading.ZooItemCoin;
+import net.minecraft.src.zoo.core.BlockFencer;
+import net.minecraft.src.zoo.core.EntityHandeler;
+import net.minecraft.src.zoo.core.ItemSaltwaterBucket;
+import net.minecraft.src.zoo.core.ZooAcorns;
+import net.minecraft.src.zoo.core.ZooAxe;
+import net.minecraft.src.zoo.core.ZooBlock;
+import net.minecraft.src.zoo.core.ZooBlockGlass;
+import net.minecraft.src.zoo.core.ZooBlockQuicksand;
+import net.minecraft.src.zoo.core.ZooBlockWall;
+import net.minecraft.src.zoo.core.ZooBonemealHandler;
+import net.minecraft.src.zoo.core.ZooCrafting;
+import net.minecraft.src.zoo.core.ZooEnumTool;
+import net.minecraft.src.zoo.core.ZooFence;
+import net.minecraft.src.zoo.core.ZooGlass;
+import net.minecraft.src.zoo.core.ZooHoe;
+import net.minecraft.src.zoo.core.ZooItem;
+import net.minecraft.src.zoo.core.ZooItemFenceDestroyer;
+import net.minecraft.src.zoo.core.ZooLeaves;
+import net.minecraft.src.zoo.core.ZooPickaxe;
+import net.minecraft.src.zoo.core.ZooPlantHandler;
+import net.minecraft.src.zoo.core.ZooPlatform;
+import net.minecraft.src.zoo.core.ZooSaltwaterFlowing;
+import net.minecraft.src.zoo.core.ZooSaltwaterStationary;
+import net.minecraft.src.zoo.core.ZooSapling;
+import net.minecraft.src.zoo.core.ZooSettings;
+import net.minecraft.src.zoo.core.ZooShovel;
+import net.minecraft.src.zoo.core.ZooSword;
+import net.minecraft.src.zoo.core.ZooTallGrass;
 
 public class Zoo {
 	
@@ -29,7 +46,7 @@ public class Zoo {
 	}
 	
 	
-	// stuff that needs to be defined earlier
+	//stuff that needs to be defined earlier
 	private static boolean versionCheck = mod_ZooCore.settings.version;
 	
 	/**block ID's
@@ -58,15 +75,16 @@ public class Zoo {
 	private int plexiglassB = 223;
 	private int savannahTallGrassB = 224;
 	private int shopB = 225;
-	private int exhibitB = 226;
-	private int coniferousTallGrassB = 227;
-	private int acornsB = 228;
-	private int acaciaLeavesB = 229;
-	private int bluePineLeavesB = 230;
-	private int saplingB = 231;
-	private int grounder = 232
-	private int portal = 233
-	private int portalTool = 234**/
+	private int shopB2 = 226;/////
+	private int exhibitB = 227;
+	private int coniferousTallGrassB = 228;
+	private int acornsB = 229;
+	private int acaciaLeavesB = 230;
+	private int bluePineLeavesB = 231;
+	private int saplingB = 232;
+	private int grounder = 233;
+	private int portal = 234;
+	private int portalTool = 235;**/
 
 	public static boolean versionCheck()
 	{
@@ -142,6 +160,7 @@ public class Zoo {
 	public static void init()
 	{
 		
+		
 		ZAPI.registerFenceTool(fenceDestroyer);
 		
 		ZAPI.registerGlass(plexiglassBlock);
@@ -162,69 +181,54 @@ public class Zoo {
 			BAPI.registerBiomeHandler((IBiome) tropic);
 		}
         
-		
-		new ZooDirts();
 		new ZooCrafting();
 		
-				
-		//register
-		ModLoader.registerBlock(ZooDirts.savannah);
-		ModLoader.registerBlock(asphalt);
-		ModLoader.registerBlock(concrete);
-		ModLoader.registerBlock(brownStone);
-		ModLoader.registerBlock(fence);
-		ModLoader.registerBlock(plexiglass);
-		ModLoader.registerBlock(ZooDirts.deciduous);
-		ModLoader.registerBlock(ZooDirts.coniferous);
-		ModLoader.registerBlock(ZooDirts.tropical);
-		ModLoader.registerBlock(ZooDirts.coniPeat);
-		ModLoader.registerBlock(ZooDirts.deciPeat);
-		ModLoader.registerBlock(ZooDirts.laterite);
-		ModLoader.registerBlock(ZooDirts.mesa);
-		ModLoader.registerBlock(ZooDirts.gleyPeat);
-		ModLoader.registerBlock(ZooDirts.rainforest);
-		ModLoader.registerBlock(Quicksand);
-		ModLoader.registerBlock(Gfence);
-		ModLoader.registerBlock(Ofence);
-		ModLoader.registerBlock(Bfence);
-		ModLoader.registerBlock(plexiglassBlock);
-		ModLoader.registerBlock(savannahgrass);
-		ModLoader.registerBlock(coniferousgrass);
-		ModLoader.registerBlock(acorns);
-		ModLoader.registerBlock(acaciaLeaves);
-		ModLoader.registerBlock(saltwaterMoving);
-        ModLoader.registerBlock(saltwaterStill);
 
-		//names
-		ModLoader.addName(asphalt, "Asphalt");
-		ModLoader.addName(concrete, "Concrete");
-		ModLoader.addName(brownStone, "Brown Stone");
-		ModLoader.addName(saltwaterStill, "Saltwater");
-		ModLoader.addName(saltwaterMoving, "Saltwater");
+		//items
 		ModLoader.addName(saltBucket, "Bucket of saltwater");
-		ModLoader.addName(fence, "Stone fence");
-		ModLoader.addName(plexiglass, "Plexi Glass Pane");
 		ModLoader.addName(fenceDestroyer, "Fence removing tool");
 		ModLoader.addName(bsSword, "Brownstone Sword");
 		ModLoader.addName(bsPickaxe, "Brownstone Pickaxe");
 		ModLoader.addName(bsHoe, "Brownstone Hoe");
 		ModLoader.addName(bsShovel, "Brownstone Shovel");
 		ModLoader.addName(bsAxe, "Brownstone Axe");
-		ModLoader.addName(Quicksand, "Quicksand");
-		ModLoader.addName(Gfence, "Gold Fence");
-		ModLoader.addName(Ofence, "Obsidian Fence");
-		ModLoader.addName(Bfence, "Brownstone Fence");
-		ModLoader.addName(plexiglassBlock, "Plexi Glass");
-		ModLoader.addName(fencer, "Exhibit tool");
 		ModLoader.addName(smallFencePack, "Small fence pack");
 		ModLoader.addName(fencePack, "Fence Pack");
 		ModLoader.addName(compactFencePack, "Compact Fence Pack");
 		ModLoader.addName(lasso, "Lasso");
-		ModLoader.addName(savannahgrass, "Savannah grass");
-		ModLoader.addName(coniferousgrass, "Coniferous Grass");
-		ModLoader.addName(acorns, "Acorns");
-		ModLoader.addName(acaciaLeaves, "Acacia leaves");
 		
+		
+		//blocks
+		registerBlock(asphalt, "Asphalt");
+		registerBlock(concrete, "Concrete");
+		registerBlock(brownStone, "Brown Stone");
+		registerBlock(saltwaterStill, "Saltwater");
+		registerBlock(saltwaterMoving, "Saltwater");
+		registerBlock(fence, "Stone fence");
+		registerBlock(plexiglass, "Plexi Glass Pane");
+		registerBlock(Quicksand, "Quicksand");
+		registerBlock(Gfence, "Gold Fence");
+		registerBlock(Ofence, "Obsidian Fence");
+		registerBlock(Bfence, "Brownstone Fence");
+		registerBlock(plexiglassBlock, "Plexi Glass");
+		registerBlock(fencer, "Exhibit tool");
+		registerBlock(savannahgrass, "Savannah grass");
+		registerBlock(coniferousgrass, "Coniferous Grass");
+		registerBlock(acorns, "Acorns");
+		registerBlock(acaciaLeaves, "Acacia leaves");
+		registerBlock(ZooDirts.savannah, "Savannah");
+		registerBlock(ZooDirts.deciduous, "Deciduous");
+		registerBlock(ZooDirts.coniferous, "Coniferous");
+		registerBlock(ZooDirts.tropical, "Tropical");
+		registerBlock(ZooDirts.coniPeat, "Deciduous Peat");
+		registerBlock(ZooDirts.deciPeat, "Coniferous Peat");
+		registerBlock(ZooDirts.mesa, "Mesa");
+		registerBlock(ZooDirts.laterite, "Laterite");
+		registerBlock(ZooDirts.gleyPeat, "Gley Peat");
+		registerBlock(ZooDirts.rainforest, "Rainforest");
+		
+		
+		//blocks with metadata
 		ModLoader.registerBlock(blueLeaves, net.minecraft.src.zoo.core.ZooItemLeaves.class);
 		ModLoader.addName(new ItemStack(blueLeaves), "Blue pine leaves");
 		ModLoader.registerBlock(grounder, net.minecraft.src.zoo.core.ZooItemGrounder.class);
@@ -237,10 +241,10 @@ public class Zoo {
 		ModLoader.addName(new ItemStack(sapling, 1, 1), "Blue pine sapling");
 		ModLoader.addName(new ItemStack(sapling, 1, 2), "Deciduous sapling");
 		
+		
+		//other stuff
 		mc.renderEngine.registerTextureFX(new ZooSaltwaterTextureFX(saltwaterStill.blockIndexInTexture, false));
         mc.renderEngine.registerTextureFX(new ZooSaltwaterTextureFX(saltwaterMoving.blockIndexInTexture, true));
-				
-		//other stuff
 		if (saltwaterMoving.blockID + 1 != saltwaterStill.blockID) {
 		      throw new RuntimeException("Still saltwater id must be moving saltwater id + 1");
 		}
@@ -262,63 +266,21 @@ public class Zoo {
 		MinecraftForge.setBlockHarvestLevel(Block.netherFence, "zoofencedestroyer", 1);
 		MinecraftForge.setBlockHarvestLevel(Block.fence, "zoofencedestroyer", 1);
 		MinecraftForge.registerCustomBucketHandler(saltBucket);
-		
 		MinecraftForge.versionDetect("Zoo Tycoon", 1, 3, 3);
-		
 		MinecraftForge.registerBonemealHandler(new ZooBonemealHandler());
 		
 		/*test recipes
         ModLoader.AddRecipe(new ItemStack(Item.shears, 1), new Object[] {
 		     "X", Character.valueOf('X'), Block.dirt
 		});*/
-
-				
-		/**entities*/
-		//animals
-	    ModLoader.registerEntityID(ZooEntityBighorn.class, "Bighorn", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooEntityGazelle.class, "Gazelle", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooEntityHippo.class, "Hippo", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooEntityPrimate.class, "Primate", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooEntityRhino.class, "Rhino", ModLoader.getUniqueEntityId());
-	    ModLoader.registerEntityID(ZooEntityTiger.class, "Tiger", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooEntityElephant.class, "Elephant", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooEntityAfricanWDog.class, "African Wild Dog", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooEntityAnteater.class, "Anteater", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooEntityLion.class, "Lion", ModLoader.getUniqueEntityId());
-		//ModLoader.registerEntityID(ZooEntityPanther.class, "Panther", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooEntityFennecFox.class, "Fennec Fox", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooEntityGiraffe.class, "Giraffe", ModLoader.getUniqueEntityId());
-		//ModLoader.registerEntityID(ZooEntityFlamingo.class, "Flamingo", ModLoader.getUniqueEntityId());
-		//ModLoader.registerEntityID(ZooEntityGreyWolf.class, "Grey wolf", ModLoader.getUniqueEntityId());
 		
-		
-		//NPC's
-		ModLoader.registerEntityID(ZooVisitorMale.class, "NPC 1", ModLoader.getUniqueEntityId());
-		ModLoader.registerEntityID(ZooVisitorFemale.class, "Female", ModLoader.getUniqueEntityId());
-		          
-		
-	    //spawning
-	    ModLoader.addSpawn(ZooEntityBighorn.class, mod_ZooCore.getSpawnRate("Bighorn Spawnrate", 1), 4, 4, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooEntityGazelle.class, mod_ZooCore.getSpawnRate("Gazelle Spawnrate", 1), 4, 4, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooEntityHippo.class, mod_ZooCore.getSpawnRate("Hippo Spawnrate", 1), 4, 4, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooEntityPrimate.class, mod_ZooCore.getSpawnRate("Primate Spawnrate", 1), 4, 4, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooEntityRhino.class, mod_ZooCore.getSpawnRate("Rhino Spawnrate", 1), 4, 4, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooEntityTiger.class, mod_ZooCore.getSpawnRate("Tiger Spawnrate", 1), 4, 4, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooVisitorMale.class, mod_ZooCore.getSpawnRate("NPC 1 Spawnrate", 1), 1, 1, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooEntityLion.class, mod_ZooCore.getSpawnRate("Lion Spawnrate", 1), 4, 4, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooEntityAnteater.class, mod_ZooCore.getSpawnRate("Anteater Spawnrate", 1), 4, 4, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooEntityAfricanWDog.class, mod_ZooCore.getSpawnRate("African wild dog spawnrate", 1), 4, 8, EnumCreatureType.creature, savana);
-		//ModLoader.addSpawn(ZooEntityPanther.class, mod_ZooCore.getSpawnRate("Panther Spawnrate", 20), 4, 4, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooEntityFennecFox.class, mod_ZooCore.getSpawnRate("Fennec Fox Spawnrate", 1), 4, 4, EnumCreatureType.creature);
-		ModLoader.addSpawn(ZooEntityGiraffe.class, mod_ZooCore.getSpawnRate("Giraffe Spawnrate", 1), 4, 4, EnumCreatureType.creature);
-		//ModLoader.addSpawn(ZooEntityFlamingo.class, mod_ZooCore.getSpawnRate("Flamingo Spawnrate", 20), 4, 4, EnumCreatureType.creature);
-		//ModLoader.addSpawn(ZooEntityGreyWolf.class, mod_ZooCore.getSpawnRate("Grey Wolf Spawnrate", 10), 10, 10, EnumCreatureType.creature);
-		
-		/**broken*/
-		//
-		//ModLoader.addSpawn(ZooEntityElephant.class, mod_Zoo.getSpawnRate("Elephant Spawnrate", 20), 10, 10, EnumCreatureType.creature);
-		
-		
+		EntityHandeler.init();
+	}
+	
+	private static void registerBlock(Block block, String s)
+	{
+		ModLoader.registerBlock(block);
+		ModLoader.addName(block, s);
 	}
 		
 	//misc
@@ -330,22 +292,16 @@ public class Zoo {
 	public static final Block saltwaterMoving = (new ZooSaltwaterFlowing(mod_ZooCore.getBlockIdFor("Moving saltwater", 204), Material.water).setHardness(100F).setBlockName("swm").setLightOpacity(2).disableStats().setRequiresSelfNotify());
 	public static final Block Quicksand = (new ZooBlockQuicksand(mod_ZooCore.getBlockIdFor("Quicksand", 219), 37).setBlockName("qs"));
 	public static final Block savannahgrass = (new ZooTallGrass(mod_ZooCore.getBlockIdFor("Savannah Tall Grass", 224), 26).setBlockName("sg").setStepSound(Block.soundGrassFootstep));
-	public static final Block coniferousgrass = (new ZooTallGrass(mod_ZooCore.getBlockIdFor("Coniferous Tall Grass", 227), 27).setBlockName("cg").setStepSound(Block.soundGrassFootstep));
-	public static final Block acorns = (new ZooAcorns(mod_ZooCore.getBlockIdFor("Acorns", 228), 35).setBlockName("acorns").setStepSound(Block.soundWoodFootstep));
-	public static final BlockFencer fencer = (BlockFencer)(new BlockFencer(mod_ZooCore.getBlockIdFor("Exhibit tool", 226)).setBlockName("fencer").setHardness(0F));
-
-	
-	//leaves and tree stuff
-	public static final Block acaciaLeaves = (new ZooLeaves(mod_ZooCore.getBlockIdFor("Acacia Leaves", 229), 43).setHardness(0.2F).setBlockName("leaves").setStepSound(Block.soundGrassFootstep));
-	public static final Block blueLeaves = (new ZooLeaves(mod_ZooCore.getBlockIdFor("Blue Pine Leaves", 230), 39).setHardness(0.2F).setBlockName("blueleaves").setStepSound(Block.soundGrassFootstep).setRequiresSelfNotify());
-	public static final Block sapling = (new ZooSapling(mod_ZooCore.getBlockIdFor("Sapling", 231), 44).setBlockName("sapling").setStepSound(Block.soundGrassFootstep));
-	
-	
-	//fences
+	public static final Block coniferousgrass = (new ZooTallGrass(mod_ZooCore.getBlockIdFor("Coniferous Tall Grass", 228), 27).setBlockName("cg").setStepSound(Block.soundGrassFootstep));
+	public static final Block acorns = (new ZooAcorns(mod_ZooCore.getBlockIdFor("Acorns", 229), 35).setBlockName("acorns").setStepSound(Block.soundWoodFootstep));
+	public static final BlockFencer fencer = (BlockFencer)(new BlockFencer(mod_ZooCore.getBlockIdFor("Exhibit tool", 227)).setBlockName("fencer").setHardness(0F));
+	public static final Block acaciaLeaves = (new ZooLeaves(mod_ZooCore.getBlockIdFor("Acacia Leaves", 230), 43).setHardness(0.2F).setBlockName("leaves").setStepSound(Block.soundGrassFootstep));
+	public static final Block blueLeaves = (new ZooLeaves(mod_ZooCore.getBlockIdFor("Blue Pine Leaves", 231), 39).setHardness(0.2F).setBlockName("blueleaves").setStepSound(Block.soundGrassFootstep).setRequiresSelfNotify());
+	public static final Block sapling = (new ZooSapling(mod_ZooCore.getBlockIdFor("Sapling", 232), 44).setBlockName("sapling").setStepSound(Block.soundGrassFootstep));
 	public static final Block fence = (new BlockFence(mod_ZooCore.getBlockIdFor("Stone Fence", 206), 1, Material.rock).setHardness(3F).setResistance(6F).setBlockName("stonefence").setStepSound(Block.soundStoneFootstep));
 	public static final Block Gfence = (new BlockFence(mod_ZooCore.getBlockIdFor("Golden Fence", 220), 23, Material.iron).setHardness(20F).setResistance(6F).setBlockName("gfence").setStepSound(Block.soundMetalFootstep));
 	public static final Block Ofence = (new BlockFence(mod_ZooCore.getBlockIdFor("Obsidian Fence", 221), 37, Material.rock).setHardness(50F).setResistance(6F).setBlockName("ofence").setStepSound(Block.soundStoneFootstep));
-	public static final Block Bfence = (new BlockFence(mod_ZooCore.getBlockIdFor("Brownstone Fence", 222), ModLoader.addOverride("/terrain.png", "/zoo/bs.png"), Material.rock).setHardness(3F).setResistance(6F).setBlockName("bfence").setStepSound(Block.soundStoneFootstep));
+	public static final Block Bfence = (new ZooFence(mod_ZooCore.getBlockIdFor("Brownstone Fence", 222), 10, Material.rock).setHardness(3F).setResistance(6F).setBlockName("bfence").setStepSound(Block.soundStoneFootstep));
 	public static final Block plexiglass = (new ZooBlockGlass(mod_ZooCore.getBlockIdFor("Plexi glass pane", 207), 12, 31, Material.glass, true).setHardness(0.5F).setResistance(20000F).setBlockName("plexiglasspane").setStepSound(Block.soundGlassFootstep));
 	public static final Block plexiglassBlock = (new ZooGlass(mod_ZooCore.getBlockIdFor("Plexi glass", 223), 12, Material.glass, false).setHardness(0.5F).setResistance(20000F).setBlockName("plexiglass").setStepSound(Block.soundGlassFootstep));
 		
@@ -356,9 +312,6 @@ public class Zoo {
 	public static Item fencePack = (new ZooItem(mod_ZooCore.getItemIdFor("Fence Pack", 409)).setItemName("fencePack").setIconIndex(12));
 	public static Item compactFencePack = (new ZooItem(mod_ZooCore.getItemIdFor("Compact Fence Pack", 410)).setItemName("compactFencePack").setIconIndex(13));
 	public static Item lasso = (new ZooItem(mod_ZooCore.getItemIdFor("Lasso", 411)).setIconIndex(14).setItemName("lasso"));
-
-	
-	//tools
 	public static Item bsSword = (new ZooSword(mod_ZooCore.getItemIdFor("Brownstone Sword", 402), ZooEnumTool.BS).setIconIndex(6).setItemName("bssw"));
 	public static Item bsPickaxe = (new ZooPickaxe(mod_ZooCore.getItemIdFor("Brownstone Pickaxe", 403), ZooEnumTool.BS).setIconIndex(2).setItemName("bsp"));
 	public static Item bsAxe = (new ZooAxe(mod_ZooCore.getItemIdFor("Brownstone Axe", 404), ZooEnumTool.BS).setIconIndex(3).setItemName("bsa"));
@@ -375,10 +328,6 @@ public class Zoo {
 
 	
 	
-	
 	//other
-	public static int GameModeID = mod_ZooCore.getSpawnRate("Gamemode ID", 5);
 	public static Minecraft mc = ModLoader.getMinecraftInstance();
-	
-	public static BiomeGenBase savana[] = {savannah};
 }

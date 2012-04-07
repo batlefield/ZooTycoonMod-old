@@ -14,6 +14,8 @@ import net.minecraft.src.zoo.core.*;
 
 public class ZooGenUmbrellaThornAcacia extends WorldGenerator
 {
+	
+	private StructureGenerator generator = new StructureGenerator();
 
     public ZooGenUmbrellaThornAcacia(boolean flag)
     {
@@ -127,15 +129,15 @@ public class ZooGenUmbrellaThornAcacia extends WorldGenerator
                 setBlockAndMetadata(world, i + 2, h + 4, k, Zoo.acaciaLeaves.blockID, 0);
                 
                 //generating base
-                StructureGenerator.generateFloor(world, h + 3, i - 5, k - 1, i + 5, k + 1, Zoo.acaciaLeaves.blockID);
-                StructureGenerator.generateFloor(world, h + 3, i - 1, k - 5, i + 1, k + 5, Zoo.acaciaLeaves.blockID);
-                StructureGenerator.generateFloor(world, h + 4, i - 2, k - 2, i + 2, k + 2, Zoo.acaciaLeaves.blockID);
+                generator.generateFloor(world, h + 3, i - 5, k - 1, i + 5, k + 1, Zoo.acaciaLeaves.blockID);
+                generator.generateFloor(world, h + 3, i - 1, k - 5, i + 1, k + 5, Zoo.acaciaLeaves.blockID);
+                generator.generateFloor(world, h + 4, i - 2, k - 2, i + 2, k + 2, Zoo.acaciaLeaves.blockID);
                 
                 //generating corners
-                StructureGenerator.generateFloor(world, h + 3, i - 2, k - 2, i - 3, k - 3, Zoo.acaciaLeaves.blockID);
-                StructureGenerator.generateFloor(world, h + 3, i + 2, k + 2, i + 3, k + 3, Zoo.acaciaLeaves.blockID);
-                StructureGenerator.generateFloor(world, h + 3, i + 2, k - 2, i + 3, k - 3, Zoo.acaciaLeaves.blockID);
-                StructureGenerator.generateFloor(world, h + 3, i - 2, k + 2, i - 3, k + 3, Zoo.acaciaLeaves.blockID);
+                generator.generateFloor(world, h + 3, i - 2, k - 2, i - 3, k - 3, Zoo.acaciaLeaves.blockID);
+                generator.generateFloor(world, h + 3, i + 2, k + 2, i + 3, k + 3, Zoo.acaciaLeaves.blockID);
+                generator.generateFloor(world, h + 3, i + 2, k - 2, i + 3, k - 3, Zoo.acaciaLeaves.blockID);
+                generator.generateFloor(world, h + 3, i - 2, k + 2, i - 3, k + 3, Zoo.acaciaLeaves.blockID);
                 
                 //generating
                 setBlockAndMetadata(world, i + 4, h + 3, k + 2, Zoo.acaciaLeaves.blockID, 0);
@@ -178,8 +180,8 @@ public class ZooGenUmbrellaThornAcacia extends WorldGenerator
                 setBlockAndMetadata(world, i - 1, h + 4, k - 4, Zoo.acaciaLeaves.blockID, 0);
                 setBlockAndMetadata(world, i, h + 4, k - 4, Zoo.acaciaLeaves.blockID, 0);
                 
-                StructureGenerator.generateFloor(world, h + 3, i - 3, k - 1, i + 3, k + 1, 0);
-                StructureGenerator.generateFloor(world, h + 3, i - 1, k - 3, i + 1, k + 3, 0);
+                generator.generateFloor(world, h + 3, i - 3, k - 1, i + 3, k + 1, 0);
+                generator.generateFloor(world, h + 3, i - 1, k - 3, i + 1, k + 3, 0);
                 
                 setBlockAndMetadata(world, i - 2, h + 3, k - 2, 0, 0);
                 setBlockAndMetadata(world, i + 2, h + 3, k + 2, 0, 0);

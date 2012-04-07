@@ -5,10 +5,11 @@ import java.io.File;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.MinecraftForgeClient;
+import net.minecraft.src.forge.NetworkMod;
 import net.minecraft.src.zoo.api.ZAPI;
 import net.minecraft.src.zoo.dimension.WorldProviderZoo;
 
-public class mod_ZooDimension extends BaseMod{
+public class mod_ZooDimension extends NetworkMod{
 
 	public String getVersion() {
 		return new StringBuilder().append("Zoo Tycoon ").append(mod_ZooCore.version).append(" Dimension for Minecraft ").append(mod_ZooCore.mcVersion).append(" by ").append(mod_ZooCore.author).toString();
@@ -29,6 +30,16 @@ public class mod_ZooDimension extends BaseMod{
         instance = this;
     }
 
+	public boolean clientSideRequired()
+	{
+		return true;
+	}
+
+	public boolean serverSideRequired()
+	{
+		return false;
+	}
+	
     public static void initialize()
     {
     	ZooDimension.init();
@@ -90,4 +101,5 @@ public class mod_ZooDimension extends BaseMod{
     public static mod_ZooDimension instance;
     private static boolean initialized = false;
     private static Minecraft minecraft = ModLoader.getMinecraftInstance();
+
 }

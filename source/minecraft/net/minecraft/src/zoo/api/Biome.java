@@ -44,7 +44,7 @@ public class Biome {
 			BAPI.getBiome(3).add(biome);
 		}
 		
-		System.out.println("Registered biome " + biome.biomeName + " chace of spawning in it was set to " + spawn);
+		System.out.println("Registered biome " + biome.biomeName + ", chace of spawning in it was set to " + spawn);
 	}
 	
 	public static List getBiomes(int i)

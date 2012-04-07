@@ -34,7 +34,8 @@ public class ZooContainerTradingFood extends Container
 
         Item aitem[] = {
             Item.appleGold, Item.appleRed, Item.beefCooked, Item.bowlSoup, Item.bread, Item.bucketMilk, Item.cake,Item.chickenCooked, 
-            Item.cookie, Item.egg, Item.fermentedSpiderEye, Item.fishCooked, Item.melon, Item.reed, Item.spiderEye, Item.sugar, Item.wheat
+            Item.cookie, Item.egg, Item.fermentedSpiderEye, Item.fishCooked, Item.melon, Item.reed, Item.spiderEye, Item.sugar, 
+            Item.wheat, Item.porkRaw, Item.porkCooked
         };
         for(int l1 = 0; l1 < aitem.length; l1++)
         {

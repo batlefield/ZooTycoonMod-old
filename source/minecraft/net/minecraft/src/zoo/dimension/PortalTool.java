@@ -15,6 +15,8 @@ import net.minecraft.src.zoo.core.gen.StructureGenerator;
 
 public class PortalTool extends ZooBlockDim {
 
+	private StructureGenerator generator = new StructureGenerator();
+	
 	public PortalTool(int i, int j, Material material) {
 		super(i, j, material);
 	}
@@ -41,33 +43,33 @@ public class PortalTool extends ZooBlockDim {
 		
 		world.editingBlocks = true;
 		
-		StructureGenerator.generateCuboid(world, i - 3, j, k - 3, i + 3, j + 4, k + 3, 0);
-		StructureGenerator.generateFloor(world, j, i - 3, k - 3, i + 3, k + 3, Block.stairSingle.blockID, slab);
-		StructureGenerator.generateFloor(world, j, i - 2, k - 2, i + 2, k + 2, bs);
-		StructureGenerator.generateFloor(world, j + 3, i - 1, k - 1, i + 1, k + 1, bs);
+		generator.generateCuboid(world, i - 3, j, k - 3, i + 3, j + 4, k + 3, 0);
+		generator.generateFloor(world, j, i - 3, k - 3, i + 3, k + 3, Block.stairSingle.blockID, slab);
+		generator.generateFloor(world, j, i - 2, k - 2, i + 2, k + 2, bs);
+		generator.generateFloor(world, j + 3, i - 1, k - 1, i + 1, k + 1, bs);
 		
-		StructureGenerator.placeBlock(world, i + 1, j + 1, k + 1, bs);
-		StructureGenerator.placeBlock(world, i + 1, j + 1, k - 1, bs);
-		StructureGenerator.placeBlock(world, i - 1, j + 1, k + 1, bs);
-		StructureGenerator.placeBlock(world, i - 1, j + 1, k - 1, bs);
+		generator.placeBlock(world, i + 1, j + 1, k + 1, bs);
+		generator.placeBlock(world, i + 1, j + 1, k - 1, bs);
+		generator.placeBlock(world, i - 1, j + 1, k + 1, bs);
+		generator.placeBlock(world, i - 1, j + 1, k - 1, bs);
 		
-		StructureGenerator.placeBlock(world, i + 1, j + 2, k + 1, bs);
-		StructureGenerator.placeBlock(world, i + 1, j + 2, k - 1, bs);
-		StructureGenerator.placeBlock(world, i - 1, j + 2, k + 1, bs);
-		StructureGenerator.placeBlock(world, i - 1, j + 2, k - 1, bs);
+		generator.placeBlock(world, i + 1, j + 2, k + 1, bs);
+		generator.placeBlock(world, i + 1, j + 2, k - 1, bs);
+		generator.placeBlock(world, i - 1, j + 2, k + 1, bs);
+		generator.placeBlock(world, i - 1, j + 2, k - 1, bs);
 		
-		StructureGenerator.placeBlock(world, i, j + 4, k, bs);
-		StructureGenerator.placeBlock(world, i, j + 1, k, Block.torchWood.blockID);
+		generator.placeBlock(world, i, j + 4, k, bs);
+		generator.placeBlock(world, i, j + 1, k, Block.torchWood.blockID);
 		
-		StructureGenerator.placeBlock(world, i + 1, j + 1, k, p);
-		StructureGenerator.placeBlock(world, i, j + 1, k - 1, p);
-		StructureGenerator.placeBlock(world, i, j + 1, k + 1, p);
-		StructureGenerator.placeBlock(world, i - 1, j + 1, k, p);
+		generator.placeBlock(world, i + 1, j + 1, k, p);
+		generator.placeBlock(world, i, j + 1, k - 1, p);
+		generator.placeBlock(world, i, j + 1, k + 1, p);
+		generator.placeBlock(world, i - 1, j + 1, k, p);
 		
-		StructureGenerator.placeBlock(world, i + 1, j + 2, k, p);
-		StructureGenerator.placeBlock(world, i, j + 2, k - 1, p);
-		StructureGenerator.placeBlock(world, i, j + 2, k + 1, p);
-		StructureGenerator.placeBlock(world, i - 1, j + 2, k, p);
+		generator.placeBlock(world, i + 1, j + 2, k, p);
+		generator.placeBlock(world, i, j + 2, k - 1, p);
+		generator.placeBlock(world, i, j + 2, k + 1, p);
+		generator.placeBlock(world, i - 1, j + 2, k, p);
 		
 		
 		world.editingBlocks = false;

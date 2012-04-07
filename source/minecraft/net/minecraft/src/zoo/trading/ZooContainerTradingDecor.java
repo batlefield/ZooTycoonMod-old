@@ -25,7 +25,7 @@ public class ZooContainerTradingDecor extends Container
         Block ablock[] = {
         		Block.bookShelf, Block.cobblestoneMossy, Block.dirt, Block.dispenser, Block.enchantmentTable, Block.fence, Block.fenceGate,
         		Block.fenceIron, Block.glowStone, Block.music, Block.netherFence, Block.planks, Block.pumpkin, Block.pumpkinLantern,
-                Block.plantRed, Block.plantYellow, Block.jukebox
+                Block.plantRed, Block.plantYellow, Block.jukebox, Block.field_48209_bL
         };
         for(int i = 0; i < ablock.length; i++)
         {

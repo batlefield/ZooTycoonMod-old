@@ -1,7 +1,7 @@
 package net.minecraft.src.zoo.core.render;
 
 import net.minecraft.src.*;
-import net.minecraft.src.zoo.core.modells.FemaleBase;
+import net.minecraft.src.zoo.core.modells.visitors.FemaleBase;
 
 public class RenderFemale extends RenderLiving{
 	

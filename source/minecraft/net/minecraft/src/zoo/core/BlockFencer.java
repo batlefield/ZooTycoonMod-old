@@ -21,6 +21,8 @@ import net.minecraft.src.zoo.core.gen.StructureGenerator;
 
 public class BlockFencer extends Block implements ITextureProvider{
 
+	private StructureGenerator generator = new StructureGenerator();
+	
 	public BlockFencer(int i) {
 		super(i, Material.wood);
 	}
@@ -197,12 +199,12 @@ public class BlockFencer extends Block implements ITextureProvider{
 	{
 		world.editingBlocks = true;
 		//clear area
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z + size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z + size, 0);
 		//generate floor
-        StructureGenerator.generateFloor(world, y - 1, x, z, x + size, z + size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x + size, z + size, Block.grass.blockID);
         if(size==16)
         {
-        	StructureGenerator.generateFloor(world, y + 2, x + (size / 2), z + (size / 2), x + (size / 2) + 1, z + (size / 2) + 1, Block.planks.blockID);
+        	generator.generateFloor(world, y + 2, x + (size / 2), z + (size / 2), x + (size / 2) + 1, z + (size / 2) + 1, Block.planks.blockID);
         }
         if(size == 32)
         {
@@ -213,22 +215,22 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x + 16, y + 3, z + 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        StructureGenerator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
-        StructureGenerator.generateWall(world, x + size, y, z + size, x, y + 1, z + size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x + size, y, z + size, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x + size, y, z + size, x, y + 1, z + size, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
+        generator.generateWall(world, x + size, y, z + size, x + size, y + 1 , z, blockid, blockmd);
         //generate torches on top of the fence
-        StructureGenerator.generateHollowFloor(world, y + 2, x, z, x + size, z + size, Block.torchWood.blockID, 5);
+        generator.generateHollowFloor(world, y + 2, x, z, x + size, z + size, Block.torchWood.blockID, 5);
         
         if(size == 16)
         {
 	        //generate torches facing south/north
-	        StructureGenerator.generateWall(world, x + 7, y + 2, z + (size / 2), x + 7, y + 2 , z + (size / 2) + 1, Block.torchWood.blockID, 2);
-	        StructureGenerator.generateWall(world, x + 10, y + 2, z + (size / 2), x + 10, y + 2 , z + (size / 2) + 1, Block.torchWood.blockID, 1);
+	        generator.generateWall(world, x + 7, y + 2, z + (size / 2), x + 7, y + 2 , z + (size / 2) + 1, Block.torchWood.blockID, 2);
+	        generator.generateWall(world, x + 10, y + 2, z + (size / 2), x + 10, y + 2 , z + (size / 2) + 1, Block.torchWood.blockID, 1);
 	        
 	        //generate torches facing east/west
-	        StructureGenerator.generateWall(world, x + (size / 2), y + 2, z + 7, x + (size / 2) + 1, y + 2 , z + 7, Block.torchWood.blockID, 3);
-	        StructureGenerator.generateWall(world, x + (size / 2), y + 2, z + 10, x + (size / 2) + 1, y + 2 , z + 10, Block.torchWood.blockID, 4);
+	        generator.generateWall(world, x + (size / 2), y + 2, z + 7, x + (size / 2) + 1, y + 2 , z + 7, Block.torchWood.blockID, 3);
+	        generator.generateWall(world, x + (size / 2), y + 2, z + 10, x + (size / 2) + 1, y + 2 , z + 10, Block.torchWood.blockID, 4);
         }
         
         if(!mc.thePlayer.capabilities.depleteBuckets)
@@ -241,12 +243,12 @@ public class BlockFencer extends Block implements ITextureProvider{
 	{
 		world.editingBlocks = true;
 		//clear area
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z + size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z + size, 0);
 		//generate floor
-        StructureGenerator.generateFloor(world, y - 1, x, z, x - size, z + size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x - size, z + size, Block.grass.blockID);
         if(size==16)
         {
-        	StructureGenerator.generateFloor(world, y + 2, x - (size / 2), z + (size / 2), x - (size / 2) - 1, z + (size / 2) + 1, Block.planks.blockID);
+        	generator.generateFloor(world, y + 2, x - (size / 2), z + (size / 2), x - (size / 2) - 1, z + (size / 2) + 1, Block.planks.blockID);
         }
         if(size == 32)
         {
@@ -257,22 +259,22 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x - 16, y + 3, z + 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        StructureGenerator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
-        StructureGenerator.generateWall(world, x - size, y, z + size, x, y + 1, z + size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x - size, y, z + size, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x - size, y, z + size, x, y + 1, z + size, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
+        generator.generateWall(world, x - size, y, z + size, x - size, y + 1 , z, blockid, blockmd);
         //generate torches on top of the fence
-        StructureGenerator.generateHollowFloor(world, y + 2, x, z, x - size, z + size, Block.torchWood.blockID, 5);
+        generator.generateHollowFloor(world, y + 2, x, z, x - size, z + size, Block.torchWood.blockID, 5);
         
         if(size == 16)
         {
 	        //generate torches facing south/north
-	        StructureGenerator.generateWall(world, x - 7, y + 2, z + (size / 2), x - 7, y + 2 , z + (size / 2) + 1, Block.torchWood.blockID, 2);
-	        StructureGenerator.generateWall(world, x - 10, y + 2, z + (size / 2), x - 10, y + 2 , z + (size / 2) + 1, Block.torchWood.blockID, 1);
+	        generator.generateWall(world, x - 7, y + 2, z + (size / 2), x - 7, y + 2 , z + (size / 2) + 1, Block.torchWood.blockID, 2);
+	        generator.generateWall(world, x - 10, y + 2, z + (size / 2), x - 10, y + 2 , z + (size / 2) + 1, Block.torchWood.blockID, 1);
 	        
 	        //generate torches facing east/west
-	        StructureGenerator.generateWall(world, x - (size / 2), y + 2, z + 7, x - (size / 2) - 1, y + 2 , z + 7, Block.torchWood.blockID, 3);
-	        StructureGenerator.generateWall(world, x - (size / 2), y + 2, z + 10, x - (size / 2) - 1, y + 2 , z + 10, Block.torchWood.blockID, 4);
+	        generator.generateWall(world, x - (size / 2), y + 2, z + 7, x - (size / 2) - 1, y + 2 , z + 7, Block.torchWood.blockID, 3);
+	        generator.generateWall(world, x - (size / 2), y + 2, z + 10, x - (size / 2) - 1, y + 2 , z + 10, Block.torchWood.blockID, 4);
         }
         
         if(!mc.thePlayer.capabilities.depleteBuckets)
@@ -285,12 +287,12 @@ public class BlockFencer extends Block implements ITextureProvider{
 	{
 		world.editingBlocks = true;
 		//clear area
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z - size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z - size, 0);
 		//generate floor
-        StructureGenerator.generateFloor(world, y - 1, x, z, x + size, z - size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x + size, z - size, Block.grass.blockID);
         if(size==16)
         {
-        	StructureGenerator.generateFloor(world, y + 2, x + (size / 2), z - (size / 2), x + (size / 2) + 1, z - (size / 2) - 1, Block.planks.blockID);
+        	generator.generateFloor(world, y + 2, x + (size / 2), z - (size / 2), x + (size / 2) + 1, z - (size / 2) - 1, Block.planks.blockID);
         }
         if(size == 32)
         {
@@ -301,28 +303,28 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x + 16, y + 3, z - 16, Zoo.brownStone.blockID);
         }
 
-        StructureGenerator.generateFloor(world, y - 1,x + size , z, x + size + 1, z - size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1,x + size , z, x + size + 1, z - size, Block.grass.blockID);
         if(size == 16)
         {
         	world.setBlockWithNotify(x + (size / 2) + 1, y + 2, z - (size / 2), Block.planks.blockID);
         	world.setBlockWithNotify(x + (size / 2) + 1, y + 2, z - (size / 2) - 1, Block.planks.blockID);
         }
         //generate fence
-        StructureGenerator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
-        StructureGenerator.generateWall(world, x + size, y, z - size, x, y + 1, z - size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x + size, y, z - size, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x + size, y, z - size, x, y + 1, z - size, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
+        generator.generateWall(world, x + size, y, z - size, x + size, y + 1 , z, blockid, blockmd);
         //generate torches on top of the fence
-        StructureGenerator.generateHollowFloor(world, y + 2, x, z, x + size, z - size, Block.torchWood.blockID, 5);
+        generator.generateHollowFloor(world, y + 2, x, z, x + size, z - size, Block.torchWood.blockID, 5);
         if(size == 16)
         {
 	        //generate torches facing west/east
-	        StructureGenerator.generateWall(world, x + 7, y + 2, z - (size / 2), x + 7, y + 2 , z - (size / 2) - 1, Block.torchWood.blockID, 2);
-	        StructureGenerator.generateWall(world, x + 10, y + 2, z - (size / 2), x + 10, y + 2 , z - (size / 2) - 1, Block.torchWood.blockID, 1);
+	        generator.generateWall(world, x + 7, y + 2, z - (size / 2), x + 7, y + 2 , z - (size / 2) - 1, Block.torchWood.blockID, 2);
+	        generator.generateWall(world, x + 10, y + 2, z - (size / 2), x + 10, y + 2 , z - (size / 2) - 1, Block.torchWood.blockID, 1);
 	        
 	        //generate torches facing south/north
-	        StructureGenerator.generateWall(world, x + (size / 2), y + 2, z - 7, x + (size / 2) + 1, y + 2 , z - 7, Block.torchWood.blockID, 3);
-	        StructureGenerator.generateWall(world, x + (size / 2), y + 2, z - 10, x + (size / 2) + 1, y + 2 , z - 10, Block.torchWood.blockID, 4);
+	        generator.generateWall(world, x + (size / 2), y + 2, z - 7, x + (size / 2) + 1, y + 2 , z - 7, Block.torchWood.blockID, 3);
+	        generator.generateWall(world, x + (size / 2), y + 2, z - 10, x + (size / 2) + 1, y + 2 , z - 10, Block.torchWood.blockID, 4);
         }
         
         if(!mc.thePlayer.capabilities.depleteBuckets)
@@ -335,12 +337,12 @@ public class BlockFencer extends Block implements ITextureProvider{
 	{
 		world.editingBlocks = true;
 		//clear area
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z - size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z - size, 0);
 		//generate floor
-        StructureGenerator.generateFloor(world, y - 1, x, z, x - size, z - size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x - size, z - size, Block.grass.blockID);
         if(size==16)
         {
-        	StructureGenerator.generateFloor(world, y + 2, x - (size / 2), z - (size / 2), x - (size / 2) - 1, z - (size / 2) - 1, Block.planks.blockID);
+        	generator.generateFloor(world, y + 2, x - (size / 2), z - (size / 2), x - (size / 2) - 1, z - (size / 2) - 1, Block.planks.blockID);
         }
         if(size == 32)
         {
@@ -351,22 +353,22 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x - 16, y + 3, z - 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        StructureGenerator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
-        StructureGenerator.generateWall(world, x - size, y, z - size, x, y + 1, z - size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x - size, y, z - size, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x - size, y, z - size, x, y + 1, z - size, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
+        generator.generateWall(world, x - size, y, z - size, x - size, y + 1 , z, blockid, blockmd);
         //generate torches on top of the fence
-        StructureGenerator.generateHollowFloor(world, y + 2, x, z, x - size, z - size, Block.torchWood.blockID, 5);
+        generator.generateHollowFloor(world, y + 2, x, z, x - size, z - size, Block.torchWood.blockID, 5);
         
         if(size == 16)
         {
 	        //generate torches facing south/north
-	        StructureGenerator.generateWall(world, x - 7, y + 2, z - (size / 2), x - 7, y + 2 , z - (size / 2) - 1, Block.torchWood.blockID, 2);
-	        StructureGenerator.generateWall(world, x - 10, y + 2, z - (size / 2), x - 10, y + 2 , z - (size / 2) - 1, Block.torchWood.blockID, 1);
+	        generator.generateWall(world, x - 7, y + 2, z - (size / 2), x - 7, y + 2 , z - (size / 2) - 1, Block.torchWood.blockID, 2);
+	        generator.generateWall(world, x - 10, y + 2, z - (size / 2), x - 10, y + 2 , z - (size / 2) - 1, Block.torchWood.blockID, 1);
 	        
 	        //generate torches facing east/west
-	        StructureGenerator.generateWall(world, x - (size / 2), y + 2, z - 7, x - (size / 2) - 1, y + 2 , z - 7, Block.torchWood.blockID, 3);
-	        StructureGenerator.generateWall(world, x - (size / 2), y + 2, z - 10, x - (size / 2) - 1, y + 2 , z - 10, Block.torchWood.blockID, 4);
+	        generator.generateWall(world, x - (size / 2), y + 2, z - 7, x - (size / 2) - 1, y + 2 , z - 7, Block.torchWood.blockID, 3);
+	        generator.generateWall(world, x - (size / 2), y + 2, z - 10, x - (size / 2) - 1, y + 2 , z - 10, Block.torchWood.blockID, 4);
         }
         
         if(!mc.thePlayer.capabilities.depleteBuckets)
@@ -379,12 +381,12 @@ public class BlockFencer extends Block implements ITextureProvider{
 	{
 		world.editingBlocks = true;
 		//clear area
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z + size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z + size, 0);
 		//generate floor
-        StructureGenerator.generateFloor(world, y - 1, x, z, x + size, z + size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x + size, z + size, Block.grass.blockID);
         if(size==16)
         {
-        	StructureGenerator.generateFloor(world, y + 2, x + (size / 2), z + (size / 2), x + (size / 2) + 1, z + (size / 2) + 1, Block.glowStone.blockID);
+        	generator.generateFloor(world, y + 2, x + (size / 2), z + (size / 2), x + (size / 2) + 1, z + (size / 2) + 1, Block.glowStone.blockID);
         }
         if(size == 32)
         {
@@ -395,10 +397,10 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x + 16, y + 3, z + 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        StructureGenerator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
-        StructureGenerator.generateWall(world, x + size, y, z + size, x, y + 1, z + size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x + size, y, z + size, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x + size, y, z + size, x, y + 1, z + size, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
+        generator.generateWall(world, x + size, y, z + size, x + size, y + 1 , z, blockid, blockmd);
         
         if(!mc.thePlayer.capabilities.depleteBuckets)
         {
@@ -410,12 +412,12 @@ public class BlockFencer extends Block implements ITextureProvider{
 	{
 		world.editingBlocks = true;
 		//clear area
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z - size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z - size, 0);
 		//generate floor
-        StructureGenerator.generateFloor(world, y - 1, x, z, x + size + 1, z - size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x + size + 1, z - size, Block.grass.blockID);
         if(size==16)
         {
-        	StructureGenerator.generateFloor(world, y + 2, x + (size / 2), z - (size / 2), x + (size / 2) + 1, z - (size / 2) - 1, Block.glowStone.blockID);
+        	generator.generateFloor(world, y + 2, x + (size / 2), z - (size / 2), x + (size / 2) + 1, z - (size / 2) - 1, Block.glowStone.blockID);
         }
         if(size == 32)
         {
@@ -431,10 +433,10 @@ public class BlockFencer extends Block implements ITextureProvider{
 	        world.setBlockWithNotify(x + (size / 2) + 1, y + 2, z - (size / 2) - 1, Block.glowStone.blockID);
         }
         //generate fence
-        StructureGenerator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
-        StructureGenerator.generateWall(world, x + size, y, z - size, x, y + 1, z - size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x + size, y, z - size, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x + size, y, z - size, x, y + 1, z - size, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
+        generator.generateWall(world, x + size, y, z - size, x + size, y + 1 , z, blockid, blockmd);
         
         if(!mc.thePlayer.capabilities.depleteBuckets)
         {
@@ -446,12 +448,12 @@ public class BlockFencer extends Block implements ITextureProvider{
 	{
 		world.editingBlocks = true;
 		//clear area
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z - size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z - size, 0);
 		//generate floor
-        StructureGenerator.generateFloor(world, y - 1, x, z, x - size, z - size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x - size, z - size, Block.grass.blockID);
         if(size==16)
         {
-        	StructureGenerator.generateFloor(world, y + 2, x - (size / 2), z - (size / 2), x - (size / 2) -1, z - (size / 2) - 1, Block.glowStone.blockID);
+        	generator.generateFloor(world, y + 2, x - (size / 2), z - (size / 2), x - (size / 2) -1, z - (size / 2) - 1, Block.glowStone.blockID);
         }
         if(size == 32)
         {
@@ -462,10 +464,10 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x - 16, y + 3, z - 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        StructureGenerator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
-        StructureGenerator.generateWall(world, x - size, y, z - size, x, y + 1, z - size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x - size, y, z - size, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x - size, y, z - size, x, y + 1, z - size, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
+        generator.generateWall(world, x - size, y, z - size, x - size, y + 1 , z, blockid, blockmd);
         
         if(!mc.thePlayer.capabilities.depleteBuckets)
         {
@@ -477,12 +479,12 @@ public class BlockFencer extends Block implements ITextureProvider{
 	{
 		world.editingBlocks = true;
 		//clear area
-		StructureGenerator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z + size, 0);
+		generator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z + size, 0);
 		//generate floor
-        StructureGenerator.generateFloor(world, y - 1, x, z, x - size, z + size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x - size, z + size, Block.grass.blockID);
         if(size==16)
         {
-        	StructureGenerator.generateFloor(world, y + 2, x - (size / 2), z + (size / 2), x - (size / 2) - 1, z + (size / 2) + 1, Block.glowStone.blockID);
+        	generator.generateFloor(world, y + 2, x - (size / 2), z + (size / 2), x - (size / 2) - 1, z + (size / 2) + 1, Block.glowStone.blockID);
         }
         if(size == 32)
         {
@@ -493,10 +495,10 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x - 16, y + 3, z + 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        StructureGenerator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
-        StructureGenerator.generateWall(world, x - size, y, z + size, x, y + 1, z + size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
-        StructureGenerator.generateWall(world, x - size, y, z + size, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x - size, y, z + size, x, y + 1, z + size, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
+        generator.generateWall(world, x - size, y, z + size, x - size, y + 1 , z, blockid, blockmd);
         
         if(!mc.thePlayer.capabilities.depleteBuckets)
         {

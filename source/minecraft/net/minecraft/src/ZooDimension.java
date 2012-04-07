@@ -24,7 +24,7 @@ public class ZooDimension {
 	}
 	
 	
-	public static final ZooPortal portal = (ZooPortal) new ZooPortal(mod_ZooDimension.getBlockIdFor("Portal", 233), 0, Material.portal).setHardness(-1F).setStepSound(Block.soundGlassFootstep).setLightValue(0.75F).setBlockName("zooportal");
-	public static final Block portalCreator = new PortalTool(mod_ZooDimension.getBlockIdFor("Portal tool", 234), 0, Material.iron).setHardness(1F).setStepSound(Block.soundMetalFootstep).setBlockName("portaltool");
+	public static final ZooPortal portal = (ZooPortal) new ZooPortal(mod_ZooDimension.getBlockIdFor("Portal", 234), 0, Material.portal).setHardness(-1F).setStepSound(Block.soundGlassFootstep).setLightValue(0.75F).setBlockName("zooportal");
+	public static final Block portalCreator = new PortalTool(mod_ZooDimension.getBlockIdFor("Portal tool", 235), 0, Material.iron).setHardness(1F).setStepSound(Block.soundMetalFootstep).setBlockName("portaltool");
 
 }

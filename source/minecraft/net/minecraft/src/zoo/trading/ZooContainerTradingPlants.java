@@ -24,7 +24,8 @@ public class ZooContainerTradingPlants extends Container
         itemList = new ArrayList();
         Block ablock[] =
             {
-                Block.cactus, Block.melon, Block.pumpkin, Block.plantRed, Block.plantYellow, Block.vine, Block.waterlily
+                Block.cactus, Block.melon, Block.pumpkin, Block.plantRed, Block.plantYellow, Block.vine, Block.waterlily,
+                Block.sapling, Block.leaves, Block.deadBush, Block.grass
             };
         for(int i = 0; i < ablock.length; i++)
         {

@@ -7,6 +7,7 @@ import net.minecraft.src.BlockFlower;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.StatList;
 import net.minecraft.src.World;
@@ -20,10 +21,15 @@ public class ZooTallGrass extends BlockFlower implements ITextureProvider
 
     public ZooTallGrass(int i, int j)
     {
-        super(i, j);
+        super(i, j, Material.vine);
         float f = 0.4F;
         blockIndexInTexture = j;
         setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.8F, 0.5F + f);
+    }
+    
+    public boolean isBlockReplaceable(World world, int x, int y, int z) 
+    {
+	    return true;
     }
     
     public boolean canThisPlantGrowOnThisBlockID(int i, int j)
