@@ -3,7 +3,6 @@ package net.minecraft.src.zoo.dimension;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.GenLayer;
 import net.minecraft.src.IntCache;
-import net.minecraft.src.battlefield.API.BAPI;
 import net.minecraft.src.zoo.api.Biome;
 
 public class ZooGenLayerBiome extends GenLayer

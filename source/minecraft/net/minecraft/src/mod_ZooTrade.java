@@ -4,16 +4,19 @@ import java.io.File;
 import java.util.Map;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.src.BAPI.BAPI;
 import net.minecraft.src.forge.Configuration;
+import net.minecraft.src.forge.NetworkMod;
 import net.minecraft.src.zoo.api.Trade;
 import net.minecraft.src.zoo.trading.BlockShop;
 import net.minecraft.src.zoo.trading.BlockShop2;
+import net.minecraft.src.zoo.trading.TradingBlocksCreative;
 import net.minecraft.src.zoo.trading.ZooEntityShopKeeper;
 import net.minecraft.src.zoo.trading.ZooItemCoin;
-import net.minecraft.src.zoo.trading.ZooPlayerBaseTrade;
+import net.minecraft.src.zoo.trading.ZooTradeNBT;
 import net.minecraft.src.zoo.trading.ZooRenderShopKeeper;
 
-public class mod_ZooTrade extends BaseMod
+public class mod_ZooTrade extends NetworkMod
 {
 
 	public static int money;
@@ -50,9 +53,9 @@ public class mod_ZooTrade extends BaseMod
 	private static int getItemID(String s, int i)
 	{
 		config.load();
-		config.getOrCreateIntProperty(s, 2, i);
+		config.getOrCreateIntProperty(s, config.CATEGORY_ITEM, i);
 		config.save();
-		return new Integer(config.getOrCreateIntProperty(s, 2, i).value).intValue();
+		return new Integer(config.getOrCreateIntProperty(s, config.CATEGORY_ITEM, i).value).intValue();
 	}
 
 	public void load()
@@ -60,7 +63,8 @@ public class mod_ZooTrade extends BaseMod
 		ctr = 0;
 		worldLoaded = false;
 
-		PlayerAPI.register("ZooPlayerBaseTrade", ZooPlayerBaseTrade.class);
+		BAPI.registerNBT(new ZooTradeNBT());
+		BAPI.registerCreativeHandler(new TradingBlocksCreative());
 		Trade.init();
 		loadmod();
 

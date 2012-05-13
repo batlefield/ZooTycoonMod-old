@@ -475,7 +475,7 @@ public class ZooChunkProvider implements IChunkProvider
         BlockSand.fallInstantly = true;
         int var4 = par2 * 16;
         int var5 = par3 * 16;
-        BiomeGenBase var6 = this.worldObj.func_48454_a(var4 + 16, var5 + 16);
+        BiomeGenBase var6 = this.worldObj.getBiomeGenForCoords(var4 + 16, var5 + 16);
         this.rand.setSeed(this.worldObj.getSeed());
         long var7 = this.rand.nextLong() / 2L * 2L + 1L;
         long var9 = this.rand.nextLong() / 2L * 2L + 1L;
@@ -536,7 +536,7 @@ public class ZooChunkProvider implements IChunkProvider
             {
                 var14 = this.worldObj.getPrecipitationHeight(var4 + var12, var5 + var13);
 
-                if (this.worldObj.isBlockHydratedDirectly(var12 + var4, var14 - 1, var13 + var5))
+                if (this.worldObj.isBlockFreezable(var12 + var4, var14 - 1, var13 + var5))
                 {
                     this.worldObj.setBlockWithNotify(var12 + var4, var14 - 1, var13 + var5, Block.ice.blockID);
                 }
@@ -590,7 +590,7 @@ public class ZooChunkProvider implements IChunkProvider
      */
     public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4)
     {
-        BiomeGenBase var5 = this.worldObj.func_48454_a(par2, par4);
+        BiomeGenBase var5 = this.worldObj.getBiomeGenForCoords(par2, par4);
         return var5 == null ? null : var5.getSpawnableList(par1EnumCreatureType);
     }
 

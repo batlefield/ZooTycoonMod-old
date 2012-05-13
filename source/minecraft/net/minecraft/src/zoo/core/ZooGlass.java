@@ -3,10 +3,18 @@ package net.minecraft.src.zoo.core;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.src.*;
+import net.minecraft.src.BlockBreakable;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.StatList;
+import net.minecraft.src.World;
+import net.minecraft.src.Zoo;
 import net.minecraft.src.forge.ITextureProvider;
+import net.minecraft.src.zoo.api.GUIType;
+import net.minecraft.src.zoo.api.ITrade;
 
-public class ZooGlass extends BlockBreakable implements ITextureProvider
+public class ZooGlass extends BlockBreakable implements ITextureProvider, ITrade
 {
 
     public ZooGlass(int i, int j, Material material, boolean flag)
@@ -38,9 +46,15 @@ public class ZooGlass extends BlockBreakable implements ITextureProvider
             super.harvestBlock(world, entityplayer, i, j, k, l);
         }
     }
-	
-	public void addCreativeItems(ArrayList itemList)
-    {
-		itemList.add(new ItemStack(this));
-    }
+
+	public int getPrice(int i) {
+		return 20;
+	}
+
+	public void addToGUI(GUIType type, ArrayList list) {
+		if(type == GUIType.DIRT)
+		{
+			list.add(new ItemStack(this));
+		}
+	}
 }

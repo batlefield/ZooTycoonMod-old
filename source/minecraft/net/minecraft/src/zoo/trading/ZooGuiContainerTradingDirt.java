@@ -255,14 +255,14 @@ public class ZooGuiContainerTradingDirt extends GuiContainer
             {
                 if (j == 0)
                 {
-                    mc.thePlayer.func_48153_a(inventoryplayer1.getItemStack());
+                    mc.thePlayer.dropPlayerItem(inventoryplayer1.getItemStack());
                     mc.playerController.func_35639_a(inventoryplayer1.getItemStack());
                     inventoryplayer1.setItemStack(null);
                 }
                 if (j == 1)
                 {
                     ItemStack itemstack3 = inventoryplayer1.getItemStack().splitStack(1);
-                    mc.thePlayer.func_48153_a(itemstack3);
+                    mc.thePlayer.dropPlayerItem(itemstack3);
                     mc.playerController.func_35639_a(itemstack3);
                     if (inventoryplayer1.getItemStack().stackSize == 0)
                     {

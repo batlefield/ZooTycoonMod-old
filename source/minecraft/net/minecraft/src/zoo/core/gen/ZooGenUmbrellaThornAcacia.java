@@ -26,7 +26,7 @@ public class ZooGenUmbrellaThornAcacia extends WorldGenerator
     {
         int l = random.nextInt(3) + 4;
         boolean flag = true;
-        if(j < 1 || j + l + 4 > world.getWorldHeight())
+        if(j < 1 || j + l + 4 > 256)
         {
             return false;
         }
@@ -45,7 +45,7 @@ public class ZooGenUmbrellaThornAcacia extends WorldGenerator
             {
                 for(int l2 = k - byte0; l2 <= k + byte0 && flag; l2++)
                 {
-                    if(i1 >= 0 && i1 < world.getWorldHeight())
+                    if(i1 >= 0 && i1 < 256)
                     {
                         int j3 = world.getBlockId(i2, i1, l2);
                         if(j3 != 0 && j3 != Zoo.acaciaLeaves.blockID)
@@ -67,7 +67,7 @@ public class ZooGenUmbrellaThornAcacia extends WorldGenerator
             return false;
         }
         int j1 = world.getBlockId(i, j - 1, k);
-        if(j1 != ZooDirts.savannah.blockID && j1 != Block.dirt.blockID || j >= world.getWorldHeight() - l - 1)
+        if(j1 != ZooDirts.savannah.blockID && j1 != Block.dirt.blockID || j >= 256 - l - 1)
         {
             return false;
         }

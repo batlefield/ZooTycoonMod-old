@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.battlefield.API.BAPI;
+import net.minecraft.src.BAPI.Main;
 
 /** Biome API
  * Developed to register custom biomes for zoo dimension
@@ -37,11 +37,11 @@ public class Biome {
 		}
 		if(village)
 		{
-			BAPI.getBiome(2).add(biome);
+			Main.getBiome(2).add(biome);
 		}
 		if(stronghold)
 		{
-			BAPI.getBiome(3).add(biome);
+			Main.getBiome(3).add(biome);
 		}
 		
 		System.out.println("Registered biome " + biome.biomeName + ", chace of spawning in it was set to " + spawn);

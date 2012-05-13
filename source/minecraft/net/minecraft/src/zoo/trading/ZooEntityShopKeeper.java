@@ -111,10 +111,6 @@ public class ZooEntityShopKeeper extends EntityCreature
         		{
         			mc.displayGuiScreen(new ZooGuiContainerTradingDecor());
     			}
-        		if(type == 10)
-        		{
-        			mc.displayGuiScreen(new ZooGuiContainerTradingMod());
-    			}
         			
             } else
             {
@@ -161,10 +157,6 @@ public class ZooEntityShopKeeper extends EntityCreature
     		texture = "/zoo/modells/npcs/shopkeeper.png";
     	}
     	if(type == 9)
-    	{
-    		texture = "/zoo/modells/npcs/shopkeeper.png";
-    	}
-    	if(type == 10)
     	{
     		texture = "/zoo/modells/npcs/shopkeeper.png";
     	}

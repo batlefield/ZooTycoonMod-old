@@ -1,8 +1,11 @@
 package net.minecraft.src.zoo.trading;
 
 import java.util.*;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+import net.minecraft.src.zoo.api.GUIType;
+import net.minecraft.src.zoo.api.ITrade;
 import net.minecraft.src.zoo.api.Trade;
 
 
@@ -25,7 +28,7 @@ public class ZooContainerTradingDecor extends Container
         Block ablock[] = {
         		Block.bookShelf, Block.cobblestoneMossy, Block.dirt, Block.dispenser, Block.enchantmentTable, Block.fence, Block.fenceGate,
         		Block.fenceIron, Block.glowStone, Block.music, Block.netherFence, Block.planks, Block.pumpkin, Block.pumpkinLantern,
-                Block.plantRed, Block.plantYellow, Block.jukebox, Block.field_48209_bL
+                Block.plantRed, Block.plantYellow, Block.jukebox, Block.redstoneLampIdle
         };
         for(int i = 0; i < ablock.length; i++)
         {
@@ -37,7 +40,7 @@ public class ZooContainerTradingDecor extends Container
             itemList.add(new ItemStack(Block.cloth.blockID, 1, k1));
         }
         
-        addBlocks();
+        addBlocks(itemList);
 
         Item aitem[] = {
             Item.painting
@@ -52,13 +55,13 @@ public class ZooContainerTradingDecor extends Container
             itemList.add(new ItemStack(Item.dyePowder.shiftedIndex, 1, i2));
         }
         
+        addItems(itemList);
         
         for(int i2 = 0; i2 < 3; i2++)
         {
             itemList.add(new ItemStack(mod_ZooTrade.Coin.shiftedIndex, 1, i2));
         }
         
-        addItems();
         sortGui();
         InventoryPlayer inventoryplayer = minecraft.thePlayer.inventory;
         for(int l2 = 0; l2 < 5; l2++)
@@ -136,28 +139,31 @@ public class ZooContainerTradingDecor extends Container
 
     }
     
-    public void addItems()
+    public void addItems(List list)
     {
-      List items = Trade.getItems(9);
-      if (items != null)
-      {
-        for (int i = 0; i < items.size(); i++)
-        {
-          itemList.add(items.get(i));
-        }
-      }
+    	for(Item item : Item.itemsList)
+    	{
+    		if(item != null && item instanceof ITrade)
+    		{
+    			ITrade handler = (ITrade)item;
+    			
+    			handler.addToGUI(GUIType.DECOR, (ArrayList) list);
+    		}
+    	}
     }
 
-    public void addBlocks()
+    public void addBlocks(List list)
     {
-      List blocks = Trade.getBlocks(9);
-      if (blocks != null)
-      {
-        for (int i = 0; i < blocks.size() / 2; i++)
-        {
-          itemList.add(blocks.get(i));
-        }
-      }
+    	for(Block block : Block.blocksList)
+    	{
+    		if(block != null && block instanceof ITrade)
+    		{
+    			ITrade handler = (ITrade)block;
+    			
+    			handler.addToGUI(GUIType.DECOR, (ArrayList) list);
+    			
+    		}
+    	}
     }
 
 }

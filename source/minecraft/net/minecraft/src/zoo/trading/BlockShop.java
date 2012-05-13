@@ -369,11 +369,94 @@ public class BlockShop extends Block implements ITextureProvider
 
 	public void armorShop(World world, int x, int y, int z, int direction)
 	{
+		if (direction == 4)
+		{
+			world.setBlockWithNotify(x, y, z, Block.workbench.blockID);
+			world.setBlockWithNotify(x, y, z + 1, Block.workbench.blockID);
+			world.setBlockWithNotify(x, y, z + 2, Block.planks.blockID);
+			world.setBlockWithNotify(x, y, z - 1, Block.planks.blockID);
+			
+			world.setBlockAndMetadataWithNotify(x - 2, y, z - 1, Block.chest.blockID, 3);
+			world.setBlockAndMetadataWithNotify(x - 2, y, z - 2, Block.chest.blockID, 3);
+		}
+		if (direction ==5)
+		{
+			world.setBlockWithNotify(x, y, z, Block.workbench.blockID);
+			world.setBlockWithNotify(x + 1, y, z, Block.workbench.blockID);
+			world.setBlockWithNotify(x + 2, y, z, Block.planks.blockID);
+			world.setBlockWithNotify(x - 1, y, z, Block.planks.blockID);
+			
+			world.setBlockAndMetadataWithNotify(x - 1, y, z - 2, Block.chest.blockID, 3);
+			world.setBlockAndMetadataWithNotify(x - 2, y, z - 2, Block.chest.blockID, 3);
+			}
+		if (direction == 6)
+		{
+			world.setBlockWithNotify(x, y, z, Block.workbench.blockID);
+			world.setBlockWithNotify(x, y, z - 1, Block.workbench.blockID);
+			world.setBlockWithNotify(x, y, z - 2, Block.planks.blockID);
+			world.setBlockWithNotify(x, y, z + 1, Block.planks.blockID);
+			
+			world.setBlockAndMetadataWithNotify(x + 2, y, z + 1, Block.chest.blockID, 3);
+			world.setBlockAndMetadataWithNotify(x + 2, y, z + 2, Block.chest.blockID, 3);
+		}
+		if (direction == 7)
+		{
+			world.setBlockWithNotify(x, y, z, Block.workbench.blockID);
+			world.setBlockWithNotify(x - 1, y, z, Block.workbench.blockID);
+			world.setBlockWithNotify(x - 2, y, z, Block.planks.blockID);
+			world.setBlockWithNotify(x + 1, y, z, Block.planks.blockID);
+			
+			world.setBlockAndMetadataWithNotify(x + 1, y, z + 2, Block.chest.blockID, 3);
+			world.setBlockAndMetadataWithNotify(x + 2, y, z + 2, Block.chest.blockID, 3);
+		}
+		
 
 	}
 
 	public void decorationShop(World world, int x, int y, int z, int direction)
 	{
+		StructureGenerator generator = new StructureGenerator();
+		if (direction == 8)
+		{
+			world.setBlockWithNotify(x, y, z, Block.cloth.blockID);
+			world.setBlockWithNotify(x, y, z - 1, Block.cloth.blockID);
+			world.setBlockWithNotify(x, y, z + 1, Block.cloth.blockID);
+			world.setBlockWithNotify(x, y, z + 2, Block.cloth.blockID);
+			
+			generator.generatePillar(world, x - 2, y, z - 1, Block.bookShelf.blockID, 2);
+			generator.generatePillar(world, x - 2, y, z + 2, Block.bookShelf.blockID, 2);
+		}
+		if (direction == 9)
+		{
+			world.setBlockWithNotify(x, y, z, Block.cloth.blockID);
+			world.setBlockWithNotify(x - 1, y, z, Block.cloth.blockID);
+			world.setBlockWithNotify(x + 1, y, z, Block.cloth.blockID);
+			world.setBlockWithNotify(x + 2, y, z, Block.cloth.blockID);
+			 
+			generator.generatePillar(world, x - 1, y, z - 2, Block.bookShelf.blockID, 2);
+			generator.generatePillar(world, x - 2, y, z + 2, Block.bookShelf.blockID, 2);
+		}
+		if (direction == 10)
+		{
+			world.setBlockWithNotify(x, y, z, Block.cloth.blockID);
+			world.setBlockWithNotify(x, y, z + 1, Block.cloth.blockID);
+			world.setBlockWithNotify(x, y, z - 1, Block.cloth.blockID);
+			world.setBlockWithNotify(x, y, z - 2, Block.cloth.blockID);
+			
+			generator.generatePillar(world, x + 2, y, z + 1, Block.bookShelf.blockID, 2);
+			generator.generatePillar(world, x + 2, y, z - 2, Block.bookShelf.blockID, 2);
+		}
+		if (direction == 11)
+		{
+			world.setBlockWithNotify(x, y, z, Block.cloth.blockID);
+			world.setBlockWithNotify(x + 1, y, z, Block.cloth.blockID);
+			world.setBlockWithNotify(x - 1, y, z, Block.cloth.blockID);
+			world.setBlockWithNotify(x - 2, y, z, Block.cloth.blockID);
+			 
+			generator.generatePillar(world, x + 1, y, z + 2, Block.bookShelf.blockID, 2);
+			generator.generatePillar(world, x + 2, y, z - 2, Block.bookShelf.blockID, 2);
+		}
+			
 
 	}
 
@@ -555,13 +638,5 @@ public class BlockShop extends Block implements ITextureProvider
 
 		}
 		world.editingBlocks = false;
-	}
-
-	public void addCreativeItems(ArrayList itemList)
-	{
-		itemList.add(new ItemStack(this, 1, 0));
-		itemList.add(new ItemStack(this, 1, 4));
-		itemList.add(new ItemStack(this, 1, 8));
-		itemList.add(new ItemStack(this, 1, 12));
 	}
 }

@@ -76,7 +76,7 @@ public class ZooTeleporter extends Teleporter
             for (int j2 = i1 - c; j2 <= i1 + c; j2++)
             {
                 double d3 = ((double)j2 + 0.5D) - entity.posZ;
-                for (int k2 = world.getWorldHeight() - 1; k2 >= 0; k2--)
+                for (int k2 = 256 - 1; k2 >= 0; k2--)
                 {
                     if (world.getBlockId(j1, k2, j2) != ZooDimension.portal.blockID)
                     {
@@ -148,7 +148,7 @@ public class ZooTeleporter extends Teleporter
             for (int j3 = k - byte0; j3 <= k + byte0; j3++)
             {
                 double d3 = ((double)j3 + 0.5D) - entity.posZ;
-                for (int k4 = world.getWorldHeight() - 1; k4 >= 0; k4--)
+                for (int k4 = 256 - 1; k4 >= 0; k4--)
                 {
                     if (!world.isAirBlock(i2, k4, j3))
                     {
@@ -205,7 +205,7 @@ public class ZooTeleporter extends Teleporter
                 for (int k3 = k - byte0; k3 <= k + byte0; k3++)
                 {
                     double d4 = ((double)k3 + 0.5D) - entity.posZ;
-                    for (int l4 = world.getWorldHeight() - 1; l4 >= 0; l4--)
+                    for (int l4 = 256 - 1; l4 >= 0; l4--)
                     {
                         if (!world.isAirBlock(j2, l4, k3))
                         {
@@ -263,9 +263,9 @@ public class ZooTeleporter extends Teleporter
             {
                 i1 = 70;
             }
-            if (i1 > world.getWorldHeight() - 10)
+            if (i1 > 256 - 10)
             {
-                i1 = world.getWorldHeight() - 10;
+                i1 = 256 - 10;
             }
             i3 = i1;
             for (int i5 = -1; i5 <= 1; i5++)

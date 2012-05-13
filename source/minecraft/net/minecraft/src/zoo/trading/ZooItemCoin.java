@@ -2,11 +2,16 @@ package net.minecraft.src.zoo.trading;
 
 import java.util.ArrayList;
 
-import net.minecraft.src.*;
-import net.minecraft.src.forge.ITextureProvider;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumRarity;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
+import net.minecraft.src.mod_ZooTrade;
+import net.minecraft.src.zoo.api.GUIType;
+import net.minecraft.src.zoo.api.ITrade;
 import net.minecraft.src.zoo.core.ZooItem;
 
-public class ZooItemCoin extends ZooItem {
+public class ZooItemCoin extends ZooItem implements ITrade{
 
 	public ZooItemCoin(int i) {
 		super(i);
@@ -60,16 +65,6 @@ public class ZooItemCoin extends ZooItem {
     {
         return EnumRarity.epic;
     }
-	
-    public void addCreativeItems(ArrayList itemList)
-    {    	
-    	if (this.shiftedIndex != Item.potion.shiftedIndex && this.shiftedIndex != Item.monsterPlacer.shiftedIndex)
-    	{
-			itemList.add(new ItemStack(this, 1, 0));
-			itemList.add(new ItemStack(this, 1, 1));
-			itemList.add(new ItemStack(this, 1, 2));
-    	}
-    }
     
 	public String getItemNameIS(ItemStack itemstack)
     {
@@ -91,5 +86,14 @@ public class ZooItemCoin extends ZooItem {
     public static final String blockNames[] = {
         "item.coin.bronze", "item.coin.silver", "item.coin.gold", "Coin"
     };
+    
+	public int getPrice(int i) {
+		if(i == 0) return 10;
+		if(i == 1) return 100;
+		if(i == 2) return 1000;
+		else return 0;
+	}
+
+	public void addToGUI(GUIType type, ArrayList list) {}
 
 }

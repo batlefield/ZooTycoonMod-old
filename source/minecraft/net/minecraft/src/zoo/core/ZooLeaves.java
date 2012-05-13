@@ -214,11 +214,6 @@ public class ZooLeaves extends BlockLeavesBase implements ITextureProvider, IShe
 		return "/zoo/blocks.png";
 	}
 	
-	public void addCreativeItems(ArrayList itemList)
-	{
-		itemList.add(new ItemStack(this));
-	}
-	
     public boolean isShearable(ItemStack item, World world, int X, int Y, int Z) 
     {
         return true;

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.battlefield.API.BAPI;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.MinecraftForgeClient;
 import net.minecraft.src.forge.NetworkMod;
@@ -49,13 +48,12 @@ public class mod_ZooCore extends NetworkMod
 	public static int renderMode;
 	public static KeyBinding options = new KeyBinding("Zoo options", 25);
 	public static ZooSettings settings = new ZooSettings();
+	boolean checked;
 
 	public void load()
 	{
 		ModLoader.registerKey(this, options, false);
 		renderMode = ModLoader.getUniqueBlockModelID(this, true);
-		BAPI.init();
-		Fence.init();
 		initialize();
 	}
 	
@@ -76,9 +74,7 @@ public class mod_ZooCore extends NetworkMod
 
 	public static void initialize()
 	{
-		Zoo.init();
 		if (initialized)
-
 		{
 			return;
 		}
@@ -96,7 +92,7 @@ public class mod_ZooCore extends NetworkMod
 
 	public void modsLoaded()
 	{
-		ModLoader.setInGameHook(this, true, false);
+		ModLoader.setInGameHook(this, true, true);
 		ModLoader.setInGUIHook(this, true, true);
 	}
 
@@ -121,11 +117,6 @@ public class mod_ZooCore extends NetworkMod
 		{
 			return true;
 		}
-	}
-
-	public void renderInvBlock(RenderBlocks renderblocks, Block block, int i, int j)
-	{
-
 	}
 
 	public void keyboardEvent(KeyBinding var1)
@@ -171,7 +162,7 @@ public class mod_ZooCore extends NetworkMod
 		{
 			int j7 = 1;
 			int k11 = chunkX + rand.nextInt(16) + 8;
-			int j15 = rand.nextInt(world.getWorldHeight());
+			int j15 = rand.nextInt(256);
 			int l17 = chunkZ + rand.nextInt(16) + 8;
 			(new WorldGenTallGrass(Zoo.savannahgrass.blockID, 1)).generate(world, rand, k11, j15, l17);
 		}
@@ -179,16 +170,24 @@ public class mod_ZooCore extends NetworkMod
 		{
 			int j7 = 1;
 			int k11 = chunkX + rand.nextInt(16) + 8;
-			int j15 = rand.nextInt(world.getWorldHeight());
+			int j15 = rand.nextInt(256);
 			int l17 = chunkZ + rand.nextInt(16) + 8;
 			(new WorldGenTallGrass(Zoo.coniferousgrass.blockID, 1)).generate(world, rand, k11, j15, l17);
 		}
 	}
-
-	public boolean OnTickInGame(float f, Minecraft minecraft1)
+	
+	public boolean onTickInGame(float f, Minecraft mc)
 	{
-		Zoo.versionCheck();
-		return false;
+		if(mc.theWorld == null)
+		{
+			checked = false;
+		}
+		if(!checked)
+		{
+			Zoo.versionCheck();
+			checked = true;
+		}
+		return true;
 	}
 
 	public String getVersion()
@@ -209,25 +208,25 @@ public class mod_ZooCore extends NetworkMod
 	public static int getItemIdFor(String s, int i)
 	{
 		config.load();
-		config.getOrCreateIntProperty(s, config.ITEM_PROPERTY, i);
+		config.getOrCreateIntProperty(s, config.CATEGORY_ITEM, i);
 		config.save();
-		return new Integer(config.getOrCreateIntProperty(s, config.ITEM_PROPERTY, i).value).intValue();
+		return new Integer(config.getOrCreateIntProperty(s, config.CATEGORY_ITEM, i).value).intValue();
 	}
 	
 	public static int getGeneralInt(String s, int i)
 	{
 		config.load();
-		config.getOrCreateIntProperty(s, config.GENERAL_PROPERTY, i);
+		config.getOrCreateIntProperty(s, config.CATEGORY_GENERAL, i);
 		config.save();
-		return new Integer(config.getOrCreateIntProperty(s, config.GENERAL_PROPERTY, i).value).intValue();
+		return new Integer(config.getOrCreateIntProperty(s, config.CATEGORY_GENERAL, i).value).intValue();
 	}
 
 	public static boolean getBoolean(String s, boolean b)
 	{
 		config.load();
-		config.getOrCreateBooleanProperty(s, config.GENERAL_PROPERTY, b);
+		config.getOrCreateBooleanProperty(s, config.CATEGORY_GENERAL, b);
 		config.save();
-		return new Boolean(config.getOrCreateBooleanProperty(s, config.GENERAL_PROPERTY, b).value).booleanValue();
+		return new Boolean(config.getOrCreateBooleanProperty(s, config.CATEGORY_GENERAL, b).value).booleanValue();
 	}
 
 	public static mod_ZooCore instance;

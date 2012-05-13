@@ -1,16 +1,13 @@
-
-
 package net.minecraft.src;
 
-import java.util.Random;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.battlefield.API.BAPI;
-import net.minecraft.src.battlefield.API.IBiome;
-import net.minecraft.src.battlefield.API.VersionCheck;
+import net.minecraft.src.BAPI.BAPI;
+import net.minecraft.src.BAPI.VersionCheck;
+import net.minecraft.src.BAPI.interfaces.IBiome;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.zoo.api.ZAPI;
 import net.minecraft.src.zoo.core.BlockFencer;
+import net.minecraft.src.zoo.core.CoreBlocksCreative;
 import net.minecraft.src.zoo.core.EntityHandeler;
 import net.minecraft.src.zoo.core.ItemSaltwaterBucket;
 import net.minecraft.src.zoo.core.ZooAcorns;
@@ -29,22 +26,16 @@ import net.minecraft.src.zoo.core.ZooItem;
 import net.minecraft.src.zoo.core.ZooItemFenceDestroyer;
 import net.minecraft.src.zoo.core.ZooLeaves;
 import net.minecraft.src.zoo.core.ZooPickaxe;
-import net.minecraft.src.zoo.core.ZooPlantHandler;
+import net.minecraft.src.zoo.core.ZooPlaceableHandler;
 import net.minecraft.src.zoo.core.ZooPlatform;
 import net.minecraft.src.zoo.core.ZooSaltwaterFlowing;
 import net.minecraft.src.zoo.core.ZooSaltwaterStationary;
 import net.minecraft.src.zoo.core.ZooSapling;
-import net.minecraft.src.zoo.core.ZooSettings;
 import net.minecraft.src.zoo.core.ZooShovel;
 import net.minecraft.src.zoo.core.ZooSword;
 import net.minecraft.src.zoo.core.ZooTallGrass;
 
 public class Zoo {
-	
-	public Zoo()
-	{
-	}
-	
 	
 	//stuff that needs to be defined earlier
 	private static boolean versionCheck = mod_ZooCore.settings.version;
@@ -88,70 +79,10 @@ public class Zoo {
 
 	public static boolean versionCheck()
 	{
-		if(versionCheck && !VersionCheck.run("http://www2.arnes.si/~pmati/ZTUC.html").equals(mod_ZooCore.version))
+		String s = VersionCheck.run("http://www2.arnes.si/~pmati/ZTUC.html");
+		if(versionCheck && !s.equals(mod_ZooCore.version))
         {
-        	Random random = new Random();
-        	int color = random.nextInt(15);
-        	
-        	String colorS;
-        	
-        	switch (color)
-        	{
-	        	case 0:
-	        		colorS = "§4";
-	        		break;
-	        	case 1:
-	        		colorS = "§c";
-	        		break;
-	        	case 2:
-	        		colorS = "§6";
-	        		break;
-	        	case 3:
-	        		colorS = "§e";
-	        		break;
-	        	case 4:
-	        		colorS = "§2";
-	        		break;
-	        	case 5:
-	        		colorS = "§a";
-	        		break;
-	        	case 6:
-	        		colorS = "§b";
-	        		break;
-	        	case 7:
-	        		colorS = "§3";
-	        		break;
-	        	case 8:
-	        		colorS = "§1";
-	        		break;
-	        	case 9:
-	        		colorS = "§9";
-	        		break;
-	        	case 10:
-	        		colorS = "§d";
-	        		break;
-	        	case 11:
-	        		colorS = "§5";
-	        		break;
-	        	case 12:
-	        		colorS = "§f";
-	        		break;
-	        	case 13:
-	        		colorS = "§7";
-	        		break;
-	        	case 14:
-	        		colorS = "§8";
-	        		break;
-	        	case 15:
-	        		colorS = "§0";
-	        		break;
-	        		
-        		default:
-        			colorS = "§f";
-        			break;
-        	}
-        	
-        	mc.thePlayer.addChatMessage(colorS + "New version of ZooTycoon Available (" + VersionCheck.run("http://www2.arnes.si/~pmati/ZTUC.html") + ")");
+        	mc.thePlayer.addChatMessage(BAPI.getCustomStringColor() + "New version of Zoo Tycoon Available (" + s + ")");
         }
 		return false;
 	}
@@ -159,8 +90,6 @@ public class Zoo {
 	
 	public static void init()
 	{
-		
-		
 		ZAPI.registerFenceTool(fenceDestroyer);
 		
 		ZAPI.registerGlass(plexiglassBlock);
@@ -171,14 +100,15 @@ public class Zoo {
 		ZAPI.registerFence(Ofence);
 		ZAPI.registerFence(fence);
         
-		BAPI.registerPlantableHandler(new ZooPlantHandler());
+		BAPI.registerPlacableHandler(new ZooPlaceableHandler());
+		BAPI.registerCreativeHandler(new CoreBlocksCreative());
 		
 		if(mod_ZooCore.settings.generateBiomesInOver)
 		{
-			BAPI.registerBiomeHandler((IBiome) savannah);
-			BAPI.registerBiomeHandler((IBiome) decidious);
-			BAPI.registerBiomeHandler((IBiome) coniferous);
-			BAPI.registerBiomeHandler((IBiome) tropic);
+			BAPI.registerBiomeHandler(savannah);
+			BAPI.registerBiomeHandler(decidious);
+			BAPI.registerBiomeHandler(coniferous);
+			BAPI.registerBiomeHandler(tropic);
 		}
         
 		new ZooCrafting();
@@ -249,6 +179,7 @@ public class Zoo {
 		      throw new RuntimeException("Still saltwater id must be moving saltwater id + 1");
 		}
 		
+		MinecraftForge.registerOre("brownstone", new ItemStack(brownStone, 1, 0));
 		MinecraftForge.setToolClass(fenceDestroyer, "zoofencedestroyer", 6);
 		MinecraftForge.setBlockHarvestLevel(fence,"pickaxe",6);
 		MinecraftForge.setBlockHarvestLevel(Gfence,"pickaxe",6);
@@ -266,7 +197,7 @@ public class Zoo {
 		MinecraftForge.setBlockHarvestLevel(Block.netherFence, "zoofencedestroyer", 1);
 		MinecraftForge.setBlockHarvestLevel(Block.fence, "zoofencedestroyer", 1);
 		MinecraftForge.registerCustomBucketHandler(saltBucket);
-		MinecraftForge.versionDetect("Zoo Tycoon", 1, 3, 3);
+		MinecraftForge.versionDetect("Zoo Tycoon", 3, 0, 1);
 		MinecraftForge.registerBonemealHandler(new ZooBonemealHandler());
 		
 		/*test recipes

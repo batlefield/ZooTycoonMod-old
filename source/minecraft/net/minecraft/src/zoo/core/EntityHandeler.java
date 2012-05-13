@@ -4,8 +4,6 @@ import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.EntityEggInfo;
 import net.minecraft.src.EntityList;
 import net.minecraft.src.EnumCreatureType;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.Zoo;
 import net.minecraft.src.zoo.core.entities.ZooEntityAfricanWDog;
@@ -16,7 +14,6 @@ import net.minecraft.src.zoo.core.entities.ZooEntityFennecFox;
 import net.minecraft.src.zoo.core.entities.ZooEntityFlamingo;
 import net.minecraft.src.zoo.core.entities.ZooEntityGazelle;
 import net.minecraft.src.zoo.core.entities.ZooEntityGiraffe;
-import net.minecraft.src.zoo.core.entities.ZooEntityGreyWolf;
 import net.minecraft.src.zoo.core.entities.ZooEntityHippo;
 import net.minecraft.src.zoo.core.entities.ZooEntityLion;
 import net.minecraft.src.zoo.core.entities.ZooEntityPanther;
@@ -45,7 +42,6 @@ public class EntityHandeler
 	public static final int fennecFoxID = ZooEntityInfo.getEntityID("Fennec fox", ModLoader.getUniqueEntityId());
 	public static final int giraffeID = ZooEntityInfo.getEntityID("Giraffe", ModLoader.getUniqueEntityId());
 	public static final int flamingoID = ZooEntityInfo.getEntityID("Flamingo", ModLoader.getUniqueEntityId());
-	public static final int greyWolfID = ZooEntityInfo.getEntityID("Grey wolf", ModLoader.getUniqueEntityId());
 	public static final int maleID = ZooEntityInfo.getEntityID("Male", ModLoader.getUniqueEntityId());
 	public static final int femaleID = ZooEntityInfo.getEntityID("Female", ModLoader.getUniqueEntityId());
 	
@@ -63,7 +59,6 @@ public class EntityHandeler
 	public static final int fennecFoxSpawn = ZooEntityInfo.getSpawnrate("Fennec fox", 1);
 	public static final int giraffeSpawn = ZooEntityInfo.getSpawnrate("Giraffe", 1);
 	public static final int flamingoSpawn = ZooEntityInfo.getSpawnrate("Flamingo", 1);
-	public static final int greyWolfSpawn = ZooEntityInfo.getSpawnrate("Grey wolf", 1);
 	public static final int maleSpawn = ZooEntityInfo.getSpawnrate("Male", 1);
 	public static final int femaleSpawn = ZooEntityInfo.getSpawnrate("Female", 1);
 	
@@ -83,7 +78,6 @@ public class EntityHandeler
 		registerEntity(ZooEntityFennecFox.class, "Fennec Fox", fennecFoxID, fennecFoxSpawn, 4, 4, EnumCreatureType.creature, true);
 		registerEntity(ZooEntityGiraffe.class, "Giraffe", giraffeID, giraffeSpawn, 4, 4, EnumCreatureType.creature, true);
 		registerEntity(ZooEntityFlamingo.class, "Flamingo", flamingoID, flamingoSpawn, 4, 4, EnumCreatureType.creature, false);
-		registerEntity(ZooEntityGreyWolf.class, "Grey wolf", greyWolfID, greyWolfSpawn, 10, 10, EnumCreatureType.creature, false);
 		registerEntity(ZooVisitorMale.class, "Male", maleID, maleSpawn, 1, 1, EnumCreatureType.creature, false);
 		registerEntity(ZooVisitorFemale.class, "Female", femaleID, femaleSpawn, 1, 1, EnumCreatureType.creature, false);
 		          

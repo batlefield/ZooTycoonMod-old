@@ -1,8 +1,11 @@
 package net.minecraft.src.zoo.trading;
 
 import java.util.*;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+import net.minecraft.src.zoo.api.GUIType;
+import net.minecraft.src.zoo.api.ITrade;
 import net.minecraft.src.zoo.api.Trade;
 
 
@@ -32,7 +35,7 @@ public class ZooContainerTradingFencing extends Container
             itemList.add(new ItemStack(ablock[i]));
         }
         
-        addBlocks();
+        addBlocks(itemList);
 
         Item aitem[] = {
         		Zoo.fenceDestroyer, Zoo.fencePack, Zoo.smallFencePack, Zoo.compactFencePack
@@ -42,12 +45,13 @@ public class ZooContainerTradingFencing extends Container
             itemList.add(new ItemStack(aitem[l1]));
         }
         
+        addItems(itemList);
+        
         for(int i2 = 0; i2 < 3; i2++)
         {
             itemList.add(new ItemStack(mod_ZooTrade.Coin.shiftedIndex, 1, i2));
         }
         
-        addItems();
         sortGui();
         InventoryPlayer inventoryplayer = minecraft.thePlayer.inventory;
         for(int l2 = 0; l2 < 5; l2++)
@@ -125,28 +129,31 @@ public class ZooContainerTradingFencing extends Container
 
     }
     
-    public void addItems()
+    public void addItems(List list)
     {
-      List items = Trade.getItems(3);
-      if (items != null)
-      {
-        for (int i = 0; i < items.size(); i++)
-        {
-          itemList.add(items.get(i));
-        }
-      }
+    	for(Item item : Item.itemsList)
+    	{
+    		if(item != null && item instanceof ITrade)
+    		{
+    			ITrade handler = (ITrade)item;
+    			
+    			handler.addToGUI(GUIType.FENCING, (ArrayList) list);
+    		}
+    	}
     }
 
-    public void addBlocks()
+    public void addBlocks(List list)
     {
-      List blocks = Trade.getBlocks(3);
-      if (blocks != null)
-      {
-        for (int i = 0; i < blocks.size() / 2; i++)
-        {
-          itemList.add(blocks.get(i));
-        }
-      }
+    	for(Block block : Block.blocksList)
+    	{
+    		if(block != null && block instanceof ITrade)
+    		{
+    			ITrade handler = (ITrade)block;
+    			
+    			handler.addToGUI(GUIType.FENCING, (ArrayList) list);
+    			
+    		}
+    	}
     }
 
 }

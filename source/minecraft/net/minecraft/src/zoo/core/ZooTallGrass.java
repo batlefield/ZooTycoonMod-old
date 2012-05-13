@@ -97,9 +97,4 @@ public class ZooTallGrass extends BlockFlower implements ITextureProvider
 	public String getTextureFile() {
 		return "/zoo/blocks.png";
 	}
-	
-	public void addCreativeItems(ArrayList itemList)
-	{
-		itemList.add(new ItemStack(this));
-	}
 }

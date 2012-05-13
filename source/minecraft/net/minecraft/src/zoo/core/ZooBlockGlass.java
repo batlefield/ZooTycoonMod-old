@@ -157,12 +157,4 @@ public class ZooBlockGlass extends BlockPane implements ITextureProvider
         }
     }
 	
-	public void addCreativeItems(ArrayList itemList)
-    {
-		itemList.add(new ItemStack(this));
-		itemList.add(new ItemStack(Zoo.Bfence));
-		itemList.add(new ItemStack(Zoo.Ofence));
-		itemList.add(new ItemStack(Zoo.Gfence));
-		itemList.add(new ItemStack(Zoo.fence));
-    }
 }

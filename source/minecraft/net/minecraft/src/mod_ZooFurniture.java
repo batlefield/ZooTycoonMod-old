@@ -59,9 +59,9 @@ public class mod_ZooFurniture extends NetworkMod
 	private static int getItemID(String s, int i)
 	{
 		config.load();
-		config.getOrCreateIntProperty(s, 2, i);
+		config.getOrCreateIntProperty(s, config.CATEGORY_BLOCK, i);
 		config.save();
-		return new Integer(config.getOrCreateIntProperty(s, 2, i).value).intValue();
+		return new Integer(config.getOrCreateIntProperty(s, config.CATEGORY_BLOCK, i).value).intValue();
 	}
 
 	public static Block makeBlock(Class blockClass, String idname, int id, Class tileClass, Material mat, float hard, String name)

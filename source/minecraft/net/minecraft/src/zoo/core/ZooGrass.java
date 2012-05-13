@@ -124,9 +124,4 @@ public class ZooGrass extends Block implements ITextureProvider {
 	public String getTextureFile() {
 		return "/zoo/blocks.png";
 	}
-	
-	public void addCreativeItems(ArrayList itemList)
-    {
-		itemList.add(new ItemStack(this));
-    }
 }

@@ -111,9 +111,4 @@ public class ZooSapling extends BlockFlower implements ITextureProvider
 		return "/zoo/blocks.png";
 	}
 	
-	public void addCreativeItems(ArrayList itemList)
-    {
-		itemList.add(new ItemStack(this, 1, 0));
-		itemList.add(new ItemStack(this, 1, 1));
-    }
 }

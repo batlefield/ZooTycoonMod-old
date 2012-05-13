@@ -17,7 +17,7 @@ public class ZooGenBluePine2 extends WorldGenerator
         int j1 = l - i1;
         int k1 = 2 + random.nextInt(2);
         boolean flag = true;
-        if (j < 1 || j + l + 1 > world.getWorldHeight())
+        if (j < 1 || j + l + 1 > 256)
         {
             return false;
         }
@@ -36,7 +36,7 @@ public class ZooGenBluePine2 extends WorldGenerator
             {
                 for (int j3 = k - j2; j3 <= k + j2 && flag; j3++)
                 {
-                    if (l1 >= 0 && l1 < world.getWorldHeight())
+                    if (l1 >= 0 && l1 < 256)
                     {
                         int k3 = world.getBlockId(l2, l1, j3);
                         if (k3 != 0 && k3 != Zoo.blueLeaves.blockID)
@@ -57,7 +57,7 @@ public class ZooGenBluePine2 extends WorldGenerator
             return false;
         }
         int i2 = world.getBlockId(i, j - 1, k);
-        if (i2 != ZooDirts.coniferous.blockID && i2 != Block.dirt.blockID || j >= world.getWorldHeight() - l - 1)
+        if (i2 != ZooDirts.coniferous.blockID && i2 != Block.dirt.blockID || j >= 256 - l - 1)
         {
             return false;
         }

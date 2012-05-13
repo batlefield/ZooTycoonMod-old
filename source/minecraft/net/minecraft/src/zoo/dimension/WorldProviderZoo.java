@@ -1,52 +1,12 @@
 package net.minecraft.src.zoo.dimension;
 
 import net.minecraft.src.IChunkProvider;
-import net.minecraft.src.WorldProviderBase;
-import net.minecraft.src.ZooDimension;
+import net.minecraft.src.WorldProvider;
 
-public class WorldProviderZoo extends WorldProviderBase{
-
-	public int getDimensionID() {
-		return ZooDimension.dimensionId;
-	}
-	
-	public boolean renderClouds()
-    {
-        return true;
-    }
-
-    public boolean renderVoidFog()
-    {
-        return false;
-    }
-
-    public boolean renderStars()
-    {
-        return true;
-    }
-
-    public boolean darkenSkyDuringRain()
-    {
-        return false;
-    }
-
-    public String getRespawnMessage()
-    {
-        return "Hmm... let me help you by respawning into normal world.";
-    }
-    
-    public void registerWorldChunkManager()
-    {
-        worldChunkMgr = new ZooChunkManager(worldObj);
-    }
-        
-    public IChunkProvider getChunkProvider()
-    {
-        return new ZooChunkProvider(worldObj, worldObj.getSeed(), true);
-    }
+public class WorldProviderZoo extends WorldProvider{
 
 	public String getSaveFolder() {
-		return "DIM" + ZooDimension.dimensionId;
+		return "Zoo";
 	}
 
 	public String getWelcomeMessage() {
@@ -54,7 +14,23 @@ public class WorldProviderZoo extends WorldProviderBase{
 	}
 
 	public String getDepartMessage() {
-		return "Leaving Zoo dimension";
+		return "Leaving zoo dimension";
 	}
+
+    
+    public void registerWorldChunkManager()
+    {
+        worldChunkMgr = new ZooChunkManager(worldObj);
+    }
+    
+    public double getMovementFactor()
+    {
+        return 1.0;
+    }
+        
+    public IChunkProvider getChunkProvider()
+    {
+        return new ZooChunkProvider(worldObj, worldObj.getSeed(), true);
+    }
 
 }

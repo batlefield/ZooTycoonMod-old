@@ -1,22 +1,18 @@
 package net.minecraft.src.zoo.core;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.StatList;
 import net.minecraft.src.World;
 import net.minecraft.src.Zoo;
-import net.minecraft.src.battlefield.API.DamageKey;
-import net.minecraft.src.forge.*;
+import net.minecraft.src.BAPI.ItemKey;
+import net.minecraft.src.forge.ITextureProvider;
 import net.minecraft.src.zoo.api.Fence;
-import net.minecraft.src.zoo.core.*;
 import net.minecraft.src.zoo.core.gen.StructureGenerator;
 
 public class BlockFencer extends Block implements ITextureProvider{
@@ -71,7 +67,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 		
 		int md = world.getBlockMetadata(i, j, k);
 		
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getFence().contains(new DamageKey(entityplayer.getCurrentEquippedItem().itemID, entityplayer.getCurrentEquippedItem().getItemDamage())))
+		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getFence().contains(new ItemKey(entityplayer.getCurrentEquippedItem().itemID, entityplayer.getCurrentEquippedItem().getItemDamage())))
         {
             blockid = entityplayer.getCurrentEquippedItem().itemID;
             blockmd = entityplayer.getCurrentEquippedItem().getItemDamage();
@@ -109,7 +105,7 @@ public class BlockFencer extends Block implements ITextureProvider{
             }
         }
 		
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getGlass().contains(new DamageKey(entityplayer.getCurrentEquippedItem().itemID, entityplayer.getCurrentEquippedItem().getItemDamage())))
+		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getGlass().contains(new ItemKey(entityplayer.getCurrentEquippedItem().itemID, entityplayer.getCurrentEquippedItem().getItemDamage())))
         {
             blockid = entityplayer.getCurrentEquippedItem().itemID;
             blockmd = entityplayer.getCurrentEquippedItem().getItemDamage();
@@ -233,7 +229,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 	        generator.generateWall(world, x + (size / 2), y + 2, z + 10, x + (size / 2) + 1, y + 2 , z + 10, Block.torchWood.blockID, 4);
         }
         
-        if(!mc.thePlayer.capabilities.depleteBuckets)
+        if(!mc.thePlayer.capabilities.isCreativeMode)
         {
     		mc.thePlayer.getCurrentEquippedItem().stackSize--;
         }
@@ -277,7 +273,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 	        generator.generateWall(world, x - (size / 2), y + 2, z + 10, x - (size / 2) - 1, y + 2 , z + 10, Block.torchWood.blockID, 4);
         }
         
-        if(!mc.thePlayer.capabilities.depleteBuckets)
+        if(!mc.thePlayer.capabilities.isCreativeMode)
         {
     		mc.thePlayer.getCurrentEquippedItem().stackSize--;
         }
@@ -327,7 +323,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 	        generator.generateWall(world, x + (size / 2), y + 2, z - 10, x + (size / 2) + 1, y + 2 , z - 10, Block.torchWood.blockID, 4);
         }
         
-        if(!mc.thePlayer.capabilities.depleteBuckets)
+        if(!mc.thePlayer.capabilities.isCreativeMode)
         {
     		mc.thePlayer.getCurrentEquippedItem().stackSize--;
         }
@@ -371,7 +367,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 	        generator.generateWall(world, x - (size / 2), y + 2, z - 10, x - (size / 2) - 1, y + 2 , z - 10, Block.torchWood.blockID, 4);
         }
         
-        if(!mc.thePlayer.capabilities.depleteBuckets)
+        if(!mc.thePlayer.capabilities.isCreativeMode)
         {
     		mc.thePlayer.getCurrentEquippedItem().stackSize--;
         }
@@ -402,7 +398,7 @@ public class BlockFencer extends Block implements ITextureProvider{
         generator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
         generator.generateWall(world, x + size, y, z + size, x + size, y + 1 , z, blockid, blockmd);
         
-        if(!mc.thePlayer.capabilities.depleteBuckets)
+        if(!mc.thePlayer.capabilities.isCreativeMode)
         {
     		mc.thePlayer.getCurrentEquippedItem().stackSize--;
         }
@@ -438,7 +434,7 @@ public class BlockFencer extends Block implements ITextureProvider{
         generator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
         generator.generateWall(world, x + size, y, z - size, x + size, y + 1 , z, blockid, blockmd);
         
-        if(!mc.thePlayer.capabilities.depleteBuckets)
+        if(!mc.thePlayer.capabilities.isCreativeMode)
         {
     		mc.thePlayer.getCurrentEquippedItem().stackSize--;
         }
@@ -469,7 +465,7 @@ public class BlockFencer extends Block implements ITextureProvider{
         generator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
         generator.generateWall(world, x - size, y, z - size, x - size, y + 1 , z, blockid, blockmd);
         
-        if(!mc.thePlayer.capabilities.depleteBuckets)
+        if(!mc.thePlayer.capabilities.isCreativeMode)
         {
     		mc.thePlayer.getCurrentEquippedItem().stackSize--;
         }
@@ -500,7 +496,7 @@ public class BlockFencer extends Block implements ITextureProvider{
         generator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
         generator.generateWall(world, x - size, y, z + size, x - size, y + 1 , z, blockid, blockmd);
         
-        if(!mc.thePlayer.capabilities.depleteBuckets)
+        if(!mc.thePlayer.capabilities.isCreativeMode)
         {
     		mc.thePlayer.getCurrentEquippedItem().stackSize--;
         }
@@ -530,11 +526,5 @@ public class BlockFencer extends Block implements ITextureProvider{
 		world.setBlockWithNotify(x - 1, y, z + 1, Block.torchWood.blockID);
 		world.setBlockWithNotify(x - 1, y, z - 1, Block.torchWood.blockID);
 	}
-	
-	public void addCreativeItems(ArrayList itemList)
-    {
-		itemList.add(new ItemStack(this, 1, 0));
-		itemList.add(new ItemStack(this, 1, 4));
-    }
 
 }

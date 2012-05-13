@@ -136,10 +136,5 @@ public class ZooBlockWall extends Block implements ITextureProvider{
 		generator.generateCuboid(world, x - 1, y, z - 1, x - size + 1, y + 4, z - size + 1, 0);
 		generator.generateCuboid(world, x, y + 5, z, x - size, y + 20, z - size, 0);
 	}
-
-	public void addCreativeItems(ArrayList itemList)
-    {
-		itemList.add(new ItemStack(this, 1, 0));
-    }
 	
 }

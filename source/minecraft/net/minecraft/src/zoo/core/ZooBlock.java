@@ -13,10 +13,5 @@ public class ZooBlock extends Block implements ITextureProvider {
 	{
 		return "/zoo/blocks.png";
 	}
-	
-	public void addCreativeItems(ArrayList itemList)
-    {
-		itemList.add(new ItemStack(this));
-    }
 
 }

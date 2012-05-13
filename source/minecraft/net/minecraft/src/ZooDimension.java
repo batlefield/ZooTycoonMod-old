@@ -1,15 +1,19 @@
 package net.minecraft.src;
 
-import net.minecraft.src.battlefield.API.BAPI;
 import net.minecraft.src.zoo.dimension.PortalTool;
 import net.minecraft.src.zoo.dimension.ZooPortal;
+import net.minecraft.src.zoo.dimension.ZooPortalOverlay;
 import net.minecraft.src.Zoo;
+import net.minecraft.src.BAPI.*;
 
 public class ZooDimension {
 
 	public static int dimensionId = mod_ZooDimension.getInteger("Dimension ID", 5);
+	public static boolean isInPortal = false;
 	
 	public static void init() {
+		BAPI.registerGameOverlay(new ZooPortalOverlay());
+		
 		ModLoader.registerBlock(portal);
 		ModLoader.registerBlock(portalCreator);
 		

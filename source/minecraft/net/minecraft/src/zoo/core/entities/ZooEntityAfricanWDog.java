@@ -97,7 +97,7 @@ public class ZooEntityAfricanWDog extends ZooEntityAnimal
 	            }
 	            if(f < 2.0F && entityitem != null && deathTime == 0)
 	            {
-	                entityitem.setEntityDead();
+	                entityitem.setDead();
 	                feed(1);
 	            }
 	        }

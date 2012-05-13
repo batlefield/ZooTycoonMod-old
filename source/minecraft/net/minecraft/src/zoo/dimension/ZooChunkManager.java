@@ -12,7 +12,6 @@ import net.minecraft.src.IntCache;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldChunkManager;
 import net.minecraft.src.WorldType;
-import net.minecraft.src.battlefield.API.BAPI;
 import net.minecraft.src.zoo.api.Biome;
 
 public class ZooChunkManager extends WorldChunkManager

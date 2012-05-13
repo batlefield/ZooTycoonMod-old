@@ -2,9 +2,10 @@ package net.minecraft.src.zoo.api;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.src.*;
-import net.minecraft.src.battlefield.API.BAPI;
-import net.minecraft.src.battlefield.API.DamageKey;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.Item;
+import net.minecraft.src.BAPI.ItemKey;
 
 /** Fence API
  * Developed to register custom fences and custom rotators for exhibit tools(Zoo Mod)
@@ -50,12 +51,7 @@ public class Fence {
 	
 	protected static void registerFence(Block block, int i)
 	{
-		fences.add(new DamageKey(block.blockID, i));
-		
-		if(block != Block.netherFence && block != Block.fence)
-		{
-			BAPI.registerFence(block);
-		}
+		fences.add(new ItemKey(block.blockID, i));
 		
 		String s = block.getBlockName().replace("tile.", "");
 		
@@ -87,7 +83,7 @@ public class Fence {
 	
 	protected static void registerFenceAsGlass(Block block, int i)
 	{
-		glass.add(new DamageKey(block.blockID, i));
+		glass.add(new ItemKey(block.blockID, i));
 		
 		String s = block.getBlockName().replace("tile.", "");
 		

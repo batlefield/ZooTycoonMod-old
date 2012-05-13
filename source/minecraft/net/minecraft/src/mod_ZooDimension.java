@@ -4,6 +4,7 @@ import java.io.File;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.forge.Configuration;
+import net.minecraft.src.forge.DimensionManager;
 import net.minecraft.src.forge.MinecraftForgeClient;
 import net.minecraft.src.forge.NetworkMod;
 import net.minecraft.src.zoo.api.ZAPI;
@@ -26,7 +27,12 @@ public class mod_ZooDimension extends NetworkMod{
 	
 	public mod_ZooDimension()
     {
-		DimensionAPI.registerDimension(new WorldProviderZoo());
+		if(!DimensionManager.registerDimension(ZooDimension.dimensionId, new WorldProviderZoo(), true))
+		{
+			throw new IllegalArgumentException("Dimension id " + ZooDimension.dimensionId + " is already occupied by " + DimensionManager.getProvider(ZooDimension.dimensionId).getClass().getSimpleName() + " when adding Zoo dimension.");
+		}else{
+			System.out.println("Zoo: Dimension registered sucessfully");
+		}
         instance = this;
     }
 
@@ -42,9 +48,7 @@ public class mod_ZooDimension extends NetworkMod{
 	
     public static void initialize()
     {
-    	ZooDimension.init();
         if(initialized)
-        	
         {
             return;
         } else
@@ -58,10 +62,8 @@ public class mod_ZooDimension extends NetworkMod{
     }
     
     public void modsLoaded() {
-        ModLoader.setInGameHook(this, true, false);
-        ModLoader.setInGUIHook(this, true, true);
 	}
-    
+
     
     static Configuration config = new Configuration(new File(Minecraft.getMinecraftDir(), "Zoo/Dimension/Config.cfg"));
     
@@ -76,26 +78,19 @@ public class mod_ZooDimension extends NetworkMod{
     public static int getItemIdFor(String s, int i)
     {
     	config.load();
-        config.getOrCreateIntProperty(s, 2, i);
+        config.getOrCreateIntProperty(s, config.CATEGORY_ITEM, i);
         config.save();
-        return new Integer(config.getOrCreateIntProperty(s, 2, i).value).intValue();
+        return new Integer(config.getOrCreateIntProperty(s, config.CATEGORY_ITEM, i).value).intValue();
     }
     
     public static int getInteger(String s, int i)
     {
     	config.load();
-        config.getOrCreateIntProperty(s, 0, i);
+        config.getOrCreateIntProperty(s, config.CATEGORY_GENERAL, i);
         config.save();
-        return new Integer(config.getOrCreateIntProperty(s, 0, i).value).intValue();
+        return new Integer(config.getOrCreateIntProperty(s, config.CATEGORY_GENERAL, i).value).intValue();
     }
     
-    public static boolean getBoolean(String s, boolean b)
-    {
-    	config.load();
-    	config.getOrCreateBooleanProperty(s, 0, b);
-    	config.save();
-    	return new Boolean(config.getOrCreateBooleanProperty(s, 0, b).value).booleanValue();
-    }
     
     
     public static mod_ZooDimension instance;

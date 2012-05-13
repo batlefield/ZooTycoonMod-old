@@ -1,10 +1,16 @@
 package net.minecraft.src.zoo.api;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Handler;
 
-import net.minecraft.src.battlefield.API.DamageKey;
-import net.minecraft.src.forge.*;
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.ModLoader;
+import net.minecraft.src.BAPI.ItemKey;
 
 /** Trading API or TAPI
  * Developed to add custom items/blocks
@@ -41,7 +47,7 @@ public class Trade {
 		}
     }
 	
-	private static Map<DamageKey, Integer> priceMap = new HashMap<DamageKey, Integer>();
+	private static Map<ItemKey, Integer> priceMap = new HashMap<ItemKey, Integer>();
 	
 	private static List dirtBlocks = new ArrayList();
 	private static List dirtItems = new ArrayList();
@@ -204,6 +210,7 @@ public class Trade {
 		{
 			init();
 		}
+		
 		registerBlock(block, 0, id, p);
 	}
 	
@@ -361,7 +368,7 @@ public class Trade {
 		{
 			init();
 		}
-		priceMap.put(new DamageKey(item.shiftedIndex, damage), Integer.valueOf(p));
+		priceMap.put(new ItemKey(item.shiftedIndex, damage), Integer.valueOf(p));
 		
 		if(damage != 0)
 		{
@@ -386,7 +393,7 @@ public class Trade {
 		{
 			init();
 		}
-		priceMap.put(new DamageKey(block.blockID, damage), Integer.valueOf(p));
+		priceMap.put(new ItemKey(block.blockID, damage), Integer.valueOf(p));
 		
 		if(damage != 0)
 		{
@@ -405,17 +412,43 @@ public class Trade {
 
 	public static int getPrice(ItemStack itemstack)
     {
-		
 		if(!hasInit)
 		{
 			init();
 		}
 		
-    	Integer i = priceMap.get(new DamageKey(itemstack.itemID, itemstack.getItemDamage()));
-    	if(i == null){
-    		return priceLib(itemstack);
-    	}
-    	return i;
+		int i = priceLib(itemstack);;
+		
+		if(itemstack.itemID < Item.shovelSteel.shiftedIndex)
+		{
+			for(Block block : Block.blocksList)
+			{
+				if(block != null && block instanceof ITrade)
+				{
+					ITrade handler = (ITrade)block;
+					
+					if(itemstack.itemID == block.blockID)
+					{
+						i = handler.getPrice(itemstack.getItemDamage());
+					}
+				}
+			}
+		}else{
+			for(Item item : Item.itemsList)
+			{
+				if(item != null && item instanceof ITrade)
+				{
+					ITrade handler = (ITrade)item;
+					
+					if(itemstack.itemID == item.shiftedIndex)
+					{
+						System.out.println(itemstack.itemID + " " + itemstack.getItemDamage());
+						i = handler.getPrice(itemstack.getItemDamage());
+					}
+				}
+			}
+		}
+		return i;
     }
 	
 	/**
@@ -1619,18 +1652,6 @@ public class Trade {
         if(s.equals("item.record"))
         {
             return 720;
-        }
-        if(s.equals("item.coin.gold"))
-        {
-        	return 1000;
-        }
-        if(s.equals("item.coin.silver"))
-        {
-        	return 100;
-        }
-        if(s.equals("item.coin.bronze"))
-        {
-        	return 10;
         }
         if(s.equals("tile.bs"))
         {

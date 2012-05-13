@@ -98,7 +98,7 @@ public abstract class ZooEntityAnimal extends EntityCreature
         {
         	hunger = 10;
         }
-        if (hunger >= 7 && getEntityHealth() < getMaxHealth())
+        if (hunger >= 7 && health < getMaxHealth())
         {
         	hungertimer++;
             if (hungertimer >= 100)
@@ -112,7 +112,7 @@ public abstract class ZooEntityAnimal extends EntityCreature
             hungertimer++;
             if (hungertimer >= 100)
             {
-                if (getEntityHealth() > getMaxHealth()/2 || getEntityHealth() > 1)
+                if (health > getMaxHealth()/2 || health > 1)
                 {
                     attackEntityFrom(DamageSource.starve, 1);
                 }
@@ -551,6 +551,11 @@ public abstract class ZooEntityAnimal extends EntityCreature
                 }
             }
         }
+    }
+    
+    public int getEntityHealth()
+    {
+    	return health;
     }
     
     protected void jump()
