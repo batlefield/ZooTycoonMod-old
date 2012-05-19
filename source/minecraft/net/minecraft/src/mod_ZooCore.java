@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.MinecraftForgeClient;
 import net.minecraft.src.forge.NetworkMod;
-import net.minecraft.src.zoo.api.Fence;
 import net.minecraft.src.zoo.core.ZooSettings;
 import net.minecraft.src.zoo.core.entities.ZooEntityAfricanWDog;
 import net.minecraft.src.zoo.core.entities.ZooEntityAnteater;
@@ -22,6 +21,7 @@ import net.minecraft.src.zoo.core.entities.ZooEntityLion;
 import net.minecraft.src.zoo.core.entities.ZooEntityPrimate;
 import net.minecraft.src.zoo.core.entities.ZooEntityRhino;
 import net.minecraft.src.zoo.core.entities.ZooEntityTiger;
+import net.minecraft.src.zoo.core.entities.ZooEntityWolf;
 import net.minecraft.src.zoo.core.entities.ZooVisitorFemale;
 import net.minecraft.src.zoo.core.render.RenderFemale;
 import net.minecraft.src.zoo.core.render.ZooRenderAfricanWDog;
@@ -36,6 +36,7 @@ import net.minecraft.src.zoo.core.render.ZooRenderLion;
 import net.minecraft.src.zoo.core.render.ZooRenderPrimate;
 import net.minecraft.src.zoo.core.render.ZooRenderRhino;
 import net.minecraft.src.zoo.core.render.ZooRenderTiger;
+import net.minecraft.src.zoo.core.render.ZooRenderWolf;
 
 import org.lwjgl.opengl.GL11;
 
@@ -44,7 +45,7 @@ public class mod_ZooCore extends NetworkMod
 
 	public static String version = "Alpha 1.0.0";
 	public static String mcVersion = "1.1.0";
-	public static String author = "Battlefield";
+	public static String author = "Battlefield and AndrewSherman";
 	public static int renderMode;
 	public static KeyBinding options = new KeyBinding("Zoo options", 25);
 	public static ZooSettings settings = new ZooSettings();
@@ -121,12 +122,13 @@ public class mod_ZooCore extends NetworkMod
 
 	public void keyboardEvent(KeyBinding var1)
 	{
-
-		if (var1 == options)
+		if(minecraft.currentScreen == null)
 		{
-			minecraft.displayGuiScreen(new net.minecraft.src.zoo.core.GuiOptions());
+			if (var1 == options)
+			{
+				minecraft.displayGuiScreen(new net.minecraft.src.zoo.core.GuiOptions());
+			}
 		}
-
 	}
 
 	public void addRenderer(Map map)
@@ -146,7 +148,7 @@ public class mod_ZooCore extends NetworkMod
 		map.put(ZooEntityFennecFox.class, new ZooRenderFennecFox(0.5F));
 		map.put(ZooEntityGiraffe.class, new ZooRenderGiraffe(0.6F));
 		// map.put(ZooEntityFlamingo.class, new ZooRenderFlamingo(0.5F));
-		// map.put(ZooEntityGreyWolf.class, new ZooRenderGreyWolf(0.5F));
+		map.put(ZooEntityWolf.class, new ZooRenderWolf(0.5F));
 	}
 
 	public void generateSurface(World world, Random rand, int chunkX, int chunkZ)

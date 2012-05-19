@@ -1,4 +1,4 @@
-package net.minecraft.src.zoo.core.modells;
+package net.minecraft.src.zoo.core.models;
 
 import net.minecraft.src.*;
 

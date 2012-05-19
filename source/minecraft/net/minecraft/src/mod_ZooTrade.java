@@ -10,6 +10,7 @@ import net.minecraft.src.forge.NetworkMod;
 import net.minecraft.src.zoo.api.Trade;
 import net.minecraft.src.zoo.trading.BlockShop;
 import net.minecraft.src.zoo.trading.BlockShop2;
+import net.minecraft.src.zoo.trading.BlockShopTest;
 import net.minecraft.src.zoo.trading.TradingBlocksCreative;
 import net.minecraft.src.zoo.trading.ZooEntityShopKeeper;
 import net.minecraft.src.zoo.trading.ZooItemCoin;
@@ -135,11 +136,11 @@ public class mod_ZooTrade extends NetworkMod
 	public static void loadmod()
 	{
 
-		ModLoader.registerBlock(shopkeeperblockdouble, net.minecraft.src.zoo.trading.ZooItemShop.class);
-		ModLoader.addName(new ItemStack(shopkeeperblockdouble, 1, 0), "Food shop");
-		ModLoader.addName(new ItemStack(shopkeeperblockdouble, 1, 4), "Dirt shop");
+		ModLoader.registerBlock(shopkeeperblockdouble/*, net.minecraft.src.zoo.trading.ZooItemShop.class*/);
+		ModLoader.addName(/*new ItemStack(*/shopkeeperblockdouble/*, 1, 0)*/, "Food shop");
+		/*ModLoader.addName(new ItemStack(shopkeeperblockdouble, 1, 4), "Dirt shop");
 		ModLoader.addName(new ItemStack(shopkeeperblockdouble, 1, 8), "Rare items stand");
-		ModLoader.addName(new ItemStack(shopkeeperblockdouble, 1, 12), "Technic shop");
+		ModLoader.addName(new ItemStack(shopkeeperblockdouble, 1, 12), "Technic shop");*/
 
 		ModLoader.registerBlock(shopkeeperblockdouble2, net.minecraft.src.zoo.trading.ZooItemShop.class);
 		ModLoader.addName(new ItemStack(shopkeeperblockdouble2, 1, 0), "Potion shop");
@@ -160,7 +161,7 @@ public class mod_ZooTrade extends NetworkMod
 	}
 
 	public static Item Coin = (new ZooItemCoin(getItemID("Coin", 407)).setItemName("sc").setIconIndex(9));
-	public static final Block shopkeeperblockdouble = (new BlockShop(getBlockID("Shopkeeper block", 225)).setBlockName("shopkeeperdouble"));
+	public static final Block shopkeeperblockdouble = (new BlockShopTest(getBlockID("Shopkeeper block", 225)).setBlockName("shopkeeperdouble"));
 	public static final Block shopkeeperblockdouble2 = (new BlockShop2(getBlockID("Shopkeeper block 2", 226)).setBlockName("shopkeeperdouble2"));
 
 }

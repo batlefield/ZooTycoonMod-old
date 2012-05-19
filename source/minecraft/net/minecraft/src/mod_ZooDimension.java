@@ -9,13 +9,19 @@ import net.minecraft.src.forge.MinecraftForgeClient;
 import net.minecraft.src.forge.NetworkMod;
 import net.minecraft.src.zoo.api.ZAPI;
 import net.minecraft.src.zoo.dimension.WorldProviderZoo;
+import net.minecraft.src.zoo.dimension.ZooPortal;
+import net.minecraft.src.zoo.dimension.ZooTeleporter;
 
 public class mod_ZooDimension extends NetworkMod{
 
+	public static int delayedTicks;
+	public static int timeInPortal;
+	public static boolean isInPortal = false;
+	
 	public String getVersion() {
 		return new StringBuilder().append("Zoo Tycoon ").append(mod_ZooCore.version).append(" Dimension for Minecraft ").append(mod_ZooCore.mcVersion).append(" by ").append(mod_ZooCore.author).toString();
 	}
-
+	
 	public void load() {
         initialize();
         ZAPI.registerBiome(ZooBiomeBase.decidious, true, true, true);
@@ -23,6 +29,8 @@ public class mod_ZooDimension extends NetworkMod{
         ZAPI.registerBiome(ZooBiomeBase.tropic, true, true, true);
         ZAPI.registerBiome(ZooBiomeBase.ocean, false, false, true);
         ZAPI.registerBiome(ZooBiomeBase.mesa, true, false, true);
+        
+        ModLoader.setInGameHook(this, true, true);
 	}
 	
 	public mod_ZooDimension()
@@ -61,8 +69,68 @@ public class mod_ZooDimension extends NetworkMod{
         }
     }
     
-    public void modsLoaded() {
-	}
+    public boolean onTickInGame(float var1, Minecraft var2)
+    {
+    	EntityPlayer entityplayer = var2.thePlayer;
+        if (!var2.theWorld.isRemote)
+        {
+        	EntityPlayerSP entityplayersp = var2.thePlayer;
+    		if(!isInPortal(entityplayersp))
+    		{
+    			timeInPortal = 0;
+    			isInPortal = false;
+    			/*delayedTicks++;
+    			if(delayedTicks >= 85)
+    			{
+    				delayedTicks = 0;
+    				isInPortal = false;
+    			}*/
+    			return true;
+    		}
+            if (isInPortal(entityplayersp))
+            {
+            	isInPortal = true;
+                timeInPortal++;
+                if (timeInPortal == 75 && entityplayersp.timeUntilPortal <= 0)
+                {
+    				timeInPortal = 0;
+    				entityplayersp.timeUntilPortal = 10;
+    				
+    		        if (entityplayersp.dimension != ZooDimension.dimensionId)
+    		        {
+    		            var2.usePortal(ZooDimension.dimensionId, new ZooTeleporter());
+    		        }
+    		        else if (entityplayersp.dimension == ZooDimension.dimensionId)
+    		        {
+    		        	var2.usePortal(0, new ZooTeleporter());
+    		        }
+                }
+                
+            }
+        }
+		if (isInPortal((EntityPlayerSP)entityplayer))
+		{
+			entityplayer.setInPortal();
+			if(entityplayer.timeInPortal >= 0.9F)
+			{
+				entityplayer.timeInPortal = 0.0F;
+			}
+		}
+		return true;
+    }
+    
+    public static boolean isInPortal(EntityPlayerSP entityplayersp)
+    {
+        int j = (int)Math.floor(entityplayersp.posX);
+        int k = (int)Math.floor(entityplayersp.posY);
+        int l = (int)Math.floor(entityplayersp.posZ);
+		if(entityplayersp.worldObj.getBlockId(j, k, l) == ZooDimension.portal.blockID || entityplayersp.worldObj.getBlockId(j, k - 1, l) == ZooDimension.portal.blockID)
+		{
+			return true;
+		}
+		return false;
+    }
+    
 
     
     static Configuration config = new Configuration(new File(Minecraft.getMinecraftDir(), "Zoo/Dimension/Config.cfg"));

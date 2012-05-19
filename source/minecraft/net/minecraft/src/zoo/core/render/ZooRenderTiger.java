@@ -1,6 +1,6 @@
 package net.minecraft.src.zoo.core.render;
 import net.minecraft.src.*;
-import net.minecraft.src.zoo.core.modells.ZooModelTiger;
+import net.minecraft.src.zoo.core.models.ZooModelTiger;
 
 public class ZooRenderTiger extends RenderLiving
 {

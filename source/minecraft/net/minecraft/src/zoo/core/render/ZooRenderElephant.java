@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.src.*;
 import net.minecraft.src.zoo.core.entities.ZooEntityAnimal;
 import net.minecraft.src.zoo.core.entities.ZooEntityElephant;
-import net.minecraft.src.zoo.core.modells.ZooModelElephant;
+import net.minecraft.src.zoo.core.models.ZooModelElephant;
 
 public class ZooRenderElephant extends RenderLiving
 {

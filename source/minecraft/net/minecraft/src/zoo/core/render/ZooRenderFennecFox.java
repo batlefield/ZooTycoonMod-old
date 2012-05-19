@@ -2,8 +2,8 @@ package net.minecraft.src.zoo.core.render;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.src.*;
 import net.minecraft.src.zoo.core.entities.*;
-import net.minecraft.src.zoo.core.modells.ZooModelFennecFox;
-import net.minecraft.src.zoo.core.modells.ZooModelGazelle;
+import net.minecraft.src.zoo.core.models.ZooModelFennecFox;
+import net.minecraft.src.zoo.core.models.ZooModelGazelle;
 
 public class ZooRenderFennecFox extends RenderLiving
 {

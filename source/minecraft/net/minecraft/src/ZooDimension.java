@@ -9,7 +9,6 @@ import net.minecraft.src.BAPI.*;
 public class ZooDimension {
 
 	public static int dimensionId = mod_ZooDimension.getInteger("Dimension ID", 5);
-	public static boolean isInPortal = false;
 	
 	public static void init() {
 		BAPI.registerGameOverlay(new ZooPortalOverlay());

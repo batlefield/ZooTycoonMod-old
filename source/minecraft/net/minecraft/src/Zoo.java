@@ -30,6 +30,7 @@ import net.minecraft.src.zoo.core.ZooPlaceableHandler;
 import net.minecraft.src.zoo.core.ZooPlatform;
 import net.minecraft.src.zoo.core.ZooSaltwaterFlowing;
 import net.minecraft.src.zoo.core.ZooSaltwaterStationary;
+import net.minecraft.src.zoo.core.ZooSaltwaterTextureFX;
 import net.minecraft.src.zoo.core.ZooSapling;
 import net.minecraft.src.zoo.core.ZooShovel;
 import net.minecraft.src.zoo.core.ZooSword;
@@ -146,6 +147,7 @@ public class Zoo {
 		registerBlock(coniferousgrass, "Coniferous Grass");
 		registerBlock(acorns, "Acorns");
 		registerBlock(acaciaLeaves, "Acacia leaves");
+		registerBlock(blueLeaves, "Blue pine leaves");
 		registerBlock(ZooDirts.savannah, "Savannah");
 		registerBlock(ZooDirts.deciduous, "Deciduous");
 		registerBlock(ZooDirts.coniferous, "Coniferous");
@@ -159,8 +161,6 @@ public class Zoo {
 		
 		
 		//blocks with metadata
-		ModLoader.registerBlock(blueLeaves, net.minecraft.src.zoo.core.ZooItemLeaves.class);
-		ModLoader.addName(new ItemStack(blueLeaves), "Blue pine leaves");
 		ModLoader.registerBlock(grounder, net.minecraft.src.zoo.core.ZooItemGrounder.class);
 		ModLoader.addName(new ItemStack(grounder, 1, 0), "Grounder 128x128");
 		ModLoader.registerBlock(fencer, net.minecraft.src.zoo.core.ZooItemFencer.class);
@@ -205,6 +205,8 @@ public class Zoo {
 		     "X", Character.valueOf('X'), Block.dirt
 		});*/
 		
+		
+		//initializes entities
 		EntityHandeler.init();
 	}
 	

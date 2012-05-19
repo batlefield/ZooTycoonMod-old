@@ -6,7 +6,7 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.RenderLiving;
 import net.minecraft.src.Tessellator;
 import net.minecraft.src.zoo.core.entities.ZooEntityAnimal;
-import net.minecraft.src.zoo.core.modells.ZooModelRhino;
+import net.minecraft.src.zoo.core.models.ZooModelRhino;
 
 import org.lwjgl.opengl.GL11;
 

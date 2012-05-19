@@ -20,6 +20,7 @@ import net.minecraft.src.zoo.core.entities.ZooEntityPanther;
 import net.minecraft.src.zoo.core.entities.ZooEntityPrimate;
 import net.minecraft.src.zoo.core.entities.ZooEntityRhino;
 import net.minecraft.src.zoo.core.entities.ZooEntityTiger;
+import net.minecraft.src.zoo.core.entities.ZooEntityWolf;
 import net.minecraft.src.zoo.core.entities.ZooVisitorFemale;
 import net.minecraft.src.zoo.core.entities.ZooVisitorMale;
 
@@ -44,6 +45,7 @@ public class EntityHandeler
 	public static final int flamingoID = ZooEntityInfo.getEntityID("Flamingo", ModLoader.getUniqueEntityId());
 	public static final int maleID = ZooEntityInfo.getEntityID("Male", ModLoader.getUniqueEntityId());
 	public static final int femaleID = ZooEntityInfo.getEntityID("Female", ModLoader.getUniqueEntityId());
+	public static final int greywolfID = ZooEntityInfo.getEntityID("GreyWolf", ModLoader.getUniqueEntityId());
 	
 	public static final int bighornSpawn = ZooEntityInfo.getSpawnrate("Bighorn", 1);
 	public static final int gazelleSpawn = ZooEntityInfo.getSpawnrate("Gazelle", 1);
@@ -61,6 +63,7 @@ public class EntityHandeler
 	public static final int flamingoSpawn = ZooEntityInfo.getSpawnrate("Flamingo", 1);
 	public static final int maleSpawn = ZooEntityInfo.getSpawnrate("Male", 1);
 	public static final int femaleSpawn = ZooEntityInfo.getSpawnrate("Female", 1);
+	public static final int greywolfSpawn = ZooEntityInfo.getSpawnrate("GreyWolf", 1);
 	
 	public static void init()
 	{
@@ -80,13 +83,27 @@ public class EntityHandeler
 		registerEntity(ZooEntityFlamingo.class, "Flamingo", flamingoID, flamingoSpawn, 4, 4, EnumCreatureType.creature, false);
 		registerEntity(ZooVisitorMale.class, "Male", maleID, maleSpawn, 1, 1, EnumCreatureType.creature, false);
 		registerEntity(ZooVisitorFemale.class, "Female", femaleID, femaleSpawn, 1, 1, EnumCreatureType.creature, false);
+		registerEntity(ZooEntityWolf.class, "GreyWolf", greywolfID, greywolfSpawn, 1, 1, EnumCreatureType.creature, false);
 		          
-		addEggs();
+		initEggs();
 	}
 	
-	private static void addEggs()
+	private static void initEggs()
 	{
 		addEgg(africanWildDogID, 0xD9BB89, 0x8C7958, "African wild dog");
+		addEgg(anteaterID, 0x313423, 0x25240f, "Anteater");
+		addEgg(bighornID, 0x573f14, 0xa0917e, "Bighorn");
+		addEgg(primateID, 0x31312f, 0xccab9c, "Primate");
+		addEgg(fennecFoxID, 0xd2c09c, 0xe2e0d3, "Fennec Fox");
+		addEgg(flamingoID, 0xffa7a7, 0xffc5b3, "Flamingo");
+		addEgg(gazelleID, 0xc67d41, 0xd0d5d1, "Gazelle");
+		addEgg(giraffeID, 0xe8bf9b, 0x815030, "Giraffe");
+		addEgg(hippoID, 0x665a58, 0x473f3e, "Hippo");
+		addEgg(lionID, 0x81622b, 0x463f2f, "Lion");
+		addEgg(rhinoID, 0xc6d0d1, 0xd5e1e2, "Rhino");
+		addEgg(pantherID, 0x000000, 0x00002e, "Black panther");
+		addEgg(elephantID, 0x4f4f4f, 0xe4e0dd, "Elephant");
+		addEgg(greywolfID, 0xe4e0dd, 0x4f4f4f, "Grey Wolf");
 	}
 	
 	private static void registerEntity(Class class1, String name, int entityID, int spawnrate, int min, int max, EnumCreatureType type, boolean canSpawn)

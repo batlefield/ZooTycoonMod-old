@@ -6,18 +6,18 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.RenderLiving;
 import net.minecraft.src.Tessellator;
 import net.minecraft.src.zoo.core.entities.ZooEntityAnimal;
-import net.minecraft.src.zoo.core.models.ZooModelGiraffe;
+import net.minecraft.src.zoo.core.models.ZooModelWolf;
 
 import org.lwjgl.opengl.GL11;
 
-public class ZooRenderGiraffe extends RenderLiving
+public class ZooRenderWolf extends RenderLiving
 {
 
 	private static byte height = -80;
 	
-    public ZooRenderGiraffe(float f)
+    public ZooRenderWolf(float f)
     {
-        super(new ZooModelGiraffe(), f);
+        super(new ZooModelWolf(), f);
     }
 
     public void renderAnimal(EntityLiving entityliving, double d, double d1, double d2, float f, float f1)

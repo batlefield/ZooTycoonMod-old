@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.src.*;
 import net.minecraft.src.zoo.core.entities.ZooEntityAnimal;
 import net.minecraft.src.zoo.core.entities.ZooEntityBighorn;
-import net.minecraft.src.zoo.core.modells.ZooModelBighorn;
+import net.minecraft.src.zoo.core.models.ZooModelBighorn;
 
 public class ZooRenderBighorn extends RenderLiving
 {

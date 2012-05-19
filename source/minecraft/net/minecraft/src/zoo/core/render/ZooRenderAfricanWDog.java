@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.src.*;
 import net.minecraft.src.zoo.core.entities.ZooEntityAfricanWDog;
 import net.minecraft.src.zoo.core.entities.ZooEntityAnimal;
-import net.minecraft.src.zoo.core.modells.ZooModelAfricanWDog;
+import net.minecraft.src.zoo.core.models.ZooModelAfricanWDog;
 
 public class ZooRenderAfricanWDog extends ZooRenderBase
 {	

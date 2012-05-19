@@ -14,12 +14,11 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.World;
 import net.minecraft.src.Zoo;
 import net.minecraft.src.ZooDimension;
+import net.minecraft.src.mod_ZooDimension;
 import net.minecraft.src.forge.ITextureProvider;
 
 public class ZooPortal extends Block implements ITextureProvider{
 
-	public static int timeInPortal;
-	
 	public ZooPortal(int i, int j, Material material) {
 		super(i, j, material);
 	}
@@ -116,67 +115,6 @@ public class ZooPortal extends Block implements ITextureProvider{
         return 1;
     }
 
-    /**
-     * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
-     */
-    public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity)
-    {
-    	if (entity instanceof EntityPlayer)
-        {
-            EntityPlayer entityplayer = (EntityPlayer)entity;
-            if (!world.isRemote)
-            {
-            	EntityPlayerSP entityplayersp = (EntityPlayerSP)entity;
-        		if(!isInPortal(entityplayersp, blockID))
-        		{
-        			timeInPortal = 0;
-        			ZooDimension.isInPortal = false;
-        			return;
-        		}
-                if (isInPortal(entityplayersp, blockID))
-                {
-                	ZooDimension.isInPortal = true;
-                    timeInPortal++;
-                    if (timeInPortal == 150 && entityplayersp.timeUntilPortal <= 0)
-                    {
-        				timeInPortal = 0;
-        				entityplayersp.timeUntilPortal = 10;
-        				
-        		        if (entityplayersp.dimension != ZooDimension.dimensionId)
-        		        {
-        		            ModLoader.getMinecraftInstance().usePortal(ZooDimension.dimensionId, new ZooTeleporter());
-        		        }
-        		        else if (entityplayersp.dimension == ZooDimension.dimensionId)
-        		        {
-        		        	ModLoader.getMinecraftInstance().usePortal(0, new ZooTeleporter());
-        		        }
-                    }
-                    
-                }
-            }
-			if (isInPortal((EntityPlayerSP)entityplayer, blockID))
-			{
-				entityplayer.setInPortal();
-				if(entityplayer.timeInPortal >= 0.9F)
-				{
-					entityplayer.timeInPortal = 0.0F;
-				}
-			}
-        }
-    }
-	
-    private boolean isInPortal(EntityPlayerSP entityplayersp, int i)
-    {
-        int j = (int)Math.floor(entityplayersp.posX);
-        int k = (int)Math.floor(entityplayersp.posY);
-        int l = (int)Math.floor(entityplayersp.posZ);
-		if(entityplayersp.worldObj.getBlockId(j, k, l) == i || entityplayersp.worldObj.getBlockId(j, k - 1, l) == i)
-		{
-			return true;
-		}
-		return false;
-    }
-    
 	public String getTextureFile() {
 		return "/zoo/dimension/blocks.png";
 	}

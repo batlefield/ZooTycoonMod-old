@@ -6,12 +6,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.Tessellator;
 import net.minecraft.src.ZooDimension;
+import net.minecraft.src.mod_ZooDimension;
 import net.minecraft.src.BAPI.interfaces.IGameOverlay;
 
 public class ZooPortalOverlay implements IGameOverlay {
 
 	public void render(Minecraft mc, int height, int width, float partialTicks, boolean isDisplayingGUI) {
-		if(ZooDimension.isInPortal)
+		if(mod_ZooDimension.isInPortal)
 		{
 	        float par1 = mc.thePlayer.prevTimeInPortal + (mc.thePlayer.timeInPortal - mc.thePlayer.prevTimeInPortal) * partialTicks;
 			

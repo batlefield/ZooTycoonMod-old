@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.src.*;
 import net.minecraft.src.zoo.core.entities.ZooEntityAnimal;
 import net.minecraft.src.zoo.core.entities.ZooEntityAnteater;
-import net.minecraft.src.zoo.core.modells.ZooModelAnteater;
+import net.minecraft.src.zoo.core.models.ZooModelAnteater;
 
 public class ZooRenderAnteater extends RenderLiving
 {

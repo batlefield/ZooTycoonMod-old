@@ -31,14 +31,22 @@ public class ZooItemLeaves extends ItemBlock implements ITextureProvider
 	
 	public String getItemNameIS(ItemStack itemstack)
     {
-        if(itemstack.getItemDamage() == 0)
-        {
-        	return blockNames[0];
-        }else{
-        	return blockNames[1];
-        }
+		if(itemstack.itemID == Zoo.blueLeaves.blockID)
+	        if(itemstack.getItemDamage() == 0)
+	        {
+	        	return blockNames[0];
+	        }else{
+	        	return blockNames[2];
+	        }
+		else
+			if(itemstack.getItemDamage() == 0)
+	        {
+	        	return blockNames[1];
+	        }else{
+	        	return blockNames[2];
+	        }
     }
     public static final String blockNames[] = {
-        "bluepine", "null"
+        "bluepine", "savannah", "null"
     };
 }
