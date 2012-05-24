@@ -6,9 +6,9 @@ import net.minecraft.src.zoo.core.modells.visitors.FemaleBase;
 public class RenderFemale extends RenderLiving{
 	
 	
-    public RenderFemale(float f)
+    public RenderFemale(net.minecraft.src.zoo.core.models.FemaleBase femaleBase, float f)
     {
-        super(new FemaleBase(), f);
+        super(femaleBase, f);
     }
 
     public void renderNew(EntityLiving entityliving, double d, double d1, double d2, 

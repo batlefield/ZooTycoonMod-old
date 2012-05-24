@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-import net.minecraft.src.battlefield.API.BAPI;
-import net.minecraft.src.battlefield.API.IBiome;
+import net.minecraft.src.BAPI.interfaces.IBiome;
 import net.minecraft.src.zoo.core.gen.ZooGenBluePine1;
 import net.minecraft.src.zoo.core.gen.ZooGenBluePine2;
 

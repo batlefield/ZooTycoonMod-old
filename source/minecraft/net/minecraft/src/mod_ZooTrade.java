@@ -11,6 +11,7 @@ import net.minecraft.src.zoo.api.Trade;
 import net.minecraft.src.zoo.trading.BlockShop;
 import net.minecraft.src.zoo.trading.BlockShop2;
 import net.minecraft.src.zoo.trading.BlockShopTest;
+import net.minecraft.src.zoo.trading.TileEntityShop;
 import net.minecraft.src.zoo.trading.TradingBlocksCreative;
 import net.minecraft.src.zoo.trading.ZooEntityShopKeeper;
 import net.minecraft.src.zoo.trading.ZooItemCoin;
@@ -135,6 +136,7 @@ public class mod_ZooTrade extends NetworkMod
 
 	public static void loadmod()
 	{
+		ModLoader.registerTileEntity(TileEntityShop.class, "Shop block");
 
 		ModLoader.registerBlock(shopkeeperblockdouble/*, net.minecraft.src.zoo.trading.ZooItemShop.class*/);
 		ModLoader.addName(/*new ItemStack(*/shopkeeperblockdouble/*, 1, 0)*/, "Food shop");

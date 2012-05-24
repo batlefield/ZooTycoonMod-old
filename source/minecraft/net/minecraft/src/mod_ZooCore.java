@@ -23,6 +23,7 @@ import net.minecraft.src.zoo.core.entities.ZooEntityRhino;
 import net.minecraft.src.zoo.core.entities.ZooEntityTiger;
 import net.minecraft.src.zoo.core.entities.ZooEntityWolf;
 import net.minecraft.src.zoo.core.entities.ZooVisitorFemale;
+import net.minecraft.src.zoo.core.models.FemaleBase;
 import net.minecraft.src.zoo.core.render.RenderFemale;
 import net.minecraft.src.zoo.core.render.ZooRenderAfricanWDog;
 import net.minecraft.src.zoo.core.render.ZooRenderAnteater;
@@ -142,7 +143,7 @@ public class mod_ZooCore extends NetworkMod
 		map.put(ZooEntityElephant.class, new ZooRenderElephant(0.5F));
 		map.put(ZooEntityAfricanWDog.class, new ZooRenderAfricanWDog(0.5F));
 		map.put(ZooEntityAnteater.class, new ZooRenderAnteater(0.5F));
-		map.put(ZooVisitorFemale.class, new RenderFemale(0.5F));
+		map.put(ZooVisitorFemale.class, new RenderFemale(new FemaleBase(), 0.5F));
 		map.put(ZooEntityLion.class, new ZooRenderLion(0.5F));
 		// map.put(ZooEntityPanther.class, new ZooRenderPanter(0.5F));
 		map.put(ZooEntityFennecFox.class, new ZooRenderFennecFox(0.5F));
