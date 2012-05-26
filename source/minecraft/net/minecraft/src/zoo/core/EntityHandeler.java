@@ -6,6 +6,8 @@ import net.minecraft.src.EntityList;
 import net.minecraft.src.EnumCreatureType;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.Zoo;
+import net.minecraft.src.mod_ZooCore;
+import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.zoo.core.entities.ZooEntityAfricanWDog;
 import net.minecraft.src.zoo.core.entities.ZooEntityAnteater;
 import net.minecraft.src.zoo.core.entities.ZooEntityBighorn;

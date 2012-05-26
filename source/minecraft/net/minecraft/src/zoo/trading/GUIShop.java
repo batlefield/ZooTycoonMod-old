@@ -30,8 +30,9 @@ public class GUIShop extends GuiScreen{
 	protected void actionPerformed(GuiButton gb) {
 		if(gb.id == 100)
 		{
-			System.out.println("gen");
 			shopTile.generate(shopTile.getType());
+			mc.displayGuiScreen((GuiScreen)null);
+            mc.setIngameFocus();
 		}
 	}
 	
@@ -55,7 +56,10 @@ public class GUIShop extends GuiScreen{
 		}
 		
 		mc.renderEngine.bindTexture(tex);
-		drawTexturedModalRect((width / 2) - (boxsizeX / 2), yStart + (15 * shopTile.getType()) - 3, 0, 176, boxsizeX, boxsizeY);
+		if(shopTile.getType() >= 0)
+		{
+			drawTexturedModalRect((width / 2) - (boxsizeX / 2), yStart + (15 * shopTile.getType()) - 3, 0, 176, boxsizeX, boxsizeY);
+		}
 		
 		super.drawScreen(mousePosX, mousePosY, partialTick);
     }
@@ -80,8 +84,11 @@ public class GUIShop extends GuiScreen{
 
                     if (var4 >= 0 && var4 < shopTile.getTypesAsString().length)
                     {
-                        shopTile.setType(var4);
-                        System.out.println(var4);
+                    	if(shopTile.getType() != var4)
+                    	{
+                        	shopTile.setType(var4);
+                        	mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                    	}
                     }
                 }
             }

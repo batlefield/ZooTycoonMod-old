@@ -31,6 +31,7 @@ public class CoreBlocksCreative implements ICreativeHandler{
 		itemList.add(new ItemStack(ZooDirts.deciPeat));
 		itemList.add(new ItemStack(ZooDirts.gleyPeat));
 		itemList.add(new ItemStack(ZooDirts.laterite));
+		itemList.add(new ItemStack(Zoo.brownStone));
 		itemList.add(new ItemStack(ZooDirts.mesa));
 		itemList.add(new ItemStack(ZooDirts.rainforest));
 		itemList.add(new ItemStack(ZooDirts.savannah));
@@ -41,6 +42,8 @@ public class CoreBlocksCreative implements ICreativeHandler{
 		itemList.add(new ItemStack(Zoo.sapling, 1, 1));
 		itemList.add(new ItemStack(Zoo.savannahgrass));
 		itemList.add(new ItemStack(Zoo.coniferousgrass));
+		itemList.add(new ItemStack(Zoo.asphalt));
+		itemList.add(new ItemStack(Zoo.concrete));
 	}
 
 }

@@ -460,1257 +460,275 @@ public class Trade {
 	
     protected static int priceLib(ItemStack itemstack)
     {
-        String s = itemstack.getItem().getItemNameIS(itemstack);
-        if(s.equals("tile.stone"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.grass"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.dirt"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.stonebrick"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.wood"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.sapling"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.bedrock"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.water"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.water"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.lava"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.lava"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.sand"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.gravel"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.oreGold"))
-        {
-            return 250;
-        }
-        if(s.equals("tile.oreIron"))
-        {
-            return 50;
-        }
-        if(s.equals("tile.oreCoal"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.log"))
-        {
-            return 4;
-        }
-        if(s.equals("tile.leaves"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.sponge"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.glass"))
-        {
-            return 3;
-        }
-        if(s.equals("tile.oreLapis"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.blockLapis"))
-        {
-            return 180;
-        }
-        if(s.equals("tile.dispenser"))
-        {
-            return 40;
-        }
-        if(s.equals("tile.sandStone"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.musicBlock"))
-        {
-            return 10;
-        }
-        if(s.equals("tile.bed"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.goldenRail"))
-        {
-            return 70;
-        }
-        if(s.equals("tile.detectorRail"))
-        {
-            return 15;
-        }
-        if(s.equals("tile.pistonStickyBase"))
-        {
-            return 130;
-        }
-        if(s.equals("tile.web"))
-        {
-            return 10;
-        }
-        if(s.equals("tile.tallgrass.shrub"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.tallgrass.grass"))
-        {
-            return 3;
-        }
-        if(s.equals("tile.tallgrass.fern"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.tallgrass"))
-        {
-            return 3;
-        }
-        if(s.equals("tile.deadbush"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.pistonBase"))
-        {
-            return 113;
-        }
-        if(s.equals("tile.cloth.white"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.orange"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.magenta"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.lightBlue"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.yellow"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.lime"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.pink"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.gray"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.silver"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.cyan"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.purple"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.blue"))
-        {
-            return 20;
-        }
-        if(s.equals("tile.cloth.brown"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.green"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.red"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.cloth.black"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.flower"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.rose"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.mushroom"))
-        {
-            return 3;
-        }
-        if(s.equals("tile.mushroom"))
-        {
-            return 3;
-        }
-        if(s.equals("tile.blockGold"))
-        {
-            return 1350;
-        }
-        if(s.equals("tile.blockIron"))
-        {
-            return 450;
-        }
-        if(s.equals("tile.stoneSlab"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.stoneSlab.stone"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.stoneSlab.sand"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.stoneSlab.wood"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.stoneSlab.cobble"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.stoneSlab.brick"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.stoneSlab.smoothStoneBrick"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.brick"))
-        {
-            return 12;
-        }
-        if(s.equals("tile.tnt"))
-        {
-            return 154;
-        }
-        if(s.equals("tile.bookshelf"))
-        {
-            return 51;
-        }
-        if(s.equals("tile.stoneMoss"))
-        {
-            return 14;
-        }
-        if(s.equals("tile.obsidian"))
-        {
-            return 25;
-        }
-        if(s.equals("tile.torch"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.fire"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.mobSpawner"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.stairsWood"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.chest"))
-        {
-            return 4;
-        }
-        if(s.equals("tile.redstoneDust"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.oreDiamond"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.blockDiamond"))
-        {
-            return 8100;
-        }
-        if(s.equals("tile.workbench"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.crops"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.farmland"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.furnace"))
-        {
-            return 8;
-        }
-        if(s.equals("tile.furnace"))
-        {
-            return 8;
-        }
-        if(s.equals("tile.sign"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.doorWood"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.ladder"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.rail"))
-        {
-            return 30;
-        }
-        if(s.equals("tile.stairsStone"))
-        {
-            return 6;
-        }
-        if(s.equals("tile.sign"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.lever"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.pressurePlate"))
-        {
-            return 3;
-        }
-        if(s.equals("tile.doorIron"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.pressurePlate"))
-        {
-            return 3;
-        }
-        if(s.equals("tile.oreRedstone"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.oreRedstone"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.notGate"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.notGate"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.button"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.snow"))
-        {
-            return 4;
-        }
-        if(s.equals("tile.ice"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.snow"))
-        {
-            return 4;
-        }
-        if(s.equals("tile.cactus"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.clay"))
-        {
-            return 4;
-        }
-        if(s.equals("tile.reeds"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.jukebox"))
-        {
-            return 908;
-        }
-        if(s.equals("tile.fence"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.pumpkin"))
-        {
-            return 30;
-        }
-        if(s.equals("tile.hellrock"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.hellsand"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.lightgem"))
-        {
-            return 12;
-        }
-        if(s.equals("tile.portal"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.litpumpkin"))
-        {
-            return 31;
-        }
-        if(s.equals("tile.cake"))
-        {
-            return 50;
-        }
-        if(s.equals("tile.diode"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.diode"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.lockedchest"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.trapdoor"))
-        {
-            return 6;
-        }
-        if(s.equals("tile.stonebricksmooth"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.mushroom"))
-        {
-            return 3;
-        }
-        if(s.equals("tile.fenceIron"))
-        {
-            return 5;
-        }
-        if(s.equals("tile.thinGlass"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.melon"))
-        {
-            return 18;
-        }
-        if(s.equals("tile.pumpkinStem"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.pumpkinStem"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.vine"))
-        {
-            return 10;
-        }
-        if(s.equals("tile.fenceGate"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.stairsBrick"))
-        {
-            return 4;
-        }
-        if(s.equals("tile.stairsStoneBrickSmooth"))
-        {
-            return 10;
-        }
-        if(s.equals("tile.mycel"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.waterlily"))
-        {
-            return 2;
-        }
-        if(s.equals("tile.netherBrick"))
-        {
-            return 4;
-        }
-        if(s.equals("tile.netherFence"))
-        {
-            return 8;
-        }
-        if(s.equals("tile.stairsNetherBrick"))
-        {
-            return 8;
-        }
-        if(s.equals("tile.netherStalk"))
-        {
-            return 20;
-        }
-        if(s.equals("tile.enchantmentTable"))
-        {
-            return 1915;
-        }
-        if(s.equals("tile.brewingStand"))
-        {
-            return 0;
-        }
-        if(s.equals("tile.cauldron"))
-        {
-            return 350;
-        }
-        if(s.equals("tile.endPortalFrame"))
-        {
-            return 10;
-        }
-        if(s.equals("tile.whiteStone"))
-        {
-            return 10;
-        }
-        if(s.equals("tile.dragonEgg"))
-        {
-            return 0;
-        }
-        if(s.equals("item.shovelIron"))
-        {
-            return 52;
-        }
-        if(s.equals("item.pickaxeIron"))
-        {
-            return 152;
-        }
-        if(s.equals("item.hatchetIron"))
-        {
-            return 152;
-        }
-        if(s.equals("item.flintAndSteel"))
-        {
-            return 53;
-        }
-        if(s.equals("item.apple"))
-        {
-            return 30;
-        }
-        if(s.equals("item.bow"))
-        {
-            return 16;
-        }
-        if(s.equals("item.arrow"))
-        {
-            return 7;
-        }
-        if(s.equals("item.coal"))
-        {
-            return 2;
-        }
-        if(s.equals("item.charcoal"))
-        {
-            return 2;
-        }
-        if(s.equals("item.emerald"))
-        {
-            return 900;
-        }
-        if(s.equals("item.ingotIron"))
-        {
-            return 50;
-        }
-        if(s.equals("item.ingotGold"))
-        {
-            return 150;
-        }
-        if(s.equals("item.swordIron"))
-        {
-            return 101;
-        }
-        if(s.equals("item.swordWood"))
-        {
-            return 3;
-        }
-        if(s.equals("item.shovelWood"))
-        {
-            return 3;
-        }
-        if(s.equals("item.pickaxeWood"))
-        {
-            return 5;
-        }
-        if(s.equals("item.hatchetWood"))
-        {
-            return 4;
-        }
-        if(s.equals("item.swordStone"))
-        {
-            return 4;
-        }
-        if(s.equals("item.shovelStone"))
-        {
-            return 4;
-        }
-        if(s.equals("item.pickaxeStone"))
-        {
-            return 6;
-        }
-        if(s.equals("item.hatchetStone"))
-        {
-            return 5;
-        }
-        if(s.equals("item.swordDiamond"))
-        {
-            return 1801;
-        }
-        if(s.equals("item.shovelDiamond"))
-        {
-            return 902;
-        }
-        if(s.equals("item.pickaxeDiamond"))
-        {
-            return 2702;
-        }
-        if(s.equals("item.hatchetDiamond"))
-        {
-            return 2702;
-        }
-        if(s.equals("item.stick"))
-        {
-            return 1;
-        }
-        if(s.equals("item.bowl"))
-        {
-            return 2;
-        }
-        if(s.equals("item.mushroomStew"))
-        {
-            return 6;
-        }
-        if(s.equals("item.swordGold"))
-        {
-            return 301;
-        }
-        if(s.equals("item.shovelGold"))
-        {
-            return 152;
-        }
-        if(s.equals("item.pickaxeGold"))
-        {
-            return 452;
-        }
-        if(s.equals("item.hatchetGold"))
-        {
-            return 452;
-        }
-        if(s.equals("item.string"))
-        {
-            return 8;
-        }
-        if(s.equals("item.feather"))
-        {
-            return 4;
-        }
-        if(s.equals("item.sulphur"))
-        {
-            return 30;
-        }
-        if(s.equals("item.hoeWood"))
-        {
-            return 2;
-        }
-        if(s.equals("item.hoeStone"))
-        {
-            return 3;
-        }
-        if(s.equals("item.hoeIron"))
-        {
-            return 102;
-        }
-        if(s.equals("item.hoeDiamond"))
-        {
-            return 1802;
-        }
-        if(s.equals("item.hoeGold"))
-        {
-            return 302;
-        }
-        if(s.equals("item.seeds"))
-        {
-            return 20;
-        }
-        if(s.equals("item.wheat"))
-        {
-            return 16;
-        }
-        if(s.equals("item.bread"))
-        {
-            return 13;
-        }
-        if(s.equals("item.helmetCloth"))
-        {
-            return 70;
-        }
-        if(s.equals("item.chestplateCloth"))
-        {
-            return 156;
-        }
-        if(s.equals("item.leggingsCloth"))
-        {
-            return 130;
-        }
-        if(s.equals("item.bootsCloth"))
-        {
-            return 80;
-        }
-        if(s.equals("item.helmetChain"))
-        {
-            return 130;
-        }
-        if(s.equals("item.chestplateChain"))
-        {
-            return 230;
-        }
-        if(s.equals("item.leggingsChain"))
-        {
-            return 170;
-        }
-        if(s.equals("item.bootsChain"))
-        {
-            return 110;
-        }
-        if(s.equals("item.helmetIron"))
-        {
-            return 250;
-        }
-        if(s.equals("item.chestplateIron"))
-        {
-            return 400;
-        }
-        if(s.equals("item.leggingsIron"))
-        {
-            return 350;
-        }
-        if(s.equals("item.bootsIron"))
-        {
-            return 102;
-        }
-        if(s.equals("item.helmetDiamond"))
-        {
-            return 4500;
-        }
-        if(s.equals("item.chestplateDiamond"))
-        {
-            return 7300;
-        }
-        if(s.equals("item.leggingsDiamond"))
-        {
-            return 6300;
-        }
-        if(s.equals("item.bootsDiamond"))
-        {
-            return 3600;
-        }
-        if(s.equals("item.helmetGold"))
-        {
-            return 750;
-        }
-        if(s.equals("item.chestplateGold"))
-        {
-            return 1200;
-        }
-        if(s.equals("item.leggingsGold"))
-        {
-            return 1050;
-        }
-        if(s.equals("item.bootsGold"))
-        {
-            return 600;
-        }
-        if(s.equals("item.flint"))
-        {
-            return 3;
-        }
-        if(s.equals("item.porkchopRaw"))
-        {
-            return 12;
-        }
-        if(s.equals("item.porkchopCooked"))
-        {
-            return 15;
-        }
-        if(s.equals("item.painting"))
-        {
-            return 15;
-        }
-        if(s.equals("item.appleGold"))
-        {
-            return 10830;
-        }
-        if(s.equals("item.sign"))
-        {
-            return 5;
-        }
-        if(s.equals("item.doorWood"))
-        {
-            return 5;
-        }
-        if(s.equals("item.bucket"))
-        {
-            return 110;
-        }
-        if(s.equals("item.bucketWater"))
-        {
-            return 120;
-        }
-        if(s.equals("item.bucketLava"))
-        {
-            return 170;
-        }
-        if(s.equals("item.minecart"))
-        {
-            return 220;
-        }
-        if(s.equals("item.saddle"))
-        {
-            return 250;
-        }
-        if(s.equals("item.doorIron"))
-        {
-            return 300;
-        }
-        if(s.equals("item.redstone"))
-        {
-            return 7;
-        }
-        if(s.equals("item.snowball"))
-        {
-            return 3;
-        }
-        if(s.equals("item.boat"))
-        {
-            return 5;
-        }
-        if(s.equals("item.leather"))
-        {
-            return 15;
-        }
-        if(s.equals("item.milk"))
-        {
-            return 130;
-        }
-        if(s.equals("item.brick"))
-        {
-            return 3;
-        }
-        if(s.equals("item.clay"))
-        {
-            return 3;
-        }
-        if(s.equals("item.reeds"))
-        {
-            return 5;
-        }
-        if(s.equals("item.paper"))
-        {
-            return 6;
-        }
-        if(s.equals("item.book"))
-        {
-            return 15;
-        }
-        if(s.equals("item.slimeball"))
-        {
-            return 17;
-        }
-        if(s.equals("item.minecartChest"))
-        {
-            return 230;
-        }
-        if(s.equals("item.minecartFurnace"))
-        {
-            return 220;
-        }
-        if(s.equals("item.egg"))
-        {
-            return 1;
-        }
-        if(s.equals("item.compass"))
-        {
-            return 207;
-        }
-        if(s.equals("item.fishingRod"))
-        {
-            return 13;
-        }
-        if(s.equals("item.clock"))
-        {
-            return 407;
-        }
-        if(s.equals("item.yellowDust"))
-        {
-            return 1;
-        }
-        if(s.equals("item.fishRaw"))
-        {
-            return 5;
-        }
-        if(s.equals("item.fishCooked"))
-        {
-            return 7;
-        }
-        if(s.equals("item.dyePowder.black"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.red"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.green"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.brown"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.blue"))
-        {
-            return 20;
-        }
-        if(s.equals("item.dyePowder.purple"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.cyan"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.silver"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.gray"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.pink"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.lime"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.yellow"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.lightBlue"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.magenta"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.orange"))
-        {
-            return 10;
-        }
-        if(s.equals("item.dyePowder.white"))
-        {
-            return 2;
-        }
-        if(s.equals("item.bone"))
-        {
-            return 6;
-        }
-        if(s.equals("item.sugar"))
-        {
-            return 6;
-        }
-        if(s.equals("item.cake"))
-        {
-            return 150;
-        }
-        if(s.equals("item.bed"))
-        {
-            return 33;
-        }
-        if(s.equals("item.diode"))
-        {
-            return 29;
-        }
-        if(s.equals("item.cookie"))
-        {
-            return 4;
-        }
-        if(s.equals("item.map"))
-        {
-            return 260;
-        }
-        if(s.equals("item.shears"))
-        {
-            return 120;
-        }
-        if(s.equals("item.melon"))
-        {
-            return 6;
-        }
-        if(s.equals("item.seeds_pumpkin"))
-        {
-            return 30;
-        }
-        if(s.equals("item.seeds_melon"))
-        {
-            return 30;
-        }
-        if(s.equals("item.beefRaw"))
-        {
-            return 4;
-        }
-        if(s.equals("item.beefCooked"))
-        {
-            return 6;
-        }
-        if(s.equals("item.chickenRaw"))
-        {
-            return 10;
-        }
-        if(s.equals("item.chickenCooked"))
-        {
-            return 12;
-        }
-        if(s.equals("item.rottenFlesh"))
-        {
-            return 4;
-        }
-        if(s.equals("item.enderPearl"))
-        {
-            return 13;
-        }
-        if(s.equals("item.blazeRod"))
-        {
-            return 10;
-        }
-        if(s.equals("item.ghastTear"))
-        {
-            return 10;
-        }
-        if(s.equals("item.goldNugget"))
-        {
-            return 10;
-        }
-        if(s.equals("item.netherStalkSeeds"))
-        {
-            return 10;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 0)
-        {
-            return 10;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 1)
-        {
-            return 40;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 2)
-        {
-            return 40;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 3)
-        {
-            return 40;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 5)
-        {
-            return 40;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 9)
-        {
-            return 70;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 33)
-        {
-            return 100;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 34)
-        {
-            return 100;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 37)
-        {
-            return 100;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 41)
-        {
-            return 200;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 57)
-        {
-            return 200;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 65)
-        {
-            return 200;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 66)
-        {
-            return 200;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 67)
-        {
-            return 300;
-        }
-        if(s.equals("item.potion") && itemstack.getItemDamage() == 73)
-        {
-            return 300;
-        }
-        if(s.equals("item.glassBottle"))
-        {
-            return 3;
-        }
-        if(s.equals("item.spiderEye"))
-        {
-            return 10;
-        }
-        if(s.equals("item.fermentedSpiderEye"))
-        {
-            return 10;
-        }
-        if(s.equals("item.blazePowder"))
-        {
-            return 13;
-        }
-        if(s.equals("item.magmaCream"))
-        {
-            return 30;
-        }
-        if(s.equals("item.brewingStand"))
-        {
-            return 100;
-        }
-        if(s.equals("item.cauldron"))
-        {
-            return 100;
-        }
-        if(s.equals("item.eyeOfEnder"))
-        {
-            return 50;
-        }
-        if(s.equals("item.speckledMelon"))
-        {
-            return 10;
-        }
-        if(s.equals("item.record"))
-        {
-            return 720;
-        }
-        if(s.equals("tile.bs"))
-        {
-        	return 1;
-        }
-        if(s.equals("tile.deciduous"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.coniferous"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.tropical"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.savannah"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.conipeat"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.decipeat"))
-        {
-            return 1;
-        }
-        if(s.equals("tile.mesa"))
-        {
-        	return 1;
-        }
-        if(s.equals("tile.laterite"))
-        {
-        	return 1;
-        }
-        if(s.equals("tile.gleypeat"))
-        {
-        	return 1;
-        }
-        if(s.equals("tile.rf"))
-        {
-        	return 1;
-        }
-        if(s.equals("tile.sg"))
-        {
-        	return 3;
-        }
-        if(s.equals("tile.dg"))
-        {
-        	return 3;
-        }
-        if(s.equals("tile.cg"))
-        {
-        	return 3;
-        }
-               
-        return !s.equals("item.rand") ? 0 : 1;
+        String name = itemstack.getItem().getItemName();
+        int i = itemstack.getItemDamage();
+        if(name.equals("tile.stone")) return 1; //Stone
+		if(name.equals("tile.grass")) return 1; //Grass Block
+		if(name.equals("tile.dirt")) return 1; //Dirt
+		if(name.equals("tile.stonebrick")) return 1; //Cobblestone
+		if(name.equals("tile.wood")) return 1; //Wooden Planks
+		if(name.equals("tile.sapling")) return 2; //Sapling
+		if(name.equals("tile.bedrock")) return 0; //Bedrock
+		if(name.equals("tile.water")) return 0; //Water
+		if(name.equals("tile.water")) return 0; //Water
+		if(name.equals("tile.lava")) return 0; //Lava
+		if(name.equals("tile.lava")) return 0; //Lava
+		if(name.equals("tile.sand")) return 1; //Sand
+		if(name.equals("tile.gravel")) return 1; //Gravel
+		if(name.equals("tile.oreGold")) return 250; //Gold Ore
+		if(name.equals("tile.oreIron")) return 50; //Iron Ore
+		if(name.equals("tile.oreCoal")) return 0; //Coal Ore
+		if(name.equals("tile.log") && i == 0) return 4; //Wood
+		if(name.equals("tile.log") && i == 1) return 5; //Wood
+		if(name.equals("tile.log") && i == 2) return 5; //Wood
+		if(name.equals("tile.leaves")) return 1; //Leaves
+		if(name.equals("tile.sponge")) return 0; //Sponge
+		if(name.equals("tile.glass")) return 3; //Glass
+		if(name.equals("tile.oreLapis")) return 0; //Lapis Lazuli Ore
+		if(name.equals("tile.blockLapis")) return 180; //Lapis Lazuli Block
+		if(name.equals("tile.dispenser")) return 40; //Dispenser
+		if(name.equals("tile.sandStone")) return 2; //Sandstone
+		if(name.equals("tile.musicBlock")) return 10; //Note Block
+		if(name.equals("tile.bed")) return 0; //Bed
+		if(name.equals("tile.goldenRail")) return 70; //Powered Rail
+		if(name.equals("tile.detectorRail")) return 15; //Detector Rail
+		if(name.equals("tile.pistonStickyBase")) return 130; //Sticky Piston
+		if(name.equals("tile.web")) return 10; //Cobweb
+		if(name.equals("tile.tallgrass") && i == 0) return 2; //Shrub
+		if(name.equals("tile.tallgrass") && i == 1) return 3; //Grass
+		if(name.equals("tile.tallgrass") && i == 3) return 2; //Fern
+		if(name.equals("tile.tallgrass") && i == 4) return 3; //Grass
+		if(name.equals("tile.deadbush")) return 2; //Dead Bush
+		if(name.equals("tile.pistonBase")) return 113; //Piston
+		if(name.equals("tile.cloth") && i == 11) return 20; //Blue Wool
+		if(name.equals("tile.cloth")) return 5; //Wool
+		if(name.equals("tile.flower")) return 2; //Flower
+		if(name.equals("tile.rose")) return 2; //Rose
+		if(name.equals("tile.mushroom")) return 3; //Mushroom
+		if(name.equals("tile.mushroom")) return 3; //Mushroom
+		if(name.equals("tile.blockGold")) return 1350; //Block of Gold
+		if(name.equals("tile.blockIron")) return 450; //Block of Iron
+		if(name.equals("tile.stoneSlab")) return 1; //
+		if(name.equals("tile.brick")) return 12; //Bricks
+		if(name.equals("tile.tnt")) return 154; //TNT
+		if(name.equals("tile.bookshelf")) return 51; //Bookshelf
+		if(name.equals("tile.stoneMoss")) return 14; //Moss Stone
+		if(name.equals("tile.obsidian")) return 25; //Obsidian
+		if(name.equals("tile.torch")) return 1; //Torch
+		if(name.equals("tile.fire")) return 0; //Fire
+		if(name.equals("tile.mobSpawner")) return 0; //Monster Spawner
+		if(name.equals("tile.stairsWood")) return 2; //Wooden Stairs
+		if(name.equals("tile.chest")) return 4; //Chest
+		if(name.equals("tile.redstoneDust")) return 0; //Redstone Dust
+		if(name.equals("tile.oreDiamond")) return 0; //Diamond Ore
+		if(name.equals("tile.blockDiamond")) return 8100; //Block of Diamond
+		if(name.equals("tile.workbench")) return 2; //Crafting Table
+		if(name.equals("tile.crops")) return 0; //Crops
+		if(name.equals("tile.farmland")) return 0; //Farmland
+		if(name.equals("tile.furnace")) return 8; //Furnace
+		if(name.equals("tile.furnace")) return 8; //Furnace
+		if(name.equals("tile.sign")) return 0; //Sign
+		if(name.equals("tile.doorWood")) return 0; //Wooden Door
+		if(name.equals("tile.ladder")) return 1; //Ladder
+		if(name.equals("tile.rail")) return 30; //Rail
+		if(name.equals("tile.stairsStone")) return 6; //Stone Stairs
+		if(name.equals("tile.sign")) return 0; //Sign
+		if(name.equals("tile.lever")) return 1; //Lever
+		if(name.equals("tile.pressurePlate")) return 3; //Pressure Plate
+		if(name.equals("tile.doorIron")) return 0; //Iron Door
+		if(name.equals("tile.pressurePlate")) return 3; //Pressure Plate
+		if(name.equals("tile.oreRedstone")) return 0; //Redstone Ore
+		if(name.equals("tile.oreRedstone")) return 0; //Redstone Ore
+		if(name.equals("tile.notGate")) return 0; //Redstone Torch
+		if(name.equals("tile.notGate")) return 0; //Redstone Torch
+		if(name.equals("tile.button")) return 5; //Button
+		if(name.equals("tile.snow")) return 4; //Snow
+		if(name.equals("tile.ice")) return 2; //Ice
+		if(name.equals("tile.snow")) return 4; //Snow
+		if(name.equals("tile.cactus")) return 2; //Cactus
+		if(name.equals("tile.clay")) return 4; //Clay
+		if(name.equals("tile.reeds")) return 5; //Sugar cane
+		if(name.equals("tile.jukebox")) return 908; //Jukebox
+		if(name.equals("tile.fence")) return 1; //Fence
+		if(name.equals("tile.pumpkin")) return 30; //Pumpkin
+		if(name.equals("tile.hellrock")) return 1; //Netherrack
+		if(name.equals("tile.hellsand")) return 1; //Soul Sand
+		if(name.equals("tile.lightgem")) return 12; //Glowstone
+		if(name.equals("tile.portal")) return 0; //Portal
+		if(name.equals("tile.litpumpkin")) return 31; //Jack 'o' Lantern
+		if(name.equals("tile.cake")) return 50; //Cake
+		if(name.equals("tile.diode")) return 0; //
+		if(name.equals("tile.diode")) return 0; //
+		if(name.equals("tile.lockedchest")) return 0; //Locked chest
+		if(name.equals("tile.trapdoor")) return 6; //Trapdoor
+		if(name.equals("tile.stonebricksmooth")) return 5; //Stone Bricks
+		if(name.equals("tile.mushroom")) return 3; //Mushroom
+		if(name.equals("tile.fenceIron")) return 5; //Iron Bars
+		if(name.equals("tile.thinGlass")) return 1; //Glass Pane
+		if(name.equals("tile.melon")) return 18; //Melon
+		if(name.equals("tile.pumpkinStem")) return 0; //
+		if(name.equals("tile.pumpkinStem")) return 0; //
+		if(name.equals("tile.vine")) return 10; //Vines
+		if(name.equals("tile.fenceGate")) return 1; //Fence Gate
+		if(name.equals("tile.stairsBrick")) return 4; //Brick Stairs
+		if(name.equals("tile.stairsStoneBrickSmooth")) return 10; //Stone Brick Stairs
+		if(name.equals("tile.mycel")) return 0; //Mycelium
+		if(name.equals("tile.waterlily")) return 2; //Lily Pad
+		if(name.equals("tile.netherBrick")) return 4; //Nether Brick
+		if(name.equals("tile.netherFence")) return 8; //Nether Brick Fence
+		if(name.equals("tile.stairsNetherBrick")) return 8; //Nether Brick Stairs
+		if(name.equals("tile.netherStalk")) return 20; //Nether Wart
+		if(name.equals("tile.enchantmentTable")) return 1915; //Enchantment Table
+		if(name.equals("tile.whiteStone")) return 10; //End Stone
+		if(name.equals("tile.redstoneLight")) return 40; // Glowstone Lamp
+		if(name.equals("item.shovelIron")) return 52; //Iron Shovel
+		if(name.equals("item.pickaxeIron")) return 152; //Iron Pickaxe
+		if(name.equals("item.hatchetIron")) return 152; //Iron Axe
+		if(name.equals("item.flintAndSteel")) return 53; //Flint and Steel
+		if(name.equals("item.apple")) return 30; //Apple
+		if(name.equals("item.bow")) return 16; //Bow
+		if(name.equals("item.arrow")) return 7; //Arrow
+		if(name.equals("item.coal")) return 2; //Coal
+		if(name.equals("item.charcoal")) return 2; //Charcoal
+		if(name.equals("item.emerald")) return 900; //Diamond
+		if(name.equals("item.ingotIron")) return 50; //Iron Ingot
+		if(name.equals("item.ingotGold")) return 150; //Gold Ingot
+		if(name.equals("item.swordIron")) return 101; //Iron Sword
+		if(name.equals("item.swordWood")) return 3; //Wooden Sword
+		if(name.equals("item.shovelWood")) return 3; //Wooden Shovel
+		if(name.equals("item.pickaxeWood")) return 5; //Wooden Pickaxe
+		if(name.equals("item.hatchetWood")) return 4; //Wooden Axe
+		if(name.equals("item.swordStone")) return 4; //Stone Sword
+		if(name.equals("item.shovelStone")) return 4; //Stone Shovel
+		if(name.equals("item.pickaxeStone")) return 6; //Stone Pickaxe
+		if(name.equals("item.hatchetStone")) return 5; //Stone Axe
+		if(name.equals("item.swordDiamond")) return 1801; //Diamond Sword
+		if(name.equals("item.shovelDiamond")) return 902; //Diamond Shovel
+		if(name.equals("item.pickaxeDiamond")) return 2702; //Diamond Pickaxe
+		if(name.equals("item.hatchetDiamond")) return 2702; //Diamond Axe
+		if(name.equals("item.stick")) return 1; //Stick
+		if(name.equals("item.bowl")) return 2; //Bowl
+		if(name.equals("item.mushroomStew")) return 6; //Mushroom Stew
+		if(name.equals("item.swordGold")) return 301; //Golden Sword
+		if(name.equals("item.shovelGold")) return 152; //Golden Shovel
+		if(name.equals("item.pickaxeGold")) return 452; //Golden Pickaxe
+		if(name.equals("item.hatchetGold")) return 452; //Golden Axe
+		if(name.equals("item.string")) return 8; //String
+		if(name.equals("item.feather")) return 4; //Feather
+		if(name.equals("item.sulphur")) return 30; //Gunpowder
+		if(name.equals("item.hoeWood")) return 2; //Wooden Hoe
+		if(name.equals("item.hoeStone")) return 3; //Stone Hoe
+		if(name.equals("item.hoeIron")) return 102; //Iron Hoe
+		if(name.equals("item.hoeDiamond")) return 1802; //Diamond Hoe
+		if(name.equals("item.hoeGold")) return 302; //Golden Hoe
+		if(name.equals("item.seeds")) return 3; //Seeds
+		if(name.equals("item.wheat")) return 16; //Wheat
+		if(name.equals("item.bread")) return 13; //Bread
+		if(name.equals("item.helmetCloth")) return 70; //Leather Cap
+		if(name.equals("item.chestplateCloth")) return 156; //Leather Tunic
+		if(name.equals("item.leggingsCloth")) return 130; //Leather Pants
+		if(name.equals("item.bootsCloth")) return 80; //Leather Boots
+		if(name.equals("item.helmetChain")) return 130; //Chain Helmet
+		if(name.equals("item.chestplateChain")) return 230; //Chain Chestplate
+		if(name.equals("item.leggingsChain")) return 170; //Chain Leggings
+		if(name.equals("item.bootsChain")) return 110; //Chain Boots
+		if(name.equals("item.helmetIron")) return 250; //Iron Helmet
+		if(name.equals("item.chestplateIron")) return 400; //Iron Chestplate
+		if(name.equals("item.leggingsIron")) return 350; //Iron Leggings
+		if(name.equals("item.bootsIron")) return 102; //Iron Boots
+		if(name.equals("item.helmetDiamond")) return 4500; //Diamond Helmet
+		if(name.equals("item.chestplateDiamond")) return 7300; //Diamond Chestplate
+		if(name.equals("item.leggingsDiamond")) return 6300; //Diamond Leggings
+		if(name.equals("item.bootsDiamond")) return 3600; //Diamond Boots
+		if(name.equals("item.helmetGold")) return 750; //Golden Helmet
+		if(name.equals("item.chestplateGold")) return 1200; //Golden Chestplate
+		if(name.equals("item.leggingsGold")) return 1050; //Golden Leggings
+		if(name.equals("item.bootsGold")) return 600; //Golden boots
+		if(name.equals("item.flint")) return 3; //Flint
+		if(name.equals("item.porkchopRaw")) return 12; //Raw Porkchop
+		if(name.equals("item.porkchopCooked")) return 15; //Cooked Porkchop
+		if(name.equals("item.painting")) return 15; //Painting
+		if(name.equals("item.appleGold")) return 110; //Golden Apple
+		if(name.equals("item.sign")) return 5; //Sign
+		if(name.equals("item.doorWood")) return 5; //Wooden Door
+		if(name.equals("item.bucket")) return 110; //Bucket
+		if(name.equals("item.bucketWater")) return 120; //Water Bucket
+		if(name.equals("item.bucketLava")) return 170; //Lava bucket
+		if(name.equals("item.minecart")) return 220; //Minecart
+		if(name.equals("item.saddle")) return 250; //Saddle
+		if(name.equals("item.doorIron")) return 300; //Iron Door
+		if(name.equals("item.redstone")) return 7; //Redstone
+		if(name.equals("item.snowball")) return 3; //Snowball
+		if(name.equals("item.boat")) return 5; //Boat
+		if(name.equals("item.leather")) return 15; //Leather
+		if(name.equals("item.milk")) return 130; //Milk
+		if(name.equals("item.brick")) return 3; //Brick
+		if(name.equals("item.clay")) return 3; //Clay
+		if(name.equals("item.reeds")) return 5; //Sugar Canes
+		if(name.equals("item.paper")) return 6; //Paper
+		if(name.equals("item.book")) return 15; //Book
+		if(name.equals("item.slimeball")) return 17; //Slimeball
+		if(name.equals("item.minecartChest")) return 230; //Minecart with Chest
+		if(name.equals("item.minecartFurnace")) return 220; //Minecart with Furnace
+		if(name.equals("item.egg")) return 1; //Egg
+		if(name.equals("item.compass")) return 207; //Compass
+		if(name.equals("item.fishingRod")) return 13; //Fishing Rod
+		if(name.equals("item.clock")) return 407; //Clock
+		if(name.equals("item.yellowDust")) return 1; //Glowstone Dust
+		if(name.equals("item.fishRaw")) return 5; //Raw Fish
+		if(name.equals("item.fishCooked")) return 7; //Cooked Fish
+		if(name.equals("item.dyePowder")  && i == 4) return 20; //Lapis Lazuli
+		if(name.equals("item.dyePowder")) return 10; 
+		if(name.equals("item.bone")) return 6; //Bone
+		if(name.equals("item.sugar")) return 6; //Sugar
+		if(name.equals("item.cake")) return 150; //Cake
+		if(name.equals("item.bed")) return 33; //Bed
+		if(name.equals("item.diode")) return 29; //Redstone Repeater
+		if(name.equals("item.cookie")) return 4; //Cookie
+		if(name.equals("item.map")) return 260; //Map
+		if(name.equals("item.shears")) return 120; //Shears
+		if(name.equals("item.melon")) return 6; //Melon
+		if(name.equals("item.seeds_pumpkin")) return 2; //Pumpkin Seeds
+		if(name.equals("item.seeds_melon")) return 2; //Melon Seeds
+		if(name.equals("item.beefRaw")) return 4; //Raw Beef
+		if(name.equals("item.beefCooked")) return 6; //Steak
+		if(name.equals("item.chickenRaw")) return 10; //Raw Chicken
+		if(name.equals("item.chickenCooked")) return 12; //Cooked Chicken
+		if(name.equals("item.rottenFlesh")) return 4; //Rotten Flesh
+		if(name.equals("item.enderPearl")) return 13; //Ender Pearl
+		if(name.equals("item.blazeRod")) return 10; //Blaze Rod
+		if(name.equals("item.ghastTear")) return 10; //Ghast Tear
+		if(name.equals("item.goldNugget")) return 10; //Gold Nugget
+		if(name.equals("item.netherStalkSeeds")) return 10; //Nether Wart
+		if(name.equals("item.potion") && i == 0) return 10; //Water Bottle
+		if(name.equals("item.potion") && i == 1) return 40; //Water Bottle
+		if(name.equals("item.potion") && i == 2) return 40; //Water Bottle
+		if(name.equals("item.potion") && i == 3) return 40; //Water Bottle
+		if(name.equals("item.potion") && i == 5) return 40; //Water Bottle
+		if(name.equals("item.potion") && i == 9) return 70; //Water Bottle
+		if(name.equals("item.potion") && i == 33) return 100; //Water Bottle
+		if(name.equals("item.potion") && i == 34) return 100; //Water Bottle
+		if(name.equals("item.potion") && i == 37) return 100; //Water Bottle
+		if(name.equals("item.potion") && i == 41) return 200; //Water Bottle
+		if(name.equals("item.potion") && i == 57) return 200; //Water Bottle
+		if(name.equals("item.potion") && i == 65) return 200; //Water Bottle
+		if(name.equals("item.potion") && i == 66) return 200; //Water Bottle
+		if(name.equals("item.potion") && i == 67) return 300; //Water Bottle
+		if(name.equals("item.potion") && i == 73) return 300; //Water Bottle
+		if(name.equals("item.glassBottle")) return 3; //Glass Bottle
+		if(name.equals("item.spiderEye")) return 10; //Spider Eye
+		if(name.equals("item.fermentedSpiderEye")) return 10; //Fermented Spider Eye
+		if(name.equals("item.blazePowder")) return 13; //Blaze Powder
+		if(name.equals("item.magmaCream")) return 30; //Magma Cream
+		if(name.equals("item.brewingStand")) return 100; //Brewing Stand
+		if(name.equals("item.cauldron")) return 100; //Cauldron
+		if(name.equals("item.eyeOfEnder")) return 50; //Eye of Ender
+		if(name.equals("item.speckledMelon")) return 10; //Glistering Melon
+		if(name.equals("item.record")) return 720; //Music Disc
+		if(name.equals("item.catalogue")) return 143; //Minecraft Catalogue
+		if(name.equals("item.expBottle")) return 150; // Exp Bottle
+		if(name.equals("item.fireball")) return 4; // Fire Charge
+		return -1;
     }
 
     /**

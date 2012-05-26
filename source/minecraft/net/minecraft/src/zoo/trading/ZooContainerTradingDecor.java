@@ -114,30 +114,28 @@ public class ZooContainerTradingDecor extends Container
     }
     
     public void scrollTo(float f)
-    {
-        int i = (itemList.size() / 8 - 8) + 1;
-        int j = (int)((double)(f * (float)i) + 0.5D);
-        if(j < 0)
-        {
-            j = 0;
-        }
-        for(int k = 0; k < 9; k++)
-        {
-            for(int l = 0; l < 8; l++)
-            {
-                int i1 = l + (k + j) * 8;
-                if(i1 >= 0 && i1 < itemList.size())
-                {
-                    ZooGuiContainerTradingDecor.getInventory().setInventorySlotContents(l + k * 8, (ItemStack)itemList.get(i1));
-                } else
-                {
-                	ZooGuiContainerTradingDecor.getInventory().setInventorySlotContents(l + k * 8, null);
-                }
-            }
-
-        }
-
-    }
+	{
+		int i = (itemList.size() / 8 - 5) + 1;
+		int j = (int) ((double) (f * (float) i) + 0.5D);
+		if (j < 0)
+		{
+			j = 0;
+		}
+		for (int k = 0; k < 5; k++)
+		{
+			for (int l = 0; l < 8; l++)
+			{
+				int i1 = l + (k + j) * 8;
+				if (i1 >= 0 && i1 < itemList.size())
+				{
+					ZooGuiContainerTradingDecor.getInventory().setInventorySlotContents(l + k * 8, (ItemStack) itemList.get(i1));
+				} else
+				{
+					ZooGuiContainerTradingDecor.getInventory().setInventorySlotContents(l + k * 8, null);
+				}
+			}
+		}
+	}
     
     public void addItems(List list)
     {

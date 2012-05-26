@@ -20,7 +20,7 @@ public class ZooItem extends Item implements ITextureProvider{
 		return "/zoo/items.png";
 	}
 	
-	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7)
+	/*public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7)
     {
         if (par3World.isRemote)
         {
@@ -45,6 +45,6 @@ public class ZooItem extends Item implements ITextureProvider{
 
             return true;
         }
-    }
+    }*/
 	
 }

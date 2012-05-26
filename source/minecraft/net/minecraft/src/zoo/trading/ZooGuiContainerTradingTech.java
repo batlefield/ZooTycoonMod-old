@@ -16,13 +16,15 @@ public class ZooGuiContainerTradingTech extends GuiContainer
     private float currentScroll;
     private boolean isScrolling;
     private boolean wasClicking;
+    private Minecraft minecraft;
 
     public ZooGuiContainerTradingTech()
     {
         super(new ZooContainerTradingTech());
+        minecraft = ModLoader.getMinecraftInstance();
         currentScroll = 0.0F;
         isScrolling = false;
-        mc.thePlayer.craftingInventory = inventorySlots;
+        minecraft.thePlayer.craftingInventory = inventorySlots;
         allowUserInput = true;
         ySize = 208;
     }

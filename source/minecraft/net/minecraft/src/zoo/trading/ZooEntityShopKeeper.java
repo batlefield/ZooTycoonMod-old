@@ -1,6 +1,7 @@
 package net.minecraft.src.zoo.trading;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+import net.minecraft.src.zoo.core.GUIIDEnum;
 import net.minecraft.src.zoo.trading.*;
 
 public class ZooEntityShopKeeper extends EntityCreature
@@ -75,46 +76,45 @@ public class ZooEntityShopKeeper extends EntityCreature
         {
         	if(mc.currentScreen == null)
             {
+        		int x = MathHelper.floor_double(posX);
+        		int y = MathHelper.floor_double(posY);
+        		int z = MathHelper.floor_double(posZ);
         		if(type == 1)
         		{
-        			mc.displayGuiScreen(new ZooGuiContainerTradingDirt());
+        			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_DECOR.ID, worldObj, x, y, z);
     			}
         		if(type == 2)
         		{
-        			mc.displayGuiScreen(new ZooGuiContainerTradingFood());
+        			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_DIRT.ID, worldObj, x, y, z);
     			}
         		if(type == 3)
         		{
-        			mc.displayGuiScreen(new ZooGuiContainerTradingFencing());
+        			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_FENCING.ID, worldObj, x, y, z);
     			}
         		if(type == 4)
         		{
-        			mc.displayGuiScreen(new ZooGuiContainerTradingSpecial());
+        			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_FOOD.ID, worldObj, x, y, z);
     			}
         		if(type == 5)
         		{
-        			mc.displayGuiScreen(new ZooGuiContainerTradingTech());
+        			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_PLANTS.ID, worldObj, x, y, z);
     			}
         		if(type == 6)
         		{
-        			mc.displayGuiScreen(new ZooGuiContainerTradingPotion());
+        			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_POTION.ID, worldObj, x, y, z);
     			}
         		if(type == 7)
         		{
-        			mc.displayGuiScreen(new ZooGuiContainerTradingPlants());
+        			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_SPECIAL.ID, worldObj, x, y, z);
     			}
         		if(type == 8)
         		{
-        			mc.displayGuiScreen(new ZooGuiContainerTradingTools());
+        			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_TECH.ID, worldObj, x, y, z);
     			}
         		if(type == 9)
         		{
-        			mc.displayGuiScreen(new ZooGuiContainerTradingDecor());
+        			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_TOOLS.ID, worldObj, x, y, z);
     			}
-        			
-            } else
-            {
-            	mc.displayGuiScreen(null);
             }
         } else
         {
