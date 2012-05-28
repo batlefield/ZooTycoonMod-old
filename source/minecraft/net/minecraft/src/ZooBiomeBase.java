@@ -1,9 +1,6 @@
 package net.minecraft.src;
 
 import net.minecraft.src.zoo.core.ZooPlatform;
-import net.minecraft.src.zoo.dimension.ZooDimDecidious;
-import net.minecraft.src.zoo.dimension.ZooDimSavannah;
-import net.minecraft.src.zoo.dimension.ZooDimTropic;
 
 public class ZooBiomeBase extends BiomeGenBase{
 

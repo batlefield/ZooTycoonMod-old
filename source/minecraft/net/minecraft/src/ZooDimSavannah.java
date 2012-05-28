@@ -1,11 +1,7 @@
-package net.minecraft.src.zoo.dimension;
+package net.minecraft.src;
 
 import java.util.Random;
 
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.WorldGenerator;
-import net.minecraft.src.ZooBiomeBase;
-import net.minecraft.src.ZooDirts;
 import net.minecraft.src.BAPI.interfaces.IBiome;
 import net.minecraft.src.zoo.core.gen.ZooGenUmbrellaThornAcacia;
 
