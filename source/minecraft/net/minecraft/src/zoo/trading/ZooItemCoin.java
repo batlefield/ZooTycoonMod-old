@@ -6,9 +6,9 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
-import net.minecraft.src.mod_ZooTrade;
 import net.minecraft.src.zoo.api.GUIType;
 import net.minecraft.src.zoo.api.ITrade;
+import net.minecraft.src.zoo.api.Trade;
 import net.minecraft.src.zoo.core.ZooItem;
 
 public class ZooItemCoin extends ZooItem implements ITrade{
@@ -40,17 +40,17 @@ public class ZooItemCoin extends ZooItem implements ITrade{
 	{
 		if(itemstack.getItemDamage() == 2)
 		{
-			mod_ZooTrade.money += 1000;
+			Trade.increaseMoney(1000);
 			itemstack.stackSize --;
 		}
 		if(itemstack.getItemDamage() == 1)
 		{
-			mod_ZooTrade.money += 100;
+			Trade.increaseMoney(100);
 			itemstack.stackSize --;
 		}
 		if(itemstack.getItemDamage() == 0)
 		{
-			mod_ZooTrade.money += 10;
+			Trade.increaseMoney(10);
 			itemstack.stackSize --;
 		}
 		return itemstack;
@@ -70,27 +70,27 @@ public class ZooItemCoin extends ZooItem implements ITrade{
     {
         if(itemstack.getItemDamage() == 0)
         {
-        	return blockNames[0];
+        	return itemNames[0];
         }
         if(itemstack.getItemDamage() == 1)
         {
-        	return blockNames[1];
+        	return itemNames[1];
         }
         if(itemstack.getItemDamage() == 2)
         {
-        	return blockNames[2];
+        	return itemNames[2];
         }else{
-        	return blockNames[3];
+        	return itemNames[3];
         }
     }
-    public static final String blockNames[] = {
+    public static final String itemNames[] = {
         "item.coin.bronze", "item.coin.silver", "item.coin.gold", "Coin"
     };
     
-	public int getPrice(int i) {
-		if(i == 0) return 10;
-		if(i == 1) return 100;
-		if(i == 2) return 1000;
+	public int getPrice(int i, int j) {
+		if(j == 0) return 10;
+		if(j == 1) return 100;
+		if(j == 2) return 1000;
 		else return 0;
 	}
 

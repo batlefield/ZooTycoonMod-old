@@ -1,6 +1,11 @@
-package net.minecraft.src;
+package net.minecraft.src.zoo.dimension;
 
 import java.util.Random;
+
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.RenderEngine;
+import net.minecraft.src.TextureFX;
+import net.minecraft.src.ZooDimension;
 
 import org.lwjgl.opengl.GL11;
 

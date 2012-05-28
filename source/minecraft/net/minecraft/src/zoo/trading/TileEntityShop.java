@@ -16,6 +16,9 @@ public class TileEntityShop extends TileEntity
 
 	private short type = -1;
 	private String[] types = "Decoration Shop, Dirt Shop, Fencing shop, Food Shop, Plants Shop, Potion Shop, Special Shop, Tech Shop, Tools & Armor Shop".split(", ");
+	private int[] prices = {
+			
+	};
 
 	public void readFromNBT(NBTTagCompound nbt)
 	{
@@ -37,6 +40,11 @@ public class TileEntityShop extends TileEntity
 	public int getType()
 	{
 		return type;
+	}
+	
+	public boolean isTypeValid(int i)
+	{
+		return i >= 0 && i <= 9;
 	}
 
 	public void setType(int i)

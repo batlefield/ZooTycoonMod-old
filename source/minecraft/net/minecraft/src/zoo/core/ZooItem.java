@@ -8,7 +8,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 import net.minecraft.src.forge.ITextureProvider;
-import net.minecraft.src.zoo.trading.ZooEntityShopKeeper;
+import net.minecraft.src.zoo.core.entities.ZooVisitorFemale;
 
 public class ZooItem extends Item implements ITextureProvider{
 
@@ -39,7 +39,7 @@ public class ZooItem extends Item implements ITextureProvider{
                 var9 = 0.5D;
             }
             
-            Entity entity = new ZooEntityShopKeeper(par3World, 1);
+            Entity entity = new ZooVisitorFemale(par3World);
             entity.setLocationAndAngles(par4, par5, par6, par3World.rand.nextFloat() * 360.0F, 0.0F);
             par3World.spawnEntityInWorld(entity);
 

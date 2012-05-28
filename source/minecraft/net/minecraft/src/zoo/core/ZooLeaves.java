@@ -7,6 +7,7 @@ import net.minecraft.src.Block;
 import net.minecraft.src.BlockLeavesBase;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
@@ -22,7 +23,7 @@ import net.minecraft.src.forge.ITextureProvider;
 //            EntityPlayer, ItemStack, Item, ItemShears, 
 //            StatList, Entity
 
-public class ZooLeaves extends BlockLeavesBase implements ITextureProvider, IShearable
+public class ZooLeaves extends Block implements ITextureProvider, IShearable
 {
 
     private int baseIndexInPNG;
@@ -30,10 +31,22 @@ public class ZooLeaves extends BlockLeavesBase implements ITextureProvider, IShe
 
     public ZooLeaves(int i, int j)
     {
-        super(i, j, Material.leaves, false);
+        super(i, j, Material.leaves);
         baseIndexInPNG = j;
         setTickRandomly(true);
 
+    }
+    
+    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    {
+        int var6 = par1IBlockAccess.getBlockId(par2, par3, par4);
+        if(var6 == this.blockID)
+        {
+        	return false;
+        }
+        else {
+        	return super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
+        }
     }
 
     public void onBlockRemoval(World world, int i, int j, int k)

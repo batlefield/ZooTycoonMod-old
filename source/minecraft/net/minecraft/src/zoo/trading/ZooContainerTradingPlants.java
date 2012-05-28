@@ -127,7 +127,7 @@ public class ZooContainerTradingPlants extends Container
     
     public void scrollTo(float f)
     {
-        int i = (itemList.size() / 8 - 8) + 1;
+        int i = (itemList.size() / 8 - 5) + 1;
         int j = (int)((double)(f * (float)i) + 0.5D);
         if(j < 0)
         {

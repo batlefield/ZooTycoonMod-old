@@ -28,7 +28,7 @@ public class GUIHandlerTrade implements IGuiHandler{
         
         if(ID == GUIIDEnum.SHOP_DECOR.ID)
         {
-        	return new ZooGuiContainerTradingDecor();
+        	return new ZooGuiContainerTradingDecor(player);
         }
         
         if(ID == GUIIDEnum.SHOP_DIRT.ID)

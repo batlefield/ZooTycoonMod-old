@@ -28,7 +28,7 @@ public class GUIShop extends GuiScreen{
 	}
 	
 	protected void actionPerformed(GuiButton gb) {
-		if(gb.id == 100)
+		if(gb.id == 100 && shopTile.isTypeValid(shopTile.getType()))
 		{
 			shopTile.generate(shopTile.getType());
 			mc.displayGuiScreen((GuiScreen)null);

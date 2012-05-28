@@ -150,7 +150,7 @@ public class ZooEntityShopKeeper extends EntityCreature
     	}
     	if(type == 7)
     	{
-    		texture = "/zoo/modells/npcs/shopkeeper.png";
+    		texture = "/zoo/modells/npcs/fancy shopkeeper.png";
     	}
     	if(type == 8)
     	{

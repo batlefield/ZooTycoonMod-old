@@ -12,19 +12,11 @@ import net.minecraft.src.zoo.api.Trade;
 public class ZooContainerTradingDecor extends Container
 {
 
-    private static Minecraft minecraft = ModLoader.getMinecraftInstance();
-    public static ZooContainerTradingDecor instance = new ZooContainerTradingDecor();
-    public static boolean interact;
     public static List itemList;
 
-    public ZooContainerTradingDecor()
+    public ZooContainerTradingDecor(EntityPlayer entityplayer)
     {
-        loadStacks();
-    }
-
-    public void loadStacks()
-    {
-        itemList = new ArrayList();
+    	itemList = new ArrayList();
         Block ablock[] = {
         		Block.bookShelf, Block.cobblestoneMossy, Block.dirt, Block.dispenser, Block.enchantmentTable, Block.fence, Block.fenceGate,
         		Block.fenceIron, Block.glowStone, Block.music, Block.netherFence, Block.planks, Block.pumpkin, Block.pumpkinLantern,
@@ -63,31 +55,24 @@ public class ZooContainerTradingDecor extends Container
         }
         
         sortGui();
-        InventoryPlayer inventoryplayer = minecraft.thePlayer.inventory;
-        for(int l2 = 0; l2 < 5; l2++)
-        {
-            for(int k3 = 0; k3 < 8; k3++)
-            {
-                addSlot(new Slot(ZooGuiContainerTradingDecor.getInventory(), k3 + l2 * 8, 8 + k3 * 18, 18 + l2 * 18));
-            }
+        InventoryPlayer var16 = entityplayer.inventory;
 
-        }
+		int var13;
 
-        for(int i3 = 0; i3 < 3; i3++)
-        {
-            for(int l3 = 0; l3 < 9; l3++)
-            {
-                addSlot(new Slot(inventoryplayer, l3 + i3 * 9 + 9, 8 + l3 * 18, 127 + i3 * 18));
-            }
+		for (var13 = 0; var13 < 5; ++var13)
+		{
+			for (int var14 = 0; var14 < 8; ++var14)
+			{
+				this.addSlot(new Slot(ZooGuiContainerTradingDecor.getInventory(), var14 + var13 * 8, 8 + var14 * 18, 18 + var13 * 18));
+			}
+		}
 
-        }
+		for (var13 = 0; var13 < 9; ++var13)
+		{
+			this.addSlot(new Slot(var16, var13, 8 + var13 * 18, 184));
+		}
 
-        for(int j3 = 0; j3 < 9; j3++)
-        {
-            addSlot(new Slot(inventoryplayer, j3, 8 + j3 * 18, 184));
-        }
-
-        scrollTo(0.0F);
+		scrollTo(0.0F);
     }
 
     public static void sortGui()
@@ -110,7 +95,7 @@ public class ZooContainerTradingDecor extends Container
 
     public boolean canInteractWith(EntityPlayer entityplayer)
     {
-        return interact;
+        return true;
     }
     
     public void scrollTo(float f)

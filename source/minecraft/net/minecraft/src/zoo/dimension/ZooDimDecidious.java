@@ -1,7 +1,10 @@
-package net.minecraft.src;
+package net.minecraft.src.zoo.dimension;
 
 import java.util.Random;
 
+import net.minecraft.src.WorldGenerator;
+import net.minecraft.src.ZooBiomeBase;
+import net.minecraft.src.ZooDirts;
 import net.minecraft.src.zoo.core.gen.ZooGenDeciTree;
 
 

@@ -8,36 +8,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.forge.Configuration;
 import net.minecraft.src.forge.MinecraftForgeClient;
 import net.minecraft.src.forge.NetworkMod;
+import net.minecraft.src.zoo.core.EntityHandeler;
 import net.minecraft.src.zoo.core.ZooSettings;
-import net.minecraft.src.zoo.core.entities.ZooEntityAfricanWDog;
-import net.minecraft.src.zoo.core.entities.ZooEntityAnteater;
-import net.minecraft.src.zoo.core.entities.ZooEntityBighorn;
-import net.minecraft.src.zoo.core.entities.ZooEntityElephant;
-import net.minecraft.src.zoo.core.entities.ZooEntityFennecFox;
-import net.minecraft.src.zoo.core.entities.ZooEntityGazelle;
-import net.minecraft.src.zoo.core.entities.ZooEntityGiraffe;
-import net.minecraft.src.zoo.core.entities.ZooEntityHippo;
-import net.minecraft.src.zoo.core.entities.ZooEntityLion;
-import net.minecraft.src.zoo.core.entities.ZooEntityPrimate;
-import net.minecraft.src.zoo.core.entities.ZooEntityRhino;
-import net.minecraft.src.zoo.core.entities.ZooEntityTiger;
-import net.minecraft.src.zoo.core.entities.ZooEntityWolf;
-import net.minecraft.src.zoo.core.entities.ZooVisitorFemale;
-import net.minecraft.src.zoo.core.models.FemaleBase;
-import net.minecraft.src.zoo.core.render.RenderFemale;
-import net.minecraft.src.zoo.core.render.ZooRenderAfricanWDog;
-import net.minecraft.src.zoo.core.render.ZooRenderAnteater;
-import net.minecraft.src.zoo.core.render.ZooRenderBighorn;
-import net.minecraft.src.zoo.core.render.ZooRenderElephant;
-import net.minecraft.src.zoo.core.render.ZooRenderFennecFox;
-import net.minecraft.src.zoo.core.render.ZooRenderGazelle;
-import net.minecraft.src.zoo.core.render.ZooRenderGiraffe;
-import net.minecraft.src.zoo.core.render.ZooRenderHippo;
-import net.minecraft.src.zoo.core.render.ZooRenderLion;
-import net.minecraft.src.zoo.core.render.ZooRenderPrimate;
-import net.minecraft.src.zoo.core.render.ZooRenderRhino;
-import net.minecraft.src.zoo.core.render.ZooRenderTiger;
-import net.minecraft.src.zoo.core.render.ZooRenderWolf;
 
 import org.lwjgl.opengl.GL11;
 
@@ -58,16 +30,6 @@ public class mod_ZooCore extends NetworkMod
 		renderMode = ModLoader.getUniqueBlockModelID(this, true);
 		initialize();
 	}
-	
-	public boolean clientSideRequired()
-	{
-		return true;
-	}
-
-	public boolean serverSideRequired()
-	{
-		return false;
-	}
 
 	public mod_ZooCore()
 	{
@@ -79,8 +41,7 @@ public class mod_ZooCore extends NetworkMod
 		if (initialized)
 		{
 			return;
-		}
-		else
+		} else
 		{
 			initialized = true;
 			Zoo.init();
@@ -114,8 +75,7 @@ public class mod_ZooCore extends NetworkMod
 			GL11.glBindTexture(3553 /* GL_TEXTURE_2D */, renderengine.getTexture("/terrain.png"));
 			GL11.glPopMatrix();
 			return true;
-		}
-		else
+		} else
 		{
 			return true;
 		}
@@ -123,7 +83,7 @@ public class mod_ZooCore extends NetworkMod
 
 	public void keyboardEvent(KeyBinding var1)
 	{
-		if(minecraft.currentScreen == null)
+		if (minecraft.currentScreen == null)
 		{
 			if (var1 == options)
 			{
@@ -134,22 +94,7 @@ public class mod_ZooCore extends NetworkMod
 
 	public void addRenderer(Map map)
 	{
-		map.put(ZooEntityBighorn.class, new ZooRenderBighorn(0.5F));
-		map.put(ZooEntityGazelle.class, new ZooRenderGazelle(0.5F));
-		map.put(ZooEntityHippo.class, new ZooRenderHippo(0.5F));
-		map.put(ZooEntityPrimate.class, new ZooRenderPrimate(0.5F));
-		map.put(ZooEntityRhino.class, new ZooRenderRhino(0.5F));
-		map.put(ZooEntityTiger.class, new ZooRenderTiger(0.5F));
-		map.put(ZooEntityElephant.class, new ZooRenderElephant(0.5F));
-		map.put(ZooEntityAfricanWDog.class, new ZooRenderAfricanWDog(0.5F));
-		map.put(ZooEntityAnteater.class, new ZooRenderAnteater(0.5F));
-		map.put(ZooVisitorFemale.class, new RenderFemale(new FemaleBase(), 0.5F));
-		map.put(ZooEntityLion.class, new ZooRenderLion(0.5F));
-		// map.put(ZooEntityPanther.class, new ZooRenderPanter(0.5F));
-		map.put(ZooEntityFennecFox.class, new ZooRenderFennecFox(0.5F));
-		map.put(ZooEntityGiraffe.class, new ZooRenderGiraffe(0.6F));
-		// map.put(ZooEntityFlamingo.class, new ZooRenderFlamingo(0.5F));
-		map.put(ZooEntityWolf.class, new ZooRenderWolf(0.5F));
+		EntityHandeler.addRender(map);
 	}
 
 	public void generateSurface(World world, Random rand, int chunkX, int chunkZ)
@@ -178,14 +123,14 @@ public class mod_ZooCore extends NetworkMod
 			(new WorldGenTallGrass(Zoo.coniferousgrass.blockID, 1)).generate(world, rand, k11, j15, l17);
 		}
 	}
-	
+
 	public boolean onTickInGame(float f, Minecraft mc)
 	{
-		if(mc.theWorld == null)
+		if (mc.theWorld == null)
 		{
 			checked = false;
 		}
-		if(!checked)
+		if (!checked)
 		{
 			Zoo.versionCheck();
 			checked = true;
@@ -215,7 +160,7 @@ public class mod_ZooCore extends NetworkMod
 		config.save();
 		return new Integer(config.getOrCreateIntProperty(s, config.CATEGORY_ITEM, i).value).intValue();
 	}
-	
+
 	public static int getGeneralInt(String s, int i)
 	{
 		config.load();

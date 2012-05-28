@@ -1,10 +1,13 @@
 package net.minecraft.src;
 
 import net.minecraft.src.zoo.core.ZooPlatform;
+import net.minecraft.src.zoo.dimension.ZooDimDecidious;
+import net.minecraft.src.zoo.dimension.ZooDimSavannah;
+import net.minecraft.src.zoo.dimension.ZooDimTropic;
 
 public class ZooBiomeBase extends BiomeGenBase{
 
-	protected ZooBiomeBase(int i) {
+	public ZooBiomeBase(int i) {
 		super(i);
 		topBlock = (byte)Block.grass.blockID;
         fillerBlock = (byte)Block.dirt.blockID;

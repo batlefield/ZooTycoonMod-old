@@ -8,7 +8,6 @@ public class ZooVisitorFemale extends EntityCreature{
     {
         super(world);
         moveSpeed = 0.5F;
-        texture = "/zoo/modells/girl npc.png";
     }
 
 	public int getMaxHealth()

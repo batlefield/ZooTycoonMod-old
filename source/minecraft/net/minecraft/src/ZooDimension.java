@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import net.minecraft.src.zoo.dimension.PortalTool;
 import net.minecraft.src.zoo.dimension.ZooPortal;
+import net.minecraft.src.zoo.dimension.ZooPortalFX;
 import net.minecraft.src.zoo.dimension.ZooPortalOverlay;
 import net.minecraft.src.Zoo;
 import net.minecraft.src.BAPI.*;

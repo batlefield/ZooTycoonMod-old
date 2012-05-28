@@ -14,7 +14,7 @@ import net.minecraft.src.forge.ITextureProvider;
 import net.minecraft.src.zoo.api.GUIType;
 import net.minecraft.src.zoo.api.ITrade;
 
-public class ZooGlass extends BlockBreakable implements ITextureProvider, ITrade
+public class ZooGlass extends BlockBreakable implements ITextureProvider
 {
 
     public ZooGlass(int i, int j, Material material, boolean flag)
@@ -46,15 +46,4 @@ public class ZooGlass extends BlockBreakable implements ITextureProvider, ITrade
             super.harvestBlock(world, entityplayer, i, j, k, l);
         }
     }
-
-	public int getPrice(int i) {
-		return 20;
-	}
-
-	public void addToGUI(GUIType type, ArrayList list) {
-		if(type == GUIType.DIRT)
-		{
-			list.add(new ItemStack(this));
-		}
-	}
 }

@@ -14,77 +14,7 @@ public class ZAPI {
 	
 	public ZAPI()
 	{
-		Trade.init();
 		Fence.init();
-	}
-	
-	/////////////////////////////////////////////
-	///////////////////TRADE/////////////////////
-	/////////////////////////////////////////////
-	
-	 /** GUI ID's:
-	 * 1 - Merchant that sells dirt.
-	 * 2 - Merchant that sells food.
-	 * 3 - Merchant that sells fencing.
-	 * 4 - Merchant that sells special blocks
-	 * 5 - Merchant that sells technical stuff
-	 * 6 - Merchant that sells ingridients for potions and potions
-	 * 7 - Merchant that sells plants and stuff
-	 * 8 - Merchant that sells tools and armor
-	 * 9 - Merchant that sells decorative items(bookshelves wool...)
-	 * 10 - merchant that sells items from other mods*/
-	
-	
-	/**
-	 * This function registers custom block to any of the shopkeeper GUI's
-	 * @param item				Block you want to add.
-	 * @param id				Id of GUI in which item should be placed in.
-	 * @param p					Price you want to be assigned for the block.
-	 */
-	
-	public static void tradingAdd(Block block, int id, int p)
-	{
-		tradingAdd(block, 0, id, p);
-	}
-	
-	/**
-	 * This function registers custom block to any of the shopkeeper GUI's
-	 * @param item				Item you want to add.
-	 * @param i 				Damage value of the item you want to register.
-	 * @param id				Id of GUI in which item should be register.
-	 * @param p					Price you want to be assigned for the block.
-	 * @throws					IllegalArgumentException if the GUI id is not defined.
-	 */
-	
-	public static void tradingAdd(Block block, int i, int id, int p)
-	{
-		Trade.registerBlock(block, i, id, p);
-	}
-	
-	/**
-	 * This function registers custom item to any of the shopkeeper GUI's
-	 * @param item				Item you want to add.
-	 * @param id				Id of GUI in which item should be placed in.
-	 * @param p					Price you want to be assigned for the item.
-	 */
-	
-	public static void tradingAdd(Item item, int id, int p)
-	{
-		tradingAdd(item, 0, id, p);
-	}
-	
-	/**
-	 * This function registers custom item to any of the shopkeeper GUI's
-	 * @param item				Item you want to add.
-	 * @param i 				Damage value of the item you want to register.
-	 * @param id				Id of GUI in which item should be register.
-	 * @param p					Price you want to be assigned for the item.
-	 * @throws					IllegalArgumentException if the GUI id is not defined.
-	 */
-	
-	public static void tradingAdd(Item item, int i, int id, int p)
-	{
-		Trade.registerItem(item, i, id, p);
 	}
 	
 	/////////////////////////////////////////////

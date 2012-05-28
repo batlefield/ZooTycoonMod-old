@@ -82,20 +82,6 @@ public class mod_ZooFurniture extends NetworkMod
 
 	}
 
-	public static void debugWrite(String string)
-	{
-		try
-		{
-			FileWriter fstream = new FileWriter("C:/Documents and Settings/Owner/AppData/Roaming/.minecraft/mods/ZooDebug.txt");
-			BufferedWriter out = new BufferedWriter(fstream);
-			out.append(string);
-			out.close();
-		} catch (Exception e)
-		{
-			System.err.println(e);
-		}
-	}
-
 	public void setupEntities()
 	{
 		ModLoader.registerEntityID(ZooEntitySeat.class, "EntitySeat", ModLoader.getUniqueEntityId());
