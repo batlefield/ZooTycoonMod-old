@@ -53,7 +53,7 @@ public class ZooEntityGreyWolf extends EntityTameable
         this.texture = "/mob/wolf.png";
         this.setSize(0.6F, 0.8F);
         this.moveSpeed = 0.3F;
-        this.getNavigator().func_48664_a(true);
+        this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
@@ -95,7 +95,7 @@ public class ZooEntityGreyWolf extends EntityTameable
      */
     protected void updateAITick()
     {
-        this.dataWatcher.updateObject(18, Integer.valueOf(this.getEntityHealth()));
+        this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
     }
 
     public int getMaxHealth()
@@ -106,7 +106,7 @@ public class ZooEntityGreyWolf extends EntityTameable
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(18, new Integer(this.getEntityHealth()));
+        this.dataWatcher.addObject(18, new Integer(this.getHealth()));
     }
 
     /**
@@ -123,7 +123,7 @@ public class ZooEntityGreyWolf extends EntityTameable
      */
     public String getEntityTexture()
     {
-        return this.isTamed() ? "/mob/wolf_tame.png" : (this.isAngry() ? "/mob/wolf_angry.png" : super.getEntityTexture());
+        return this.isTamed() ? "/mob/wolf_tame.png" : (this.isAngry() ? "/mob/wolf_angry.png" : super.getTexture());
     }
 
     /**
@@ -316,7 +316,7 @@ public class ZooEntityGreyWolf extends EntityTameable
      */
     public int getVerticalFaceSpeed()
     {
-        return this.func_48141_af() ? 20 : super.getVerticalFaceSpeed();
+        return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
     }
 
     /**
@@ -325,7 +325,7 @@ public class ZooEntityGreyWolf extends EntityTameable
     public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
     {
         Entity var3 = par1DamageSource.getEntity();
-        this.aiSit.func_48407_a(false);
+        this.aiSit.setIsSitting(false);
 
         if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
         {
@@ -366,7 +366,7 @@ public class ZooEntityGreyWolf extends EntityTameable
                         this.setTamed(true);
                         this.setPathToEntity((PathEntity)null);
                         this.setTarget((EntityLiving)null);
-                        this.aiSit.func_48407_a(true);
+                        this.aiSit.setIsSitting(true);
                         this.setEntityHealth(20);
                         this.setOwner(par1EntityPlayer.username);
                         this.func_48142_a(true);
@@ -404,7 +404,7 @@ public class ZooEntityGreyWolf extends EntityTameable
 
             if (par1EntityPlayer.username.equalsIgnoreCase(this.getOwnerName()) && !this.worldObj.isRemote && !this.isWheat(var2))
             {
-                this.aiSit.func_48407_a(!this.func_48141_af());
+                this.aiSit.setIsSitting(!this.isSitting());
                 this.isJumping = false;
                 this.setPathToEntity((PathEntity)null);
             }
@@ -506,7 +506,7 @@ public class ZooEntityGreyWolf extends EntityTameable
         else
         {
             ZooEntityGreyWolf var2 = (ZooEntityGreyWolf)par1EntityAnimal;
-            return !var2.isTamed() ? false : (var2.func_48141_af() ? false : this.func_48136_o_() && var2.func_48136_o_());
+            return !var2.isTamed() ? false : (var2.isSitting() ? false : this.isInLove() && var2.isInLove());
         }
     }
 }

@@ -367,7 +367,7 @@ public class Trade
 			return 0; // Lava
 		if (name.equals("tile.sand"))
 			return 1; // Sand
-		if (name.equals("tile.gravel"))
+		if (name.equals("tile.grave8l"))
 			return 1; // Gravel
 		if (name.equals("tile.oreGold"))
 			return 250; // Gold Ore

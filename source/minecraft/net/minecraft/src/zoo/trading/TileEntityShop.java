@@ -3,11 +3,13 @@ package net.minecraft.src.zoo.trading;
 import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_ZooTrade;
 import net.minecraft.src.zoo.api.Fence;
+import net.minecraft.src.zoo.api.Trade;
 import net.minecraft.src.zoo.core.GUIIDEnum;
 import net.minecraft.src.zoo.core.gen.StructureGenerator;
 
@@ -17,9 +19,9 @@ public class TileEntityShop extends TileEntity
 	private short type = -1;
 	private String[] types = "Decoration Shop, Dirt Shop, Fencing shop, Food Shop, Plants Shop, Potion Shop, Special Shop, Tech Shop, Tools & Armor Shop".split(", ");
 	private int[] prices = {
-			
+			485, 265, 317, 565, 260, 783, 36777, 713, 275
 	};
-
+	
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
@@ -30,6 +32,11 @@ public class TileEntityShop extends TileEntity
 	{
 		super.writeToNBT(nbt);
 		nbt.setShort("type", type);
+	}
+	
+	public int[] getPrices()
+	{
+		return prices;
 	}
 
 	public String[] getTypesAsString()
@@ -89,6 +96,14 @@ public class TileEntityShop extends TileEntity
 
 	public void generate(int t)
 	{
+		if(Trade.decreaseMoney(prices[t]))
+		{
+			ModLoader.getMinecraftInstance().thePlayer.addChatMessage("Shop generated!");
+		}else{
+			return;
+		}
+		
+		
 		int md = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 
 		Entity entity = new ZooEntityShopKeeper(worldObj, type + 1);

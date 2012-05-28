@@ -3,6 +3,7 @@ package net.minecraft.src.zoo.trading;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiScreen;
 import net.minecraft.src.forge.MinecraftForge;
+import net.minecraft.src.zoo.api.Trade;
 
 import org.lwjgl.opengl.GL11;
 
@@ -14,7 +15,7 @@ public class GUIShop extends GuiScreen{
     private static final int xStartOff = 3;
     private static final int yStartOff = 6;
     private static final int boxsizeY = 15;
-    private static final int boxsizeX = 117;
+    private static final int boxsizeX = 146;
 	
 	public GUIShop(TileEntityShop tile)
 	{
@@ -49,16 +50,22 @@ public class GUIShop extends GuiScreen{
 		drawTexturedModalRect(left, top, 0, 0, 176, 176);
 		
 		String[] types = shopTile.getTypesAsString();
+		int[] prices = shopTile.getPrices();
 		
 		for(int i = 0; i < types.length; i++)
 		{
-			mc.fontRenderer.drawStringWithShadow(types[i], (width / 2) - (mc.fontRenderer.getStringWidth(types[i]) / 2), yStart + (i * 15), 0xffffff);
+			mc.fontRenderer.drawStringWithShadow(types[i] + " $" + prices[i], (width / 2) - (mc.fontRenderer.getStringWidth(types[i] + " $" + prices[i]) / 2), yStart + (i * 15), 0xffffff);
 		}
 		
 		mc.renderEngine.bindTexture(tex);
 		if(shopTile.getType() >= 0)
 		{
-			drawTexturedModalRect((width / 2) - (boxsizeX / 2), yStart + (15 * shopTile.getType()) - 3, 0, 176, boxsizeX, boxsizeY);
+			if(Trade.getMoney() >= prices[shopTile.getType()])
+			{
+				drawTexturedModalRect((width / 2) - (boxsizeX / 2), yStart + (15 * shopTile.getType()) - 3, 0, 176, boxsizeX, boxsizeY);
+			}else{
+				drawTexturedModalRect((width / 2) - (boxsizeX / 2), yStart + (15 * shopTile.getType()) - 3, 0, 176 + boxsizeY, boxsizeX, boxsizeY);
+			}
 		}
 		
 		super.drawScreen(mousePosX, mousePosY, partialTick);
