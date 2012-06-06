@@ -8,7 +8,7 @@ import net.minecraft.src.BAPI.interfaces.*;;
 public class ZooPlaceableHandler implements IPlacable {
 
 	public boolean canPlantFlower(int flowerID, int plantableID, int plantableMeta) {
-		if(flowerID == Block.plantRed.blockID)
+		if(flowerID == Block.plantRed.blockID || flowerID == Block.plantYellow.blockID)
 		{
 			return plantableID == ZooDirts.coniferous.blockID || plantableID == ZooDirts.deciduous.blockID
 			|| plantableID == ZooDirts.savannah.blockID || plantableID == ZooDirts.rainforest.blockID || plantableID == ZooDirts.tropical.blockID;

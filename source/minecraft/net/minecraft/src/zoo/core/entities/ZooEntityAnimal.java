@@ -496,10 +496,6 @@ public abstract class ZooEntityAnimal extends EntityCreature
     
     public void feed(int i)
     {
-    	if (hunger <= 0)
-        {
-            return;
-        }
         hunger += i;
         if (hunger > getMaxHunger())
         {

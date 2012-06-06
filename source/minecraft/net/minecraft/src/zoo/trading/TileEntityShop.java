@@ -9,7 +9,6 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import net.minecraft.src.mod_ZooTrade;
 import net.minecraft.src.zoo.api.Fence;
-import net.minecraft.src.zoo.api.Trade;
 import net.minecraft.src.zoo.core.GUIIDEnum;
 import net.minecraft.src.zoo.core.gen.StructureGenerator;
 
@@ -17,7 +16,7 @@ public class TileEntityShop extends TileEntity
 {
 
 	private short type = -1;
-	private String[] types = "Decoration Shop, Dirt Shop, Fencing shop, Food Shop, Plants Shop, Potion Shop, Special Shop, Tech Shop, Tools & Armor Shop".split(", ");
+	private String[] types = "Decoration Shop, Dirt Shop, Fencing shop, Food Shop, Florists Shop, Magic and Alchemy Shop, Special Shop, Tech Shop, Tools & Armor Shop".split(", ");
 	private int[] prices = {
 			485, 265, 317, 565, 260, 783, 36777, 713, 275
 	};
@@ -69,22 +68,22 @@ public class TileEntityShop extends TileEntity
 			int md = world.getBlockMetadata(i, j, k);
 			if (md == 4)
 			{
-				world.setBlockAndMetadataWithNotify(i, j, k, mod_ZooTrade.shopkeeperblockdouble.blockID, 3);
+				world.setBlockAndMetadataWithNotify(i, j, k, mod_ZooTrade.shopBlock.blockID, 3);
 				return;
 			}
 			if (md == 3)
 			{
-				world.setBlockAndMetadataWithNotify(i, j, k, mod_ZooTrade.shopkeeperblockdouble.blockID, 5);
+				world.setBlockAndMetadataWithNotify(i, j, k, mod_ZooTrade.shopBlock.blockID, 5);
 				return;
 			}
 			if (md == 5)
 			{
-				world.setBlockAndMetadataWithNotify(i, j, k, mod_ZooTrade.shopkeeperblockdouble.blockID, 2);
+				world.setBlockAndMetadataWithNotify(i, j, k, mod_ZooTrade.shopBlock.blockID, 2);
 				return;
 			}
 			if (md == 2)
 			{
-				world.setBlockAndMetadataWithNotify(i, j, k, mod_ZooTrade.shopkeeperblockdouble.blockID, 4);
+				world.setBlockAndMetadataWithNotify(i, j, k, mod_ZooTrade.shopBlock.blockID, 4);
 				return;
 			}
 

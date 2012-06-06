@@ -56,7 +56,7 @@ public class Biome {
 		{
 			return biomes;
 		}else{
-			throw new IllegalArgumentException("Wrong integer");
+			throw new IllegalArgumentException("Invalid integer");
 		}
 	}
 }

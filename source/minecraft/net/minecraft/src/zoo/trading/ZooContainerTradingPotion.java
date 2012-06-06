@@ -4,9 +4,7 @@ import java.util.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.minecraft.src.zoo.api.GUIType;
 import net.minecraft.src.zoo.api.ITrade;
-import net.minecraft.src.zoo.api.Trade;
 
 
 public class ZooContainerTradingPotion extends Container

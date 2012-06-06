@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.src.forge.*;
+import net.minecraft.src.zoo.api.ITrade;
+import net.minecraft.src.zoo.trading.GUIType;
 import net.minecraft.src.*;
-public class ZooGrass extends Block implements ITextureProvider {
+
+public class ZooGrass extends Block implements ITextureProvider, ITrade {
 	
 	public ZooGrass(int i)
 	{
@@ -124,4 +127,11 @@ public class ZooGrass extends Block implements ITextureProvider {
 	public String getTextureFile() {
 		return "/zoo/blocks.png";
 	}
+	
+	public int getPrice(int i, int j)
+	{
+		return 5;
+	}
+	
+	public void addToGUI(GUIType type, ArrayList list){}
 }

@@ -36,16 +36,6 @@ public class mod_ZooFurniture extends NetworkMod
 
 	}
 
-	public boolean clientSideRequired()
-	{
-		return true;
-	}
-
-	public boolean serverSideRequired()
-	{
-		return false;
-	}
-
 	static Configuration config = new Configuration(new File(Minecraft.getMinecraftDir(), "Zoo/Furniture/Config.cfg"));
 
 	private static int getBlockID(String s, int i)
@@ -96,7 +86,7 @@ public class mod_ZooFurniture extends NetworkMod
 
 	// Blocks/Items
 	public static Block blockBench = makeBlock(ZooBlockBench.class, "Bench", 218, ZooTileEntityBench.class, Material.wood, 2.0f, "Block Bench");
-	public static Item itemBench = makeItem("Bench item", 412, blockBench, 7, "Item Bench");
+	public static Item itemBench = makeItem("Bench item", 2275, blockBench, 7, "Item Bench");
 
 	public String author = "HojoINC";
 

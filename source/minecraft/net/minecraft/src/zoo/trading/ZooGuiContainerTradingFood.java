@@ -3,7 +3,6 @@ package net.minecraft.src.zoo.trading;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.minecraft.src.zoo.api.Trade;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -86,7 +85,7 @@ public class ZooGuiContainerTradingFood extends GuiContainer
 
     protected void drawGuiContainerForegroundLayer()
     {
-        if(mod_ZooTrade.debug())
+        if(Trade.debug)
         {
             fontRenderer.drawString("You are in debug mode!", 8, 6, 0x404040);
         } else

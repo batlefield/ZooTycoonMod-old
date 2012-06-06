@@ -4,9 +4,7 @@ import java.util.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.minecraft.src.zoo.api.GUIType;
 import net.minecraft.src.zoo.api.ITrade;
-import net.minecraft.src.zoo.api.Trade;
 
 public class ZooContainerTradingTools extends Container
 {
@@ -57,6 +55,15 @@ public class ZooContainerTradingTools extends Container
 				this.addSlot(new Slot(ZooGuiContainerTradingTools.getInventory(), var14 + var13 * 8, 8 + var14 * 18, 18 + var13 * 18));
 			}
 		}
+		
+		for(int i3 = 0; i3 < 3; i3++)
+        {
+            for(int l3 = 0; l3 < 9; l3++)
+            {
+                addSlot(new Slot(var16, l3 + i3 * 9 + 9, 8 + l3 * 18, 127 + i3 * 18));
+            }
+
+        }
 
 		for (var13 = 0; var13 < 9; ++var13)
 		{

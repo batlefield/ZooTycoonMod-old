@@ -1,4 +1,4 @@
-package net.minecraft.src.zoo.api;
+package net.minecraft.src.zoo.trading;
 
 public enum GUIType {
 	

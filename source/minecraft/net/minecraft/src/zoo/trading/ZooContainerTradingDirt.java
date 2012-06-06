@@ -17,9 +17,7 @@ import net.minecraft.src.Slot;
 import net.minecraft.src.Zoo;
 import net.minecraft.src.ZooDirts;
 import net.minecraft.src.mod_ZooTrade;
-import net.minecraft.src.zoo.api.GUIType;
 import net.minecraft.src.zoo.api.ITrade;
-import net.minecraft.src.zoo.api.Trade;
 
 
 public class ZooContainerTradingDirt extends Container

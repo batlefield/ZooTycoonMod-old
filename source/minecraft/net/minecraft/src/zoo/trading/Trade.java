@@ -1,4 +1,4 @@
-package net.minecraft.src.zoo.api;
+package net.minecraft.src.zoo.trading;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
@@ -12,6 +12,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.Slot;
 import net.minecraft.src.mod_ZooCore;
 import net.minecraft.src.mod_ZooTrade;
+import net.minecraft.src.zoo.api.ITrade;
 
 import org.lwjgl.input.Keyboard;
 
@@ -19,27 +20,27 @@ public class Trade
 {
 
 	private static int money;
-	private static double priceModifier = mod_ZooTrade.getGeneralDouble("Price modifier", 0.6D);
+	public static boolean debug = false;
 
 	public static void handleMouseClick(Slot slot, Minecraft mc, Container inventorySlots, InventoryBasic inventory, int j, boolean flag)
 	{
 		if (slot != null)
 		{
-			double d = getPriceModifier();
+			double d = 0.6;
 			if (slot.inventory == inventory)
 			{
 				InventoryPlayer inventoryplayer = mc.thePlayer.inventory;
 				ItemStack itemstack1 = inventoryplayer.getItemStack();
 				ItemStack itemstack4 = slot.getStack();
-				if (!mod_ZooTrade.debug() && Keyboard.isKeyDown(mod_ZooCore.instance.options.keyCode) && itemstack4 != null)
+				if (!debug && Keyboard.isKeyDown(25) && itemstack4 != null)
 				{
 					if (flag)
 					{
-						mod_ZooTrade.debug(0);
+						debug(0);
 						displayValues(itemstack4, 1);
 					} else
 					{
-						mod_ZooTrade.debug(1);
+						debug(1);
 						displayValues(itemstack4, 0);
 					}
 				} else if (itemstack1 != null && itemstack4 != null && itemstack1.itemID == itemstack4.itemID && j != 1)
@@ -52,15 +53,15 @@ public class Trade
 							{
 								if (getMoney() < getPrice(itemstack4) * itemstack4.getMaxStackSize() - getPrice(itemstack4) * itemstack4.stackSize)
 								{
-									mod_ZooTrade.debug(2);
+									debug(2);
 								} else if (itemstack1.stackSize < itemstack1.getMaxStackSize())
 								{
 									if (getPrice(itemstack4) * itemstack1.getMaxStackSize() - getPrice(itemstack4) * itemstack1.stackSize > getMoney())
 									{
-										mod_ZooTrade.debug(3);
+										debug(3);
 									} else
 									{
-										mod_ZooTrade.debug(4);
+										debug(4);
 										decreaseMoney(getPrice(itemstack4) * itemstack1.getMaxStackSize() - getPrice(itemstack4) * itemstack1.stackSize);
 										itemstack1.stackSize = itemstack1.getMaxStackSize();
 									}
@@ -81,13 +82,13 @@ public class Trade
 									}
 								} else
 								{
-									mod_ZooTrade.debug(4);
+									debug(4);
 									inventoryplayer.setItemStack(null);
 									increaseMoney((int) (getPrice(itemstack1) * d * itemstack1.stackSize));
 								}
 							} else if (getMoney() >= getPrice(itemstack4))
 							{
-								mod_ZooTrade.debug(4);
+								debug(4);
 								itemstack1.stackSize++;
 								decreaseMoney(getPrice(itemstack4));
 							}
@@ -105,7 +106,7 @@ public class Trade
 							}
 						} else
 						{
-							mod_ZooTrade.debug(6);
+							debug(6);
 							inventoryplayer.setItemStack(null);
 							increaseMoney((int) (getPrice(itemstack1) * d));
 						}
@@ -113,7 +114,7 @@ public class Trade
 					{
 						if (getPrice(itemstack1) <= 1 && itemstack1.itemID != Item.potion.shiftedIndex)
 						{
-							mod_ZooTrade.debug(8);
+							debug(8);
 						} else if (getPrice(itemstack1) * d <= 1.0D && itemstack1.itemID != Item.potion.shiftedIndex)
 						{
 							if (itemstack1.itemID < Item.shovelSteel.shiftedIndex)
@@ -125,7 +126,7 @@ public class Trade
 							}
 						} else
 						{
-							mod_ZooTrade.debug(9);
+							debug(9);
 							itemstack1.stackSize--;
 							increaseMoney((int) (getPrice(itemstack1) * d));
 						}
@@ -135,7 +136,7 @@ public class Trade
 				{
 					if (getPrice(itemstack1) <= 1 && itemstack1.itemID != Item.potion.shiftedIndex)
 					{
-						mod_ZooTrade.debug(10);
+						debug(10);
 					} else if (itemstack1.stackSize >= 2)
 					{
 						if (j == 0)
@@ -151,7 +152,7 @@ public class Trade
 								}
 							} else
 							{
-								mod_ZooTrade.debug(12);
+								debug(12);
 								inventoryplayer.setItemStack(null);
 								increaseMoney((int) (getPrice(itemstack1) * d * itemstack1.stackSize));
 							}
@@ -168,7 +169,7 @@ public class Trade
 								}
 							} else
 							{
-								mod_ZooTrade.debug(14);
+								debug(14);
 								itemstack1.stackSize--;
 								increaseMoney((int) (getPrice(itemstack1) * d));
 							}
@@ -184,13 +185,13 @@ public class Trade
 						}
 					} else
 					{
-						mod_ZooTrade.debug(16);
+						debug(16);
 						inventoryplayer.setItemStack(null);
 						increaseMoney((int) (getPrice(itemstack1) * d));
 					}
 				} else if (itemstack4 == null)
 				{
-					mod_ZooTrade.debug(17);
+					debug(17);
 					inventoryplayer.setItemStack(null);
 				} else if (itemstack1 == null || itemstack1.itemID != itemstack4.itemID)
 				{
@@ -198,17 +199,17 @@ public class Trade
 					{
 						if (!flag && j != 1)
 						{
-							mod_ZooTrade.debug(18);
+							debug(18);
 							inventoryplayer.setItemStack(ItemStack.copyItemStack(itemstack4));
 							decreaseMoney(getPrice(itemstack4));
 						} else if (getMoney() >= getPrice(itemstack4) * itemstack4.getMaxStackSize() && j != 1)
 						{
-							mod_ZooTrade.debug(19);
+							debug(19);
 							inventoryplayer.setItemStack(ItemStack.copyItemStack(itemstack4));
 							ItemStack itemstack2 = inventoryplayer.getItemStack();
 							if (flag && itemstack2.stackSize < itemstack2.getMaxStackSize())
 							{
-								mod_ZooTrade.debug(20);
+								debug(20);
 								decreaseMoney(getPrice(itemstack2) * itemstack2.getMaxStackSize());
 								itemstack2.stackSize = itemstack2.getMaxStackSize();
 							}
@@ -217,9 +218,9 @@ public class Trade
 				}
 			} else
 			{
-				mod_ZooTrade.debug(21);
+				debug(21);
 				ItemStack itemstack = inventorySlots.getSlot(slot.slotNumber).getStack();
-				if (Keyboard.isKeyDown(mod_ZooCore.instance.options.keyCode) && itemstack != null)
+				if (Keyboard.isKeyDown(25) && itemstack != null)
 				{
 					if (flag)
 					{
@@ -264,11 +265,6 @@ public class Trade
 		money = i;
 	}
 
-	public static double getPriceModifier()
-	{
-		return priceModifier;
-	}
-
 	public static int getMoney()
 	{
 		return money;
@@ -277,13 +273,12 @@ public class Trade
 	public static boolean decreaseMoney(int i)
 	{
 		int money1 = money;
-		if (money1 - i > 0)
+		if (money1 - i >= 0)
 		{
 			money -= i;
 			return true;
 		} else
 		{
-			ModLoader.getMinecraftInstance().thePlayer.addChatMessage("Not enough money!");
 			return false;
 		}
 	}
@@ -291,6 +286,14 @@ public class Trade
 	public static void increaseMoney(int i)
 	{
 		money += i;
+	}
+	
+	public static void debug(int i)
+	{
+		if (debug)
+		{
+			ModLoader.getMinecraftInstance().thePlayer.addChatMessage(new String((new StringBuilder()).append("Debug Info: ").append(i)));
+		}
 	}
 
 	public static int getPrice(ItemStack itemstack)
@@ -875,6 +878,7 @@ public class Trade
 			return 150; // Exp Bottle
 		if (name.equals("item.fireball"))
 			return 4; // Fire Charge
+		
 		return -1;
 	}
 

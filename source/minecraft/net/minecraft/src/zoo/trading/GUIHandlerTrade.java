@@ -71,6 +71,16 @@ public class GUIHandlerTrade implements IGuiHandler{
         	return new ZooGuiContainerTradingTools(player);
         }
         
+        if(ID == GUIIDEnum.SAFE_LOCKED.ID)
+        {
+        	return new GUISafeLocked(player, (TileEntitySafe)tileentity);
+        }
+        
+        if(ID == GUIIDEnum.SAFE_UNLOCKED.ID)
+        {
+        	return new GUISafeUnlocked(player, (TileEntitySafe)tileentity);
+        }
+        
         else
         {
         	return null;

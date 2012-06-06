@@ -2,10 +2,14 @@ package net.minecraft.src.zoo.core;
 
 import java.util.ArrayList;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.Material;
+import net.minecraft.src.ZooDirts;
 import net.minecraft.src.forge.ITextureProvider;
+import net.minecraft.src.zoo.api.ITrade;
+import net.minecraft.src.zoo.trading.GUIType;
 
-public class ZooDirt extends Block implements ITextureProvider{
+public class ZooDirt extends Block implements ITextureProvider, ITrade{
 	
 	
 	public ZooDirt(int i) {
@@ -77,4 +81,11 @@ public class ZooDirt extends Block implements ITextureProvider{
 	public String getTextureFile() {
 		return "/zoo/blocks.png";
 	}
+
+	public int getPrice(int i, int j)
+	{
+		return 10;
+	}
+
+	public void addToGUI(GUIType type, ArrayList list){}
 }

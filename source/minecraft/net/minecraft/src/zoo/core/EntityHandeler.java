@@ -122,7 +122,7 @@ public class EntityHandeler
 		map.put(ZooEntityPrimate.class, new ZooRenderPrimate(0.5F));
 		map.put(ZooEntityRhino.class, new ZooRenderRhino(0.5F));
 		map.put(ZooEntityTiger.class, new ZooRenderTiger(0.5F));
-		//map.put(ZooEntityElephant.class, new ZooRenderElephant(0.5F));
+		map.put(ZooEntityElephant.class, new ZooRenderElephant(0.5F));
 		map.put(ZooEntityAfricanWDog.class, new ZooRenderAfricanWDog(0.5F));
 		map.put(ZooEntityAnteater.class, new ZooRenderAnteater(0.5F));
 		//map.put(ZooVisitorFemale.class, new RenderFemale(new FemaleBase(), "/zoo/modells/npcs/girl npc.png", 0.5F));

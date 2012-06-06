@@ -3,14 +3,24 @@ package net.minecraft.src.zoo.core;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.src.*;
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.BlockPane;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.StatList;
+import net.minecraft.src.World;
+import net.minecraft.src.Zoo;
 import net.minecraft.src.forge.ITextureProvider;
+import net.minecraft.src.zoo.api.ITrade;
+import net.minecraft.src.zoo.trading.GUIType;
 
 // Referenced classes of package net.minecraft.src:
 //            Block, IBlockAccess, World, Material, 
 //            AxisAlignedBB
 
-public class ZooBlockGlass extends BlockPane implements ITextureProvider
+public class ZooBlockGlass extends BlockPane implements ITextureProvider, ITrade
 {
 
     private int field_35300_a;
@@ -156,5 +166,17 @@ public class ZooBlockGlass extends BlockPane implements ITextureProvider
             super.harvestBlock(world, entityplayer, i, j, k, l);
         }
     }
+
+	public int getPrice(int i, int j)
+	{
+		return 345;
+	}
+
+	public void addToGUI(GUIType type, ArrayList list){
+		if(type == GUIType.DECOR)
+		{
+			list.add(new ItemStack(this));
+		}
+	}
 	
 }

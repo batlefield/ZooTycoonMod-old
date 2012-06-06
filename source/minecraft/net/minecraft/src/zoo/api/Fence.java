@@ -8,46 +8,18 @@ import net.minecraft.src.Item;
 import net.minecraft.src.BAPI.ItemKey;
 
 /** Fence API
- * Developed to register custom fences and custom rotators for exhibit tools(Zoo Mod)
+ * Developed to register custom fences and custom rotators for exhibit tools
  * 
  * @author Battlefield
  * @category Fencing
- * @see registerFence
  */
 
 public class Fence {
 	
-	private static boolean hasInit = false;
-	
-	public static void init()
-	{
-		if(!hasInit)
-		{
-			hasInit = true;
-			System.out.println("FenceAPI: FenceAPI initialized successfuly");
-		}
-		
-	}
-	
 	private static List fences = new ArrayList();
-	private static List glass = new ArrayList();
+	private static List dirts = new ArrayList();
 	private static List rotators = new ArrayList();
-	
-	/**
-	 * This function registers new fence to exhibit tool
-	 * @param block			Fence
-	 */
-	
-	protected static void registerFence(Block block)
-	{
-		registerFence(block, 0);
-	}
-	
-	/**
-	 * This function registers new fence to exhibit tool
-	 * @param block			Fence
-	 * @param i				Damage value of the block
-	 */
+	private static List glass = new ArrayList();
 	
 	protected static void registerFence(Block block, int i)
 	{
@@ -65,75 +37,68 @@ public class Fence {
 		}
 	}
 	
-	/**
-	 * This function registers new glass-like block to exhibit tool
-	 * @param block			Glass(pane) block
-	 */
-	
-	protected static void registerFenceAsGlass(Block block)
-	{
-		registerFenceAsGlass(block, 0);
-	}
-	
-	/**
-	 * This function registers new glass-like block to exhibit tool
-	 * @param block			Glass(pane) block
-	 * @param i				Damage value of the block
-	 */
-	
-	protected static void registerFenceAsGlass(Block block, int i)
-	{
-		glass.add(new ItemKey(block.blockID, i));
-		
-		String s = block.getBlockName().replace("tile.", "");
-		
-		if(i == 0)
-		{
-			System.out.println("FenceAPI: Registered " + s + " as glass into FenceAPI glass map");
-		}
-		if(i > 0)
-		{
-			System.out.println("FenceAPI: Registered " + s + " with damge value of" + i + " as glass into FenceAPI glass map");
-		}
-	}
-	
-	/**
-	 * This function registers new tool that can rotate exhibit tools/shopkeeper blocks
-	 * @param item			Tool that can rotate exhibit tools/shopkeeper blocks
-	 */
-	
 	protected static void registerRotator(Item item)
 	{
 		rotators.add(item.shiftedIndex);
 		
 		String s = item.getItemName().replace("item.", "");
 		
-		System.out.println("FenceAPI: Registered " + item.getItemName() + " as rotator into FenceAPI rotators map");
+		System.out.println("FenceAPI: Registered " + s + " as rotator into FenceAPI rotators map");
 	}
 	
-	public static List getFence()
+	protected static void registerDirt(Block block, int i)
+	{
+		dirts.add(new ItemKey(block.blockID, i));
+		
+		String s = block.getBlockName().replace("tile.", "");
+		
+		if(i == 0)
+		{
+			System.out.println("FenceAPI: Registered " + s);
+		}
+		if(i > 0)
+		{
+			System.out.println("FenceAPI: Registered " + s + " with damge value of" + i);
+		}
+	}
+	
+	protected static void registerFenceAsGlass(Block block, int i)
+	{
+		glass.add(new ItemKey(block.blockID, i));
+	}
+	
+	
+	public static List<ItemKey> getFence()
 	{
 		return fences;
 	}
 	
-	public static List getGlass()
+	public static List<ItemKey> getDirts()
+	{
+		return dirts;
+	}
+	
+	public static List<ItemKey> getGlass()
 	{
 		return glass;
 	}
 	
-	public static List getRotator()
+	public static List<ItemKey> getRotator()
 	{
 		return rotators;
 	}
 	
 	static{
 		
-		registerFence(Block.fence);
-		registerFence(Block.netherFence);
+		fences.add(new ItemKey(Block.fence.blockID, 0));
+		fences.add(new ItemKey(Block.netherFence.blockID, 0));
 		
-		registerFenceAsGlass(Block.fenceIron);
-		registerFenceAsGlass(Block.glass);
-		registerFenceAsGlass(Block.thinGlass);
+		glass.add(new ItemKey(Block.fenceIron.blockID, 0));
+		glass.add(new ItemKey(Block.glass.blockID, 0));
+		glass.add(new ItemKey(Block.thinGlass.blockID, 0));
+		
+		dirts.add(new ItemKey(Block.grass.blockID, 0));
+		dirts.add(new ItemKey(Block.sand.blockID, 0));
 	}
 	
 

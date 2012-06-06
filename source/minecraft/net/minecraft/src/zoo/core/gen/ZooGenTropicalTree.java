@@ -73,17 +73,13 @@ public class ZooGenTropicalTree extends WorldGenerator
                 
                 setBlockAndMetadata(world, i, h , k, Block.leaves.blockID, 0);
                 
-                setBlockAndMetadata(world, i + 1, h , k + 1, Block.leaves.blockID, 0);
-                setBlockAndMetadata(world, i + 2, h , k + 2, Block.leaves.blockID, 0);
-                
-                setBlockAndMetadata(world, i - 1, h , k + 1, Block.leaves.blockID, 0);
-                setBlockAndMetadata(world, i - 2, h , k + 2, Block.leaves.blockID, 0);
-                
-                setBlockAndMetadata(world, i + 1, h , k - 1, Block.leaves.blockID, 0);
-                setBlockAndMetadata(world, i + 2, h , k - 2, Block.leaves.blockID, 0);
-                
-                setBlockAndMetadata(world, i - 1, h , k - 1, Block.leaves.blockID, 0);
-                setBlockAndMetadata(world, i - 2, h , k - 2, Block.leaves.blockID, 0);
+                for(int i10 = 1; i10 < l/2.5; i10++)
+                {
+                	setBlockAndMetadata(world, i + i10, h-1 , k + i10, Block.leaves.blockID, 0);
+                	setBlockAndMetadata(world, i - i10, h-1 , k + i10, Block.leaves.blockID, 0);
+                	setBlockAndMetadata(world, i + i10, h-1 , k - i10, Block.leaves.blockID, 0);
+                	setBlockAndMetadata(world, i - i10, h-1 , k - i10, Block.leaves.blockID, 0);
+                }
 
             }
         }

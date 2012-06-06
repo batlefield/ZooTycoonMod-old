@@ -14,7 +14,8 @@ public class TradingBlocksCreative implements ICreativeHandler {
 	}
 
 	public void addCreativeBlocks(ArrayList itemList) {
-		itemList.add(new ItemStack(mod_ZooTrade.shopkeeperblockdouble));
+		itemList.add(new ItemStack(mod_ZooTrade.shopBlock));
+		itemList.add(new ItemStack(mod_ZooTrade.safe));
 	}
 
 }

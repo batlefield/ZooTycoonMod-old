@@ -5,7 +5,7 @@ import net.minecraft.src.FontRenderer;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.RenderLiving;
 import net.minecraft.src.Tessellator;
-import net.minecraft.src.zoo.core.entities.ZooEntityAnimal;
+import net.minecraft.src.zoo.core.entities.ZooDangerousMob;
 import net.minecraft.src.zoo.core.models.ZooModelLion;
 
 import org.lwjgl.opengl.GL11;
@@ -27,13 +27,12 @@ public class ZooRenderLion extends RenderLiving
 
     public void doRender(Entity entity, double d, double d1, double d2, float f, float f1)
     {
-        doRenderAnimal((ZooEntityAnimal)entity, d, d1, d2, f, f1);
+        doRenderAnimal((ZooDangerousMob) entity, d, d1, d2, f, f1);
     }
     
-    public void doRenderAnimal(ZooEntityAnimal animal, double d, double d1, double d2, float f, float f1)
+    public void doRenderAnimal(ZooDangerousMob animal, double d, double d1, double d2, float f, float f1)
     {
         super.doRender(animal, d, d1, d2, f, f1);
-        
         if(animal.captured)
         {
 	        float f2 = 1.6F;

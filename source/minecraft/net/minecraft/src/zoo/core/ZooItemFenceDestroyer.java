@@ -23,11 +23,6 @@ import net.minecraft.src.forge.*;
         }
 
         private static Block blocksEffectiveAgainst[];
-        
-        public int getDamageVsEntity(Entity entity)
-        {
-            return 30;
-        }
 
         static
         {

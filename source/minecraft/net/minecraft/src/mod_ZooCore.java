@@ -10,7 +10,9 @@ import net.minecraft.src.forge.MinecraftForgeClient;
 import net.minecraft.src.forge.NetworkMod;
 import net.minecraft.src.zoo.core.EntityHandeler;
 import net.minecraft.src.zoo.core.ZooSettings;
+import net.minecraft.src.zoo.trading.Trade;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 public class mod_ZooCore extends NetworkMod
@@ -20,7 +22,7 @@ public class mod_ZooCore extends NetworkMod
 	public static String mcVersion = "1.1.0";
 	public static String author = "Battlefield and AndrewSherman";
 	public static int renderMode;
-	public static KeyBinding options = new KeyBinding("Zoo options", 25);
+	public static KeyBinding options = new KeyBinding("Zoo options", Keyboard.KEY_P);
 	public static ZooSettings settings = new ZooSettings();
 	boolean checked;
 

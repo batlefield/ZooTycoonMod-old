@@ -2,7 +2,7 @@ package net.minecraft.src.zoo.core.entities;
 import net.minecraft.src.*;
 
 
-public class ZooEntityLion extends ZooEntityAnimal
+public class ZooEntityLion extends ZooDangerousMob
 {
 	
 	public EntityLiving roped;
@@ -49,7 +49,7 @@ public class ZooEntityLion extends ZooEntityAnimal
         return 287;
     }
     
-    protected ZooEntityAnimal spawnBabyAnimal(ZooEntityAnimal entityanimal) {
+    protected ZooDangerousMob spawnBabyAnimal(ZooDangerousMob zdm) {
 		return new ZooEntityLion(worldObj);
 	}
 

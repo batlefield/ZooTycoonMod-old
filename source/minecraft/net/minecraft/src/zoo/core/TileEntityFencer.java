@@ -1,203 +1,183 @@
 package net.minecraft.src.zoo.core;
 
-import java.util.ArrayList;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
+import net.minecraft.src.BlockFence;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.World;
 import net.minecraft.src.Zoo;
+import net.minecraft.src.mod_ZooCore;
 import net.minecraft.src.BAPI.ItemKey;
-import net.minecraft.src.forge.ITextureProvider;
+import net.minecraft.src.BAPI.Main;
 import net.minecraft.src.zoo.api.Fence;
 import net.minecraft.src.zoo.core.gen.StructureGenerator;
+import net.minecraft.src.zoo.trading.Trade;
 
-public class BlockFencer extends Block implements ITextureProvider{
-
+public class TileEntityFencer extends TileEntityBase
+{
+	private Minecraft mc = ModLoader.getMinecraftInstance();
 	private StructureGenerator generator = new StructureGenerator();
+	public int sizeIndex = 0;
+	public int currentBlockIndex;
+	public int currentFenceIndex;
+	public ItemStack currentFence = createStack((ItemKey) Fence.getFence().get(currentFenceIndex));
+	public ItemStack currentBlock = createStack((ItemKey) Fence.getDirts().get(currentBlockIndex));
+	public int[] availableSizes = {
+		16, 32	
+	};
 	
-	public BlockFencer(int i) {
-		super(i, Material.wood);
-	}
-
-
-	public String getTextureFile() {
-		return "/zoo/blocks.png";
+	
+	public void blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
+	{
+		if(entityplayer.getCurrentEquippedItem() != null && Fence.getRotator().contains(entityplayer.getCurrentEquippedItem().itemID))
+		{
+			switch(world.getBlockMetadata(i, j, k)){
+				case 2:
+					world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 4);
+					break;
+				case 3:
+					world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 5);
+					break;
+				case 4:
+					world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 3);
+					break;
+				case 5:
+					world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 2);
+					break;
+			}
+		}else{
+			entityplayer.openGui(mod_ZooCore.instance, GUIIDEnum.EXHIBIT_TOOL.ID, world, i, j, k);
+		}
 	}
 	
-	public int getRenderBlockPass()
+	public void readFromNBT(NBTTagCompound nbt)
     {
-        return 0;
+		super.readFromNBT(nbt);
+		currentFenceIndex = nbt.getInteger("CFI");
+		currentBlockIndex = nbt.getInteger("CBI");
+		sizeIndex = nbt.getInteger("Size");
     }
-	
-	public boolean isOpaqueCube()
+
+    public void writeToNBT(NBTTagCompound nbt)
     {
-        return false;
+    	super.writeToNBT(nbt);
+    	nbt.setInteger("CFI", currentFenceIndex);
+    	nbt.setInteger("CBI", currentBlockIndex);
+    	nbt.setInteger("Size", sizeIndex);
     }
-	
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
-	{		
-		if((j == 0 || j == 4) && (i == 3 || i == 5))
-		{
-			return 41;
-		}
-		else if((j == 1 || j == 5) && (i == 2 || i == 5))
-		{
-			return 41;
-		}
-		else if((j == 2 || j == 6) && (i == 2 || i == 4))
-		{
-			return 41;
-		}
-		else if((j == 3 || j == 7) && (i == 3 || i == 4))
-		{
-			return 41;
-		}
-		return 42;
-	}
-	
-	private static Minecraft mc = ModLoader.getMinecraftInstance();
-	public static int blockid;
-	public static int blockmd;
-	
-	public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer) {
-		
-		int md = world.getBlockMetadata(i, j, k);
-		
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getFence().contains(new ItemKey(entityplayer.getCurrentEquippedItem().itemID, entityplayer.getCurrentEquippedItem().getItemDamage())))
-        {
-            blockid = entityplayer.getCurrentEquippedItem().itemID;
-            blockmd = entityplayer.getCurrentEquippedItem().getItemDamage();
-            if(md == 0)
+    
+    public ItemStack createStack(ItemKey key)
+    {
+    	ItemStack stack;
+    	if(key.itemID < Item.shovelSteel.shiftedIndex)
+    	{
+    		stack = new ItemStack(Block.blocksList[key.itemID], 1, key.itemDamage);
+    	}else{
+    		stack = new ItemStack(Item.itemsList[key.itemID], 1, key.itemDamage);
+    	}
+    	return stack;
+    }
+    
+    public synchronized void incrementFenceIndex()
+    {
+    	if(currentFenceIndex != Fence.getFence().size() - 1)
+    	{
+    		currentFenceIndex++;
+    		currentFence = createStack((ItemKey) Fence.getFence().get(currentFenceIndex));
+    	}
+    }
+    
+    public synchronized void decrementFenceIndex()
+    {
+    	if(currentFenceIndex > 0)
+    	{
+    		currentFenceIndex--;
+    		currentFence = createStack((ItemKey) Fence.getFence().get(currentFenceIndex));
+    	}
+    }
+    
+    public synchronized void incrementBlockIndex()
+    {
+    	if(currentBlockIndex != Fence.getDirts().size() - 1)
+    	{
+    		currentBlockIndex++;
+    		currentBlock = createStack((ItemKey) Fence.getDirts().get(currentBlockIndex));
+    	}
+    }
+    
+    public synchronized void decrementBlockIndex()
+    {
+    	if(currentBlockIndex > 0)
+    	{
+    		currentBlockIndex--;
+    		currentBlock = createStack((ItemKey) Fence.getDirts().get(currentBlockIndex));
+    	}
+    }
+    
+    public void generate()
+    {
+    	int size = availableSizes[sizeIndex];
+    	int price = size * size * Trade.getPrice(currentBlock) + 4 * size * 2 * Trade.getPrice(currentFence) + size * 4 * Trade.getPrice(new ItemStack(Block.torchWood));
+    	int md = worldObj.getBlockMetadata(getX(), getY(), getZ());
+    	
+    	if(!Trade.decreaseMoney(price))
+    	{
+    		return;
+    	}
+    	
+    	if(!Fence.getGlass().contains(new ItemKey(currentFence.itemID, currentFence.getItemDamage())))
+    	{
+	    	if(md == 3)
+	        {
+	        	generate(worldObj, getX(), getY(), getZ(), size);
+	        }
+	        if(md == 5)
+	        {
+	        	generateFrontLeft(worldObj, getX(), getY(), getZ(), size);
+	        }
+	        if(md == 4)
+	        {
+	        	generateBackRight(worldObj, getX(), getY(), getZ(), size);
+	        }
+	        if(md == 2)
+	        {
+	        	generateBackLeft(worldObj, getX(), getY(), getZ(), size);
+	        }
+    	}else{
+    		if(md == 3)
             {
-            	generate(world, i, j, k, 16);
-            }
-            if(md == 1)
-            {
-            	generateFrontLeft(world, i, j, k, 16);
-            }
-            if(md == 3)
-            {
-            	generateBackRight(world, i, j, k, 16);
-            }
-            if(md == 2)
-            {
-            	generateBackLeft(world, i, j, k, 16);
-            }
-            if(md == 4)
-            {
-            	generate(world, i, j, k, 32);
+            	generateOnGlass(worldObj, getX(), getY(), getZ(), size);
             }
             if(md == 5)
             {
-            	generateFrontLeft(world, i, j, k, 32);
-            }
-            if(md == 7)
-            {
-            	generateBackRight(world, i, j, k, 32);
-            }
-            if(md == 6)
-            {
-            	generateBackLeft(world, i, j, k, 32);
-            }
-        }
-		
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getGlass().contains(new ItemKey(entityplayer.getCurrentEquippedItem().itemID, entityplayer.getCurrentEquippedItem().getItemDamage())))
-        {
-            blockid = entityplayer.getCurrentEquippedItem().itemID;
-            blockmd = entityplayer.getCurrentEquippedItem().getItemDamage();
-            if(md == 0)
-            {
-            	generateOnGlass(world, i, j, k, 16);
-            }
-            if(md == 1)
-            {
-            	generateOnGlassFL(world, i, j, k, 16);
-            }
-            if(md == 3)
-            {
-            	generateOnGlassBR(world, i, j, k, 16);
-            }
-            if(md == 2)
-            {
-            	generateOnGlassBL(world, i, j, k, 16);
+            	generateOnGlassFL(worldObj, getX(), getY(), getZ(), size);
             }
             if(md == 4)
             {
-            	generateOnGlass(world, i, j, k, 32);
+            	generateOnGlassBR(worldObj, getX(), getY(), getZ(), size);
             }
-            if(md == 5)
+            if(md == 2)
             {
-            	generateOnGlassFL(world, i, j, k, 32);
+            	generateOnGlassBL(worldObj, getX(), getY(), getZ(), size);
             }
-            if(md == 7)
-            {
-            	generateOnGlassBR(world, i, j, k, 32);
-            }
-            if(md == 6)
-            {
-            	generateOnGlassBL(world, i, j, k, 32);
-            }
-        }
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getRotator().contains(entityplayer.getCurrentEquippedItem().itemID) && md == 0)
-		{
-			world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 1);
-			entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-		}
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getRotator().contains(entityplayer.getCurrentEquippedItem().itemID) && md == 1)
-		{
-			world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 2);
-			entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-		}
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getRotator().contains(entityplayer.getCurrentEquippedItem().itemID) && md == 2)
-		{
-			world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 3);
-			entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-		}
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getRotator().contains(entityplayer.getCurrentEquippedItem().itemID) && md == 3)
-		{
-			world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 0);
-			entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-		}
-		
-		
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getRotator().contains(entityplayer.getCurrentEquippedItem().itemID) && md == 4)
-		{
-			world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 5);
-			entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-		}
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getRotator().contains(entityplayer.getCurrentEquippedItem().itemID) && md == 5)
-		{
-			world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 6);
-			entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-		}
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getRotator().contains(entityplayer.getCurrentEquippedItem().itemID) && md == 6)
-		{
-			world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 7);
-			entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-		}
-		if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && Fence.getRotator().contains(entityplayer.getCurrentEquippedItem().itemID) && md == 7)
-		{
-			world.setBlockAndMetadataWithNotify(i, j, k, Zoo.fencer.blockID, 4);
-			entityplayer.getCurrentEquippedItem().damageItem(1, entityplayer);
-		}
-		else
-        {
-        	super.blockActivated(world, i, j, k, entityplayer);
-        }
-		return true;
-	}
-	
-	public void generate(World world, int x, int y, int z, int size)
+    	}
+        
+        
+    	
+    	
+    }
+    
+    public void generate(World world, int x, int y, int z, int size)
 	{
 		world.editingBlocks = true;
 		//clear area
 		generator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z + size, 0);
 		//generate floor
-        generator.generateFloor(world, y - 1, x, z, x + size, z + size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x + size, z + size, currentBlock.itemID, currentBlock.getItemDamage());
         if(size==16)
         {
         	generator.generateFloor(world, y + 2, x + (size / 2), z + (size / 2), x + (size / 2) + 1, z + (size / 2) + 1, Block.planks.blockID);
@@ -211,10 +191,10 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x + 16, y + 3, z + 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        generator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
-        generator.generateWall(world, x + size, y, z + size, x, y + 1, z + size, blockid, blockmd);
-        generator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
-        generator.generateWall(world, x + size, y, z + size, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x + size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x + size, y, z + size, x, y + 1, z + size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x, y, z, x, y + 1 , z + size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x + size, y, z + size, x + size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
         //generate torches on top of the fence
         generator.generateHollowFloor(world, y + 2, x, z, x + size, z + size, Block.torchWood.blockID, 5);
         
@@ -241,7 +221,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 		//clear area
 		generator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z + size, 0);
 		//generate floor
-        generator.generateFloor(world, y - 1, x, z, x - size, z + size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x - size, z + size, currentBlock.itemID, currentBlock.getItemDamage());
         if(size==16)
         {
         	generator.generateFloor(world, y + 2, x - (size / 2), z + (size / 2), x - (size / 2) - 1, z + (size / 2) + 1, Block.planks.blockID);
@@ -255,10 +235,10 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x - 16, y + 3, z + 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        generator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
-        generator.generateWall(world, x - size, y, z + size, x, y + 1, z + size, blockid, blockmd);
-        generator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
-        generator.generateWall(world, x - size, y, z + size, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x - size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x - size, y, z + size, x, y + 1, z + size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x, y, z, x, y + 1 , z + size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x - size, y, z + size, x - size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
         //generate torches on top of the fence
         generator.generateHollowFloor(world, y + 2, x, z, x - size, z + size, Block.torchWood.blockID, 5);
         
@@ -285,7 +265,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 		//clear area
 		generator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z - size, 0);
 		//generate floor
-        generator.generateFloor(world, y - 1, x, z, x + size, z - size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x + size, z - size, currentBlock.itemID, currentBlock.getItemDamage());
         if(size==16)
         {
         	generator.generateFloor(world, y + 2, x + (size / 2), z - (size / 2), x + (size / 2) + 1, z - (size / 2) - 1, Block.planks.blockID);
@@ -299,17 +279,17 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x + 16, y + 3, z - 16, Zoo.brownStone.blockID);
         }
 
-        generator.generateFloor(world, y - 1,x + size , z, x + size + 1, z - size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1,x + size , z, x + size + 1, z - size, currentBlock.itemID, currentBlock.getItemDamage());
         if(size == 16)
         {
         	world.setBlockWithNotify(x + (size / 2) + 1, y + 2, z - (size / 2), Block.planks.blockID);
         	world.setBlockWithNotify(x + (size / 2) + 1, y + 2, z - (size / 2) - 1, Block.planks.blockID);
         }
         //generate fence
-        generator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
-        generator.generateWall(world, x + size, y, z - size, x, y + 1, z - size, blockid, blockmd);
-        generator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
-        generator.generateWall(world, x + size, y, z - size, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x + size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x + size, y, z - size, x, y + 1, z - size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x, y, z, x, y + 1 , z - size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x + size, y, z - size, x + size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
         //generate torches on top of the fence
         generator.generateHollowFloor(world, y + 2, x, z, x + size, z - size, Block.torchWood.blockID, 5);
         if(size == 16)
@@ -335,7 +315,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 		//clear area
 		generator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z - size, 0);
 		//generate floor
-        generator.generateFloor(world, y - 1, x, z, x - size, z - size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x - size, z - size, currentBlock.itemID, currentBlock.getItemDamage());
         if(size==16)
         {
         	generator.generateFloor(world, y + 2, x - (size / 2), z - (size / 2), x - (size / 2) - 1, z - (size / 2) - 1, Block.planks.blockID);
@@ -349,10 +329,10 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x - 16, y + 3, z - 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        generator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
-        generator.generateWall(world, x - size, y, z - size, x, y + 1, z - size, blockid, blockmd);
-        generator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
-        generator.generateWall(world, x - size, y, z - size, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x - size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x - size, y, z - size, x, y + 1, z - size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x, y, z, x, y + 1 , z - size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x - size, y, z - size, x - size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
         //generate torches on top of the fence
         generator.generateHollowFloor(world, y + 2, x, z, x - size, z - size, Block.torchWood.blockID, 5);
         
@@ -379,7 +359,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 		//clear area
 		generator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z + size, 0);
 		//generate floor
-        generator.generateFloor(world, y - 1, x, z, x + size, z + size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x + size, z + size, currentBlock.itemID, currentBlock.getItemDamage());
         if(size==16)
         {
         	generator.generateFloor(world, y + 2, x + (size / 2), z + (size / 2), x + (size / 2) + 1, z + (size / 2) + 1, Block.glowStone.blockID);
@@ -393,10 +373,10 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x + 16, y + 3, z + 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        generator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
-        generator.generateWall(world, x + size, y, z + size, x, y + 1, z + size, blockid, blockmd);
-        generator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
-        generator.generateWall(world, x + size, y, z + size, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x + size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x + size, y, z + size, x, y + 1, z + size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x, y, z, x, y + 1 , z + size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x + size, y, z + size, x + size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
         
         if(!mc.thePlayer.capabilities.isCreativeMode)
         {
@@ -410,7 +390,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 		//clear area
 		generator.generateCuboid(world, x, y - 1, z, x + size, y + 2, z - size, 0);
 		//generate floor
-        generator.generateFloor(world, y - 1, x, z, x + size + 1, z - size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x + size + 1, z - size, currentBlock.itemID, currentBlock.getItemDamage());
         if(size==16)
         {
         	generator.generateFloor(world, y + 2, x + (size / 2), z - (size / 2), x + (size / 2) + 1, z - (size / 2) - 1, Block.glowStone.blockID);
@@ -429,10 +409,10 @@ public class BlockFencer extends Block implements ITextureProvider{
 	        world.setBlockWithNotify(x + (size / 2) + 1, y + 2, z - (size / 2) - 1, Block.glowStone.blockID);
         }
         //generate fence
-        generator.generateWall(world, x, y, z, x + size, y + 1 , z, blockid, blockmd);
-        generator.generateWall(world, x + size, y, z - size, x, y + 1, z - size, blockid, blockmd);
-        generator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
-        generator.generateWall(world, x + size, y, z - size, x + size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x + size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x + size, y, z - size, x, y + 1, z - size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x, y, z, x, y + 1 , z - size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x + size, y, z - size, x + size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
         
         if(!mc.thePlayer.capabilities.isCreativeMode)
         {
@@ -446,7 +426,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 		//clear area
 		generator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z - size, 0);
 		//generate floor
-        generator.generateFloor(world, y - 1, x, z, x - size, z - size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x - size, z - size, currentBlock.itemID, currentBlock.getItemDamage());
         if(size==16)
         {
         	generator.generateFloor(world, y + 2, x - (size / 2), z - (size / 2), x - (size / 2) -1, z - (size / 2) - 1, Block.glowStone.blockID);
@@ -460,10 +440,10 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x - 16, y + 3, z - 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        generator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
-        generator.generateWall(world, x - size, y, z - size, x, y + 1, z - size, blockid, blockmd);
-        generator.generateWall(world, x, y, z, x, y + 1 , z - size, blockid, blockmd);
-        generator.generateWall(world, x - size, y, z - size, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x - size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x - size, y, z - size, x, y + 1, z - size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x, y, z, x, y + 1 , z - size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x - size, y, z - size, x - size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
         
         if(!mc.thePlayer.capabilities.isCreativeMode)
         {
@@ -477,7 +457,7 @@ public class BlockFencer extends Block implements ITextureProvider{
 		//clear area
 		generator.generateCuboid(world, x, y - 1, z, x - size, y + 2, z + size, 0);
 		//generate floor
-        generator.generateFloor(world, y - 1, x, z, x - size, z + size, Block.grass.blockID);
+        generator.generateFloor(world, y - 1, x, z, x - size, z + size, currentBlock.itemID, currentBlock.getItemDamage());
         if(size==16)
         {
         	generator.generateFloor(world, y + 2, x - (size / 2), z + (size / 2), x - (size / 2) - 1, z + (size / 2) + 1, Block.glowStone.blockID);
@@ -491,10 +471,10 @@ public class BlockFencer extends Block implements ITextureProvider{
         	genCross(world, x - 16, y + 3, z + 16, Zoo.brownStone.blockID);
         }
         //generate fence
-        generator.generateWall(world, x, y, z, x - size, y + 1 , z, blockid, blockmd);
-        generator.generateWall(world, x - size, y, z + size, x, y + 1, z + size, blockid, blockmd);
-        generator.generateWall(world, x, y, z, x, y + 1 , z + size, blockid, blockmd);
-        generator.generateWall(world, x - size, y, z + size, x - size, y + 1 , z, blockid, blockmd);
+        generator.generateWall(world, x, y, z, x - size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x - size, y, z + size, x, y + 1, z + size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x, y, z, x, y + 1 , z + size, currentFence.itemID, currentFence.getItemDamage());
+        generator.generateWall(world, x - size, y, z + size, x - size, y + 1 , z, currentFence.itemID, currentFence.getItemDamage());
         
         if(!mc.thePlayer.capabilities.isCreativeMode)
         {
@@ -503,15 +483,6 @@ public class BlockFencer extends Block implements ITextureProvider{
         world.editingBlocks = false;
 	}
 	
-	public int damageDropped(int i)
-	{
-		if(i >= 4 && i <= 7)
-		{
-			return 4;
-		}else{
-			return 0;
-		}
-	}
 	
 	public void genCross(World world, int x, int y, int z, int block)
 	{
@@ -526,5 +497,5 @@ public class BlockFencer extends Block implements ITextureProvider{
 		world.setBlockWithNotify(x - 1, y, z + 1, Block.torchWood.blockID);
 		world.setBlockWithNotify(x - 1, y, z - 1, Block.torchWood.blockID);
 	}
-
+    
 }

@@ -3,7 +3,6 @@ package net.minecraft.src.zoo.trading;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiScreen;
 import net.minecraft.src.forge.MinecraftForge;
-import net.minecraft.src.zoo.api.Trade;
 
 import org.lwjgl.opengl.GL11;
 
@@ -12,10 +11,8 @@ public class GUIShop extends GuiScreen{
 	private static TileEntityShop shopTile;
 	private int xStart;
     private int yStart;
-    private static final int xStartOff = 3;
-    private static final int yStartOff = 6;
     private static final int boxsizeY = 15;
-    private static final int boxsizeX = 146;
+    private static final int boxsizeX = 166;
 	
 	public GUIShop(TileEntityShop tile)
 	{

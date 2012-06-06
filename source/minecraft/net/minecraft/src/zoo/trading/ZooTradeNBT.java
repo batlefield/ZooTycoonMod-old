@@ -2,7 +2,6 @@ package net.minecraft.src.zoo.trading;
 
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.BAPI.interfaces.INBT;
-import net.minecraft.src.zoo.api.Trade;
 
 public class ZooTradeNBT implements INBT {
 

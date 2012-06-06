@@ -4,9 +4,7 @@ import java.util.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.minecraft.src.zoo.api.GUIType;
 import net.minecraft.src.zoo.api.ITrade;
-import net.minecraft.src.zoo.api.Trade;
 
 
 public class ZooContainerTradingDecor extends Container
@@ -31,6 +29,7 @@ public class ZooContainerTradingDecor extends Container
         {
             itemList.add(new ItemStack(Block.cloth.blockID, 1, k1));
         }
+        
         
         addBlocks(itemList);
 

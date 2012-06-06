@@ -4,9 +4,7 @@ import java.util.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import net.minecraft.src.zoo.api.GUIType;
 import net.minecraft.src.zoo.api.ITrade;
-import net.minecraft.src.zoo.api.Trade;
 
 
 public class ZooContainerTradingFencing extends Container
@@ -38,7 +36,7 @@ public class ZooContainerTradingFencing extends Container
         addBlocks(itemList);
 
         Item aitem[] = {
-        		Zoo.fenceDestroyer, Zoo.fencePack, Zoo.smallFencePack, Zoo.compactFencePack
+        		Zoo.fenceDestroyer
         };
         for(int l1 = 0; l1 < aitem.length; l1++)
         {

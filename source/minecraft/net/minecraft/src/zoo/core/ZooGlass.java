@@ -11,10 +11,10 @@ import net.minecraft.src.StatList;
 import net.minecraft.src.World;
 import net.minecraft.src.Zoo;
 import net.minecraft.src.forge.ITextureProvider;
-import net.minecraft.src.zoo.api.GUIType;
 import net.minecraft.src.zoo.api.ITrade;
+import net.minecraft.src.zoo.trading.GUIType;
 
-public class ZooGlass extends BlockBreakable implements ITextureProvider
+public class ZooGlass extends BlockBreakable implements ITextureProvider, ITrade
 {
 
     public ZooGlass(int i, int j, Material material, boolean flag)
@@ -46,4 +46,11 @@ public class ZooGlass extends BlockBreakable implements ITextureProvider
             super.harvestBlock(world, entityplayer, i, j, k, l);
         }
     }
+
+	public int getPrice(int i, int j)
+	{
+		return 924;
+	}
+
+	public void addToGUI(GUIType type, ArrayList list){}
 }

@@ -4,16 +4,19 @@ import java.util.List;
 import java.util.Random;
 import net.minecraft.src.*;
 
-public abstract class ZooDangerousMob extends EntityMob
+public abstract class ZooDangerousMob extends EntityCreature
 {
     private int inLove;
     private int breeding;
     protected int hunger;
+    protected int prevHunger;
     public EntityLiving roped;
     public boolean captured;
     private int hungertimer;
     private float foodSaturationLevel;
     private float foodExhaustionLevel;
+    
+    protected int attackStrength = 2;
 
     public ZooDangerousMob(World world)
     {
@@ -90,14 +93,6 @@ public abstract class ZooDangerousMob extends EntityMob
                 hunger = Math.max(hunger - 1, 0);
             }
         }
-        if(rand.nextInt(1000) == 0)
-        {
-        	feed(-1);
-        }
-        if(!captured)
-        {
-        	hunger = 10;
-        }
         if (hunger >= 7 && health < getMaxHealth())
         {
         	hungertimer++;
@@ -126,66 +121,77 @@ public abstract class ZooDangerousMob extends EntityMob
         double d2 = posY;
         addMovementStat(d - posX, d1 - posZ, d2 - posY);
     }
+    
+    /////////////////////////MAKING THE ENTITY HOSTILE (FROM ENTITYMOB)//////////////////////////////////////
 
-    protected void attackEntity(Entity entity, float f)
+    /**
+     * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
+     * (Animals, Spiders at day, peaceful PigZombies).
+     */
+    protected Entity findPlayerToAttack()
     {
-        if (entity instanceof EntityPlayer)
+        EntityPlayer var1 = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
+        return var1 != null && this.canEntityBeSeen(var1) ? var1 : null;
+    }
+
+    /**
+     * Called when the entity is attacked.
+     */
+    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    {
+        if (super.attackEntityFrom(par1DamageSource, par2))
         {
-            if (f < 3F)
+            Entity var3 = par1DamageSource.getEntity();
+
+            if (this.riddenByEntity != var3 && this.ridingEntity != var3)
             {
-                double d = entity.posX - posX;
-                double d1 = entity.posZ - posZ;
-                rotationYaw = (float)((Math.atan2(d1, d) * 180D) / 3.1415927410125732D) - 90F;
-                hasAttacked = true;
-            }
-            EntityPlayer entityplayer = (EntityPlayer)entity;
-            if (entityplayer.getCurrentEquippedItem() == null || !isWheat(entityplayer.getCurrentEquippedItem()))
-            {
-                entityToAttack = null;
-            }
-        }
-        else if (entity instanceof ZooDangerousMob)
-        {
-            ZooDangerousMob entityanimal = (ZooDangerousMob)entity;
-            if (getDelay() > 0 && entityanimal.getDelay() < 0)
-            {
-                if ((double)f < 2.5D)
+                if (var3 != this)
                 {
-                    hasAttacked = true;
+                    this.entityToAttack = var3;
                 }
-            }
-            else if (inLove > 0 && entityanimal.inLove > 0)
-            {
-                if (entityanimal.entityToAttack == null)
-                {
-                    entityanimal.entityToAttack = this;
-                }
-                if (entityanimal.entityToAttack == this && (double)f < 3.5D)
-                {
-                    entityanimal.inLove++;
-                    inLove++;
-                    breeding++;
-                    if (breeding % 4 == 0)
-                    {
-                        worldObj.spawnParticle("heart", (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + 0.5D + (double)(rand.nextFloat() * height), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, 0.0D, 0.0D, 0.0D);
-                    }
-                    if (breeding == 60)
-                    {
-                        procreate((ZooDangerousMob)entity);
-                    }
-                }
-                else
-                {
-                    breeding = 0;
-                }
+
+                return true;
             }
             else
             {
-                breeding = 0;
-                entityToAttack = null;
+                return true;
             }
         }
+        else
+        {
+            return false;
+        }
     }
+
+    public boolean attackEntityAsMob(Entity par1Entity)
+    {
+        int var2 = this.attackStrength;
+
+        if (this.isPotionActive(Potion.damageBoost))
+        {
+            var2 += 3 << this.getActivePotionEffect(Potion.damageBoost).getAmplifier();
+        }
+
+        if (this.isPotionActive(Potion.weakness))
+        {
+            var2 -= 2 << this.getActivePotionEffect(Potion.weakness).getAmplifier();
+        }
+
+        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
+    }
+
+    /**
+     * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
+     */
+    protected void attackEntity(Entity par1Entity, float par2)
+    {
+        if (this.attackTime <= 0 && par2 < 2.0F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY)
+        {
+            this.attackTime = 20;
+            this.attackEntityAsMob(par1Entity);
+        }
+    }
+    ///////////////////////////////////END OF HOSTILE CODE/////////////////////////////////
 
     private void procreate(ZooDangerousMob entityanimal)
     {
@@ -215,51 +221,6 @@ public abstract class ZooDangerousMob extends EntityMob
     }
 
     protected abstract ZooDangerousMob spawnBabyAnimal(ZooDangerousMob entityanimal);
-    
-    public boolean interact(EntityPlayer player)
-    {
-        ItemStack itemstack = player.inventory.getCurrentItem();
-        if (itemstack != null && isWheat(itemstack) && getDelay() == 0)
-        {
-            itemstack.stackSize--;
-            if (itemstack.stackSize <= 0)
-            {
-                player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-            }
-            inLove = 600;
-            entityToAttack = null;
-            for (int i = 0; i < 7; i++)
-            {
-                double d = rand.nextGaussian() * 0.02D;
-                double d1 = rand.nextGaussian() * 0.02D;
-                double d2 = rand.nextGaussian() * 0.02D;
-                worldObj.spawnParticle("heart", (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + 0.5D + (double)(rand.nextFloat() * height), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, d, d1, d2);
-            }
-
-            return true;
-        }if(itemstack != null && riddenByEntity == null && roped == null &&  itemstack.itemID == Zoo.lasso.shiftedIndex)
-        {
-        	if(!captured)
-        	{
-        		captured = true;
-        	}
-            if(--itemstack.stackSize == 0)
-            {
-                player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-            }
-            roped = player;
-            return true;
-        }
-        if(roped != null)
-        {
-            player.inventory.addItemStackToInventory(new ItemStack(Zoo.lasso));
-            roped = null;
-            return true;
-        }else
-        {
-        	return false;
-        }
-    }
     
     protected void updateEntityActionState()
     {
@@ -308,14 +269,6 @@ public abstract class ZooDangerousMob extends EntityMob
     {
     }
 
-    public boolean attackEntityFrom(DamageSource damagesource, int i)
-    {
-        fleeingTick = 60;
-        entityToAttack = null;
-        inLove = 0;
-        return super.attackEntityFrom(damagesource, i);
-    }
-
     public float getBlockPathWeight(int i, int j, int k)
     {
         if (worldObj.getBlockId(i, j - 1, k) == Block.grass.blockID)
@@ -351,52 +304,6 @@ public abstract class ZooDangerousMob extends EntityMob
         foodSaturationLevel = nbttagcompound.getFloat("foodSaturationLevel");
         foodExhaustionLevel = nbttagcompound.getFloat("foodExhaustionLevel");
     }
-    
-    protected Entity findPlayerToAttack()
-    {
-        if (fleeingTick > 0)
-        {
-            return null;
-        }
-        float f = 8F;
-        if (inLove > 0)
-        {
-            List list = worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(f, f, f));
-            for (int i = 0; i < list.size(); i++)
-            {
-                ZooDangerousMob entityanimal = (ZooDangerousMob)list.get(i);
-                if (entityanimal != this && entityanimal.inLove > 0)
-                {
-                    return entityanimal;
-                }
-            }
-        }
-        else if (getDelay() == 0)
-        {
-            List list1 = worldObj.getEntitiesWithinAABB(net.minecraft.src.EntityPlayer.class, boundingBox.expand(f, f, f));
-            for (int j = 0; j < list1.size(); j++)
-            {
-                EntityPlayer entityplayer = (EntityPlayer)list1.get(j);
-                if (entityplayer.getCurrentEquippedItem() != null && isWheat(entityplayer.getCurrentEquippedItem()))
-                {
-                    return entityplayer;
-                }
-            }
-        }
-        else if (getDelay() > 0)
-        {
-            List list2 = worldObj.getEntitiesWithinAABB(getClass(), boundingBox.expand(f, f, f));
-            for (int k = 0; k < list2.size(); k++)
-            {
-                ZooDangerousMob entityanimal1 = (ZooDangerousMob)list2.get(k);
-                if (entityanimal1 != this && entityanimal1.getDelay() < 0)
-                {
-                    return entityanimal1;
-                }
-            }
-        }
-        return null;
-    }
 
     public boolean getCanSpawnHere()
     {
@@ -419,11 +326,6 @@ public abstract class ZooDangerousMob extends EntityMob
     protected int getExperiencePoints(EntityPlayer entityplayer)
     {
         return 1 + worldObj.rand.nextInt(3);
-    }
-
-    protected boolean isWheat(ItemStack itemstack)
-    {
-        return itemstack.itemID == Item.wheat.shiftedIndex;
     }
 
     public boolean isChild()
@@ -524,6 +426,17 @@ public abstract class ZooDangerousMob extends EntityMob
                 }
             }
         }
+    }
+    
+    protected float getSpeedModifier()
+    {
+    	super.getSpeedModifier();
+        float f = super.getSpeedModifier();
+        if (entityToAttack != null)
+        {
+            f *= 1.5F;
+        }
+        return f;
     }
     
     public int getEntityHealth()

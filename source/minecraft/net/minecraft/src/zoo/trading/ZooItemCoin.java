@@ -6,9 +6,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
-import net.minecraft.src.zoo.api.GUIType;
 import net.minecraft.src.zoo.api.ITrade;
-import net.minecraft.src.zoo.api.Trade;
 import net.minecraft.src.zoo.core.ZooItem;
 
 public class ZooItemCoin extends ZooItem implements ITrade{

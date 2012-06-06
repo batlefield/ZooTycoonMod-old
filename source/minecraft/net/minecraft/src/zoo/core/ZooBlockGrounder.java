@@ -11,11 +11,11 @@ import net.minecraft.src.forge.ITextureProvider;
 import net.minecraft.src.zoo.api.Fence;
 import net.minecraft.src.zoo.core.gen.StructureGenerator;
 
-public class ZooBlockWall extends Block implements ITextureProvider{
+public class ZooBlockGrounder extends Block implements ITextureProvider{
 
 	private StructureGenerator generator = new StructureGenerator();
 	
-	public ZooBlockWall(int i) {
+	public ZooBlockGrounder(int i) {
 		super(i, Material.wood);
 	}
 

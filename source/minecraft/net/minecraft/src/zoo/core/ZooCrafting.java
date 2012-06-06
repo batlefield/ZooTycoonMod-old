@@ -1,11 +1,14 @@
 package net.minecraft.src.zoo.core;
 
+import java.util.List;
+
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.Zoo;
-import net.minecraft.src.mod_ZooFurniture;
+import net.minecraft.src.BAPI.ItemKey;
+import net.minecraft.src.zoo.api.Fence;
 
 public class ZooCrafting {
 	
@@ -56,27 +59,25 @@ public class ZooCrafting {
 		ModLoader.addRecipe(new ItemStack(Zoo.Quicksand, 1), new Object[] {
 			"X", "Y", Character.valueOf('X'), Item.bucketWater, Character.valueOf('Y'), Block.sand
 		});
-		ModLoader.addRecipe(new ItemStack(Zoo.smallFencePack, 1), new Object[] {
-			"XXX", "X X", "XXX", Character.valueOf('X'), Zoo.fence
-		});
-		ModLoader.addRecipe(new ItemStack(Zoo.fencePack, 1), new Object[] {
-			"XXX", "X X", "XXX", Character.valueOf('X'), Zoo.smallFencePack
-		});
-		ModLoader.addShapelessRecipe(new ItemStack(Zoo.compactFencePack, 1), new Object[] {
-            Zoo.fencePack, Zoo.fencePack
-        });
-		ModLoader.addRecipe(new ItemStack(Zoo.fencer, 1, 0), new Object[] {
-			"XXX", "XYX", "XXX", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), Zoo.compactFencePack
-		});
-		ModLoader.addRecipe(new ItemStack(Zoo.fencer, 1, 4), new Object[] {
-			"XXX", "YXY", "XXX", Character.valueOf('X'), Block.stone, Character.valueOf('Y'), Zoo.compactFencePack
-		});
 		ModLoader.addRecipe(new ItemStack(Zoo.lasso, 1), new Object[] {
 			"XXX", "X X", " X ", Character.valueOf('X'), Item.silk
 		});
 		ModLoader.addRecipe(new ItemStack(Zoo.grounder, 1, 0), new Object[] {
 			"YXY", "XYX", "YXY", Character.valueOf('X'), new ItemStack(Zoo.fencer, 1, 4), Character.valueOf('Y'), Block.stoneBrick
 		});
+		
+		
+		List<ItemKey> list = Fence.getFence();
+		list.addAll(Fence.getGlass());
+		for(ItemKey key : list)
+		{
+			ItemStack stack = new ItemStack(key.itemID, 1, key.itemDamage);
+			
+			ModLoader.addRecipe(new ItemStack(Zoo.fencer), new Object[] {
+				"YYY", "YXY", "YYY", Character.valueOf('X'), stack, Character.valueOf('Y'), Block.stone
+			});
+		}
+		
 	}
 
 }

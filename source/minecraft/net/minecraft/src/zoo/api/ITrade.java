@@ -2,6 +2,8 @@ package net.minecraft.src.zoo.api;
 
 import java.util.ArrayList;
 
+import net.minecraft.src.zoo.trading.GUIType;
+
 public interface ITrade {
 	
 	/**

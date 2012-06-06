@@ -17,7 +17,11 @@ public class ItemSaltwaterBucket extends ItemBucket implements IBucketHandler, I
 			{
 				w.setBlockWithNotify(i, j, k, 0);
 				
-				return new ItemStack(this);
+				EntityPlayer player = ModLoader.getMinecraftInstance().thePlayer;
+				if(!player.capabilities.isCreativeMode)
+				{
+					return new ItemStack(this);
+				}
 			}
 		
 		return null;

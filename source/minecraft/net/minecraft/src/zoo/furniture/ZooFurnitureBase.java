@@ -116,13 +116,11 @@ public abstract class ZooFurnitureBase extends BlockContainer
         return world.isBlockNormalCube(i,j-1,k);
     }
     
-    public void setRotatedCollision(float[][] coords, World world, int i, int j, int k,
-    		AxisAlignedBB axisalignedbb, ArrayList arraylist)
+    public void setRotatedCollision(float[][] coords, World world, int i, int j, int k, AxisAlignedBB axisalignedbb, ArrayList arraylist)
     {
     	setRotatedCollision(coords,1F,world,i,j,k,axisalignedbb,arraylist);
     }
-    public void setRotatedCollision(float[][] coords, float max, World world, int i, int j, int k,
-    		AxisAlignedBB axisalignedbb, ArrayList arraylist)
+    public void setRotatedCollision(float[][] coords, float max, World world, int i, int j, int k, AxisAlignedBB axisalignedbb, ArrayList arraylist)
     {
     	int m = world.getBlockMetadata(i, j, k) % 4;
     	

@@ -10,12 +10,13 @@ import net.minecraft.src.BAPI.interfaces.ICreativeHandler;
 public class CoreBlocksCreative implements ICreativeHandler{
 
 	public void addCreativeItems(ArrayList itemList) {
-		
+		itemList.add(new ItemStack(Zoo.meat, 0, 1));
+		itemList.add(new ItemStack(Zoo.meat, 0, 2));
+		itemList.add(new ItemStack(Zoo.meat, 0, 3));
 	}
 
 	public void addCreativeBlocks(ArrayList itemList) {
-		itemList.add(new ItemStack(Zoo.fencer, 1, 0));
-		itemList.add(new ItemStack(Zoo.fencer, 1, 4));
+		itemList.add(new ItemStack(Zoo.fencer));
 		itemList.add(new ItemStack(Zoo.acorns));
 		itemList.add(new ItemStack(Zoo.plexiglass));
 		itemList.add(new ItemStack(Zoo.plexiglassBlock));
