@@ -46,11 +46,6 @@ public class ZooEntityAfricanWDog extends ZooEntityAnimal
     {
         return 0.4F;
     }
-
-    protected int getDropItemId()
-    {
-        return 287;
-    }
     
     protected ZooEntityAnimal spawnBabyAnimal(ZooEntityAnimal entityanimal) {
     	boolean should;
@@ -106,5 +101,10 @@ public class ZooEntityAfricanWDog extends ZooEntityAnimal
     
 	public int getMaxHunger() {
 		return 10;
+	}
+
+	public ItemStack dropMeat()
+	{
+		return new ItemStack(Zoo.meat, 1, 0);
 	}
 }

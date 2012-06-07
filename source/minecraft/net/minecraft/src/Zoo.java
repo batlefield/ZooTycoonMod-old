@@ -224,18 +224,18 @@ public class Zoo {
 		FurnaceRecipes.smelting().addSmelting(meat.shiftedIndex, 0, new ItemStack(meat, 1, 1));
 		FurnaceRecipes.smelting().addSmelting(meat.shiftedIndex, 2, new ItemStack(meat, 1, 3));
 		
-		/*//test recipes
-        ModLoader.addRecipe(new ItemStack(Item.pickaxeDiamond, 1), new Object[] {
+		//test recipes
+        ModLoader.addRecipe(new ItemStack(Block.stoneOvenIdle, 1), new Object[] {
 		     "X", Character.valueOf('X'), Block.dirt
 		});
         
-        ModLoader.addRecipe(new ItemStack(Item.swordDiamond, 1), new Object[] {
+        ModLoader.addRecipe(new ItemStack(meat, 1, 0), new Object[] {
 		     "XX", Character.valueOf('X'), Block.dirt
 		});
         
-        ModLoader.addRecipe(new ItemStack(Item.monsterPlacer, 1, EntityHandeler.lionID), new Object[] {
+        ModLoader.addRecipe(new ItemStack(meat, 1, 2), new Object[] {
 		     "X", "X", Character.valueOf('X'), Block.dirt
-		});*/
+		});
 		
 		
 		//initializes entities

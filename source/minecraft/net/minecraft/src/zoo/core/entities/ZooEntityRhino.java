@@ -41,9 +41,9 @@ public class ZooEntityRhino extends ZooEntityAnimal
         return 0.4F;
     }
 
-    protected int getDropItemId()
+    public ItemStack dropMeat()
     {
-        return 287;
+        return new ItemStack(Zoo.meat, 1, 2);
     }
     
     protected ZooEntityAnimal spawnBabyAnimal(ZooEntityAnimal entityanimal) {

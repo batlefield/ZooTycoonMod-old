@@ -44,9 +44,9 @@ public class ZooEntityFennecFox extends ZooEntityAnimal
         return 0.4F;
     }
 
-    protected int getDropItemId()
+    public ItemStack dropMeat()
     {
-        return 287;
+        return new ItemStack(Zoo.meat, 1, 0);
     }
     
     protected ZooEntityAnimal spawnBabyAnimal(ZooEntityAnimal entityanimal) {
