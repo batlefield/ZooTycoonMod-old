@@ -31,7 +31,7 @@ public class mod_ZooTrade extends NetworkMod
 
 	public String getVersion()
 	{
-		return new StringBuilder().append("Zoo Tycoon ").append(mod_ZooCore.version).append(" Trading for Minecraft ").append(mod_ZooCore.mcVersion).append(" by ").append(mod_ZooCore.author).toString();
+		return new StringBuilder().append(mod_ZooCore.modname).append(" ").append(mod_ZooCore.version).append(" Trade for Minecraft ").append(mod_ZooCore.mcVersion).toString();
 	}
 
 	static Configuration config = new Configuration(new File(Minecraft.getMinecraftDir(), "Zoo/Trade/Config.cfg"));

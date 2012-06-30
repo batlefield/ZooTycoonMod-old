@@ -7,7 +7,9 @@ import net.minecraft.src.EntityEggInfo;
 import net.minecraft.src.EntityList;
 import net.minecraft.src.EnumCreatureType;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.WorldType;
 import net.minecraft.src.Zoo;
+import net.minecraft.src.zoo.core.entities.ZooDartEntity;
 import net.minecraft.src.zoo.core.entities.ZooEntityAfricanWDog;
 import net.minecraft.src.zoo.core.entities.ZooEntityAnteater;
 import net.minecraft.src.zoo.core.entities.ZooEntityBighorn;
@@ -26,19 +28,21 @@ import net.minecraft.src.zoo.core.entities.ZooEntityTiger;
 import net.minecraft.src.zoo.core.entities.ZooEntityWolf;
 import net.minecraft.src.zoo.core.entities.ZooVisitorFemale;
 import net.minecraft.src.zoo.core.entities.ZooVisitorMale;
-import net.minecraft.src.zoo.core.models.ZooModelFemaleMarine;
 import net.minecraft.src.zoo.core.models.visitors.FemaleBase;
 import net.minecraft.src.zoo.core.render.RenderFemale;
+import net.minecraft.src.zoo.core.render.ZooDartRender;
 import net.minecraft.src.zoo.core.render.ZooRenderAfricanWDog;
 import net.minecraft.src.zoo.core.render.ZooRenderAnteater;
 import net.minecraft.src.zoo.core.render.ZooRenderBighorn;
 import net.minecraft.src.zoo.core.render.ZooRenderElephant;
 import net.minecraft.src.zoo.core.render.ZooRenderFemaleLion;
 import net.minecraft.src.zoo.core.render.ZooRenderFennecFox;
+import net.minecraft.src.zoo.core.render.ZooRenderFlamingo;
 import net.minecraft.src.zoo.core.render.ZooRenderGazelle;
 import net.minecraft.src.zoo.core.render.ZooRenderGiraffe;
 import net.minecraft.src.zoo.core.render.ZooRenderHippo;
 import net.minecraft.src.zoo.core.render.ZooRenderLion;
+import net.minecraft.src.zoo.core.render.ZooRenderPanter;
 import net.minecraft.src.zoo.core.render.ZooRenderPrimate;
 import net.minecraft.src.zoo.core.render.ZooRenderRhino;
 import net.minecraft.src.zoo.core.render.ZooRenderTiger;
@@ -68,6 +72,7 @@ public class EntityHandeler
 	public static final int greywolfID = ZooEntityInfo.getEntityID("GreyWolf", ModLoader.getUniqueEntityId());
 	public static final int femaleMarineID = ZooEntityInfo.getEntityID("Female Marine", ModLoader.getUniqueEntityId());
 	public static final int lionFemaleID = ZooEntityInfo.getEntityID("Female lion", ModLoader.getUniqueEntityId());
+	public static final int dartID = ZooEntityInfo.getEntityID("Dart", ModLoader.getUniqueEntityId());
 	
 	public static final int bighornSpawn = ZooEntityInfo.getSpawnrate("Bighorn", 1);
 	public static final int gazelleSpawn = ZooEntityInfo.getSpawnrate("Gazelle", 1);
@@ -110,6 +115,9 @@ public class EntityHandeler
 		registerEntity(ZooEntityWolf.class, "GreyWolf", greywolfID, greywolfSpawn, 1, 1, EnumCreatureType.creature, false);
 		registerEntity(ZooVisitorFemale.class, "Female Marine", femaleMarineID, femaleMarineSpawn, 1, 1, EnumCreatureType.creature, false);
 		registerEntity(ZooEntityFemaleLion.class, "Female lion", lionFemaleID, lionFemaleSpawn, 1, 1, EnumCreatureType.creature, true);
+
+
+		ModLoader.registerEntityID(ZooDartEntity.class, "Dart", dartID);
 		          
 		initEggs();
 	}
@@ -125,15 +133,16 @@ public class EntityHandeler
 		map.put(ZooEntityElephant.class, new ZooRenderElephant(0.5F));
 		map.put(ZooEntityAfricanWDog.class, new ZooRenderAfricanWDog(0.5F));
 		map.put(ZooEntityAnteater.class, new ZooRenderAnteater(0.5F));
-		//map.put(ZooVisitorFemale.class, new RenderFemale(new FemaleBase(), "/zoo/modells/npcs/girl npc.png", 0.5F));
+		map.put(ZooVisitorFemale.class, new RenderFemale(new FemaleBase(), "/zoo/modells/npcs/girl npc.png", 0.5F));
 		map.put(ZooEntityLion.class, new ZooRenderLion(0.5F));
-		// map.put(ZooEntityPanther.class, new ZooRenderPanter(0.5F));
+		map.put(ZooEntityPanther.class, new ZooRenderPanter(0.5F));
 		map.put(ZooEntityFennecFox.class, new ZooRenderFennecFox(0.5F));
 		map.put(ZooEntityGiraffe.class, new ZooRenderGiraffe(0.6F));
-		// map.put(ZooEntityFlamingo.class, new ZooRenderFlamingo(0.5F));
-		//map.put(ZooEntityWolf.class, new ZooRenderWolf(0.5F));
+		map.put(ZooEntityFlamingo.class, new ZooRenderFlamingo(0.5F));
+		map.put(ZooEntityWolf.class, new ZooRenderWolf(0.5F));
 		map.put(ZooEntityFemaleLion.class, new ZooRenderFemaleLion(0.5F));
 		//map.put(ZooVisitorFemale.class, new RenderFemale(new ZooModelFemaleMarine(), "/zoo/modells/npcs/female marine.png", 0.5F));
+		map.put(ZooDartEntity.class, new ZooDartRender());
 	}
 	
 	private static void initEggs()
@@ -156,7 +165,11 @@ public class EntityHandeler
 	
 	private static void registerEntity(Class class1, String name, int entityID, int spawnrate, int min, int max, EnumCreatureType type, boolean canSpawn)
 	{
-		registerEntity(class1, name, entityID, spawnrate, min, max, type, (BiomeGenBase[])null, canSpawn);
+		ModLoader.registerEntityID(class1, name, entityID);
+		if(canSpawn)
+		{
+			ModLoader.addSpawn(class1, spawnrate, min, max, type);
+		}
 	}
 	
 	private static void registerEntity(Class class1, String name, int entityID, int spawnrate, int min, int max, EnumCreatureType type, BiomeGenBase[] biomeArray, boolean canSpawn)

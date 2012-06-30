@@ -63,7 +63,7 @@ public class ZooCrafting {
 			"XXX", "X X", " X ", Character.valueOf('X'), Item.silk
 		});
 		ModLoader.addRecipe(new ItemStack(Zoo.grounder, 1, 0), new Object[] {
-			"YXY", "XYX", "YXY", Character.valueOf('X'), new ItemStack(Zoo.fencer, 1, 4), Character.valueOf('Y'), Block.stoneBrick
+			"Y Y", "Y Y", "YYY", Character.valueOf('Y'), Block.stoneBrick
 		});
 		
 		

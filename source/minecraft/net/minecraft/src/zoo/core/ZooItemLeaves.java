@@ -21,7 +21,16 @@ public class ZooItemLeaves extends ItemBlock implements ITextureProvider
 
     public int getIconFromDamage(int i)
     {
-        return Zoo.blueLeaves.getBlockTextureFromSideAndMetadata(0, i);
+    	if(getBlockID() == Zoo.blueLeaves.blockID)
+    	{
+    		return Zoo.blueLeaves.getBlockTextureFromSideAndMetadata(0, i);
+    	}else if(getBlockID() == Zoo.deciLeaves.blockID)
+		{
+    		return Zoo.deciLeaves.getBlockTextureFromSideAndMetadata(0, i);
+		}
+    	else{
+    		return Zoo.acaciaLeaves.getBlockTextureFromSideAndMetadata(0, i);
+    	}
     }
     
 	public String getTextureFile() {
@@ -33,24 +42,17 @@ public class ZooItemLeaves extends ItemBlock implements ITextureProvider
     {
 		if(itemstack.itemID == Zoo.blueLeaves.blockID)
 		{
-	        if(itemstack.getItemDamage() == 0)
-	        {
-	        	return blockNames[0];
-	        }else{
-	        	return blockNames[2];
-	        }
+	        return blockNames[0];
+		}else if(itemstack.itemID == Zoo.deciLeaves.blockID)
+		{
+			return blockNames[2];
 		}
 		else
 		{
-			if(itemstack.getItemDamage() == 0)
-	        {
-	        	return blockNames[1];
-	        }else{
-	        	return blockNames[2];
-	        }
+        	return blockNames[1];
 		}
     }
     public static final String blockNames[] = {
-        "bluepine", "savannah", "null"
+        "bluepine", "savannah", "deciduous", "null"
     };
 }

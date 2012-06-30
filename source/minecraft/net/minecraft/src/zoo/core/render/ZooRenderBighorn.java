@@ -1,10 +1,14 @@
 package net.minecraft.src.zoo.core.render;
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.src.*;
-import net.minecraft.src.zoo.core.entities.ZooEntityAnimal;
-import net.minecraft.src.zoo.core.entities.ZooEntityBighorn;
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.FontRenderer;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.RenderLiving;
+import net.minecraft.src.Tessellator;
+import net.minecraft.src.zoo.core.entities.ZooNeutralMob;
 import net.minecraft.src.zoo.core.models.ZooModelBighorn;
+
+import org.lwjgl.opengl.GL11;
 
 public class ZooRenderBighorn extends RenderLiving
 {
@@ -25,10 +29,10 @@ public class ZooRenderBighorn extends RenderLiving
     public void doRender(Entity entity, double d, double d1, double d2, 
             float f, float f1)
     {
-        doRenderGazelle((ZooEntityBighorn)entity, d, d1, d2, f, f1);
+        doRenderGazelle((ZooNeutralMob)entity, d, d1, d2, f, f1);
     }
     
-    public void doRenderGazelle(ZooEntityAnimal animal, double d, double d1, double d2, float f, float f1)
+    public void doRenderGazelle(ZooNeutralMob animal, double d, double d1, double d2, float f, float f1)
     {
     	super.doRender(animal, d, d1, d2, f, f1);
         

@@ -4,12 +4,13 @@ import java.util.Random;
 
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.RenderEngine;
-import net.minecraft.src.TextureFX;
 import net.minecraft.src.ZooDimension;
 
 import org.lwjgl.opengl.GL11;
 
-public class ZooPortalFX extends TextureFX
+import cpw.mods.fml.client.FMLTextureFX;
+
+public class ZooPortalFX extends FMLTextureFX
 {
     private int portalTickCounter;
     private byte portalTextureData[][];
@@ -17,22 +18,27 @@ public class ZooPortalFX extends TextureFX
     public ZooPortalFX()
     {
         super(ZooDimension.portal.blockIndexInTexture);
-        portalTickCounter = 0;
-        portalTextureData = new byte[32][1024];
+        setup();
+    }
+    
+    public void setup()
+    {
+    	super.setup();
+        portalTextureData = new byte[32][tileSizeSquare << 4];
         Random random = new Random(100L);
         for (int i = 0; i < 32; i++)
         {
-            for (int j = 0; j < 16; j++)
+            for (int j = 0; j < tileSizeBase; j++)
             {
-                for (int k = 0; k < 16; k++)
+                for (int k = 0; k < tileSizeBase; k++)
                 {
                     float f = 0.0F;
                     for (int l = 0; l < 2; l++)
                     {
-                        float f1 = l * 8;
-                        float f2 = l * 8;
-                        float f3 = (((float)j - f1) / 16F) * 2.0F;
-                        float f4 = (((float)k - f2) / 16F) * 2.0F;
+                    	float f1 = (float)(l * tileSizeBase) * 0.5F;
+                        float f2 = (float)(l * tileSizeBase) * 0.5F;
+                        float f3 = ((float)j - f1) / (float)tileSizeBase * 2.0F;
+                        float f4 = ((float)k - f2) / (float)tileSizeBase * 2.0F;
                         if (f3 < -1F)
                         {
                             f3 += 2.0F;
@@ -61,7 +67,7 @@ public class ZooPortalFX extends TextureFX
                     int j1 = (int)(f * f * 200F + 200F);//G
                     int k1 = (int)(f * f * f * f * 255F);//B
                     int l1 = (int)(f * 100F + 155F);//Alpha
-                    int i2 = k * 16 + j;
+                    int i2 = k * tileSizeBase + j;
                     portalTextureData[i][i2 * 4 + 0] = (byte)32;
                     portalTextureData[i][i2 * 4 + 1] = (byte)181;
                     portalTextureData[i][i2 * 4 + 2] = (byte)28;
@@ -69,13 +75,14 @@ public class ZooPortalFX extends TextureFX
                 }
             }
         }
+        portalTickCounter = 0;
     }
 
     public void onTick()
     {
         portalTickCounter++;
         byte abyte0[] = portalTextureData[portalTickCounter & 0x1f];
-        for (int i = 0; i < 256; i++)
+        for (int i = 0; i < tileSizeSquare; i++)
         {
             int j = abyte0[i * 4 + 0] & 0xff;
             int k = abyte0[i * 4 + 1] & 0xff;

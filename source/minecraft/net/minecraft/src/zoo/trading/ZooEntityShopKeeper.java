@@ -115,6 +115,10 @@ public class ZooEntityShopKeeper extends EntityCreature
         		{
         			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_TOOLS.ID, worldObj, x, y, z);
     			}
+        		if(type == 10)
+        		{
+        			entityplayer.openGui(mod_ZooTrade.getInstance(), GUIIDEnum.SHOP_ANIMALS.ID, worldObj, x, y, z);
+        		}
             }
         } else
         {
@@ -157,6 +161,10 @@ public class ZooEntityShopKeeper extends EntityCreature
     		texture = "/zoo/modells/npcs/shopkeeper.png";
     	}
     	if(type == 9)
+    	{
+    		texture = "/zoo/modells/npcs/shopkeeper.png";
+    	}
+    	if(type == 10)
     	{
     		texture = "/zoo/modells/npcs/shopkeeper.png";
     	}

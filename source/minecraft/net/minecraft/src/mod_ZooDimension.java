@@ -21,7 +21,7 @@ public class mod_ZooDimension extends NetworkMod
 
 	public String getVersion()
 	{
-		return new StringBuilder().append("Zoo Tycoon ").append(mod_ZooCore.version).append(" Dimension for Minecraft ").append(mod_ZooCore.mcVersion).append(" by ").append(mod_ZooCore.author).toString();
+		return new StringBuilder().append(mod_ZooCore.modname).append(" ").append(mod_ZooCore.version).append(" Dimension for Minecraft ").append(mod_ZooCore.mcVersion).toString();
 	}
 
 	public void load()

@@ -24,6 +24,7 @@ import net.minecraft.src.World;
 import net.minecraft.src.WorldGenDungeons;
 import net.minecraft.src.WorldGenLakes;
 import net.minecraft.src.Zoo;
+import net.minecraft.src.zoo.core.gen.ZooGenMesa;
 
 public class ZooChunkProvider implements IChunkProvider
 {
@@ -498,7 +499,7 @@ public class ZooChunkProvider implements IChunkProvider
             var12 = var4 + this.rand.nextInt(16) + 8;
             var13 = this.rand.nextInt(128);
             var14 = var5 + this.rand.nextInt(16) + 8;
-            (new WorldGenLakes(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
+            (new WorldGenLakes(Zoo.saltwaterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
         }
 
         if (!var11 && this.rand.nextInt(8) == 0)
@@ -525,6 +526,15 @@ public class ZooChunkProvider implements IChunkProvider
             }
         }
 
+        for (int k2 = 0; k2 < 1; k2++)
+		{
+			int j7 = 1;
+			int k11 = (par2 << 4) + rand.nextInt(16) + 8;
+			int j15 = rand.nextInt(256);
+			int l17 = (par3 << 4) + rand.nextInt(16) + 8;
+			(new ZooGenMesa()).generate(worldObj, rand, k11, j15, l17);
+		}
+        
         var6.decorate(this.worldObj, this.rand, var4, var5);
         SpawnerAnimals.performWorldGenSpawning(this.worldObj, var6, var4 + 8, var5 + 8, 16, 16, this.rand);
         var4 += 8;

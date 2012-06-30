@@ -1,13 +1,12 @@
 package net.minecraft.src.zoo.core;
 
-import java.util.Map;
-
 import net.minecraft.src.RenderEngine;
-import net.minecraft.src.TextureFX;
 
 import org.lwjgl.opengl.GL11;
 
-public class ZooSaltwaterTextureFX extends TextureFX
+import cpw.mods.fml.client.FMLTextureFX;
+
+public class ZooSaltwaterTextureFX extends FMLTextureFX
 {
 
     protected float red[];
@@ -32,10 +31,16 @@ public class ZooSaltwaterTextureFX extends TextureFX
         isAnimated = flag;
         tileImage = 2;
         opacity = 120;
-        red = new float[256];
-        green = new float[256];
-        blue = new float[256];
-        alpha = new float[256];
+    }
+    
+    public void setup()
+    {
+    	super.setup();
+        red = new float[tileSizeSquare];
+        green = new float[tileSizeSquare];
+        blue = new float[tileSizeSquare];
+        alpha = new float[tileSizeSquare];
+        tickCounter = 0;
     }
 
     public void onTick()
@@ -44,36 +49,36 @@ public class ZooSaltwaterTextureFX extends TextureFX
         if(isAnimated)
         {
             tickCounter++;
-            for(int k = 0; k < 16; k++)
+            for(int k = 0; k < tileSizeBase; k++)
             {
-                for(int k1 = 0; k1 < 16; k1++)
+                for(int k1 = 0; k1 < tileSizeBase; k1++)
                 {
                     float f = 0.0F;
                     for(int i3 = k1 - 2; i3 <= k1; i3++)
                     {
-                        int k3 = k & 0xf;
-                        int k4 = i3 & 0xf;
-                        f += red[k3 + k4 * 16];
+                        int k3 = k & tileSizeMask;
+                        int k4 = i3 & tileSizeMask;
+                        f += red[k3 + k4 * tileSizeBase];
                     }
 
-                    green[k + k1 * 16] = f / 3.2F + blue[k + k1 * 16] * 0.8F;
+                    green[k + k1 * tileSizeBase] = f / 3.2F + blue[k + k1 * tileSizeBase] * 0.8F;
                 }
 
             }
 
-            for(int l = 0; l < 16; l++)
+            for(int l = 0; l < tileSizeBase; l++)
             {
-                for(int l1 = 0; l1 < 16; l1++)
+                for(int l1 = 0; l1 < tileSizeBase; l1++)
                 {
-                    blue[l + l1 * 16] += alpha[l + l1 * 16] * 0.05F;
-                    if(blue[l + l1 * 16] < 0.0F)
+                    blue[l + l1 * tileSizeBase] += alpha[l + l1 * tileSizeBase] * 0.05F;
+                    if(blue[l + l1 * tileSizeBase] < 0.0F)
                     {
-                        blue[l + l1 * 16] = 0.0F;
+                        blue[l + l1 * tileSizeBase] = 0.0F;
                     }
-                    alpha[l + l1 * 16] -= 0.3F;
+                    alpha[l + l1 * tileSizeBase] -= 0.3F;
                     if(Math.random() < 0.20000000000000001D)
                     {
-                        alpha[l + l1 * 16] = 0.5F;
+                        alpha[l + l1 * tileSizeBase] = 0.5F;
                     }
                 }
 
@@ -82,9 +87,9 @@ public class ZooSaltwaterTextureFX extends TextureFX
             float af[] = green;
             green = red;
             red = af;
-            for(int i2 = 0; i2 < 256; i2++)
+            for(int i2 = 0; i2 < tileSizeSquare; i2++)
             {
-                float f1 = red[i2 - tickCounter * 16 & 0xff];
+                float f1 = red[i2 - tickCounter * tileSizeBase & tileSizeSquareMask];
                 if(f1 > 1.0F)
                 {
                     f1 = 1.0F;
@@ -126,36 +131,36 @@ public class ZooSaltwaterTextureFX extends TextureFX
         } else
         {
             tickCounter++;
-            for(int i1 = 0; i1 < 16; i1++)
+            for(int i1 = 0; i1 < tileSizeBase; i1++)
             {
-                for(int j2 = 0; j2 < 16; j2++)
+                for(int j2 = 0; j2 < tileSizeBase; j2++)
                 {
                     float f2 = 0.0F;
                     for(int j3 = i1 - 1; j3 <= i1 + 1; j3++)
                     {
-                        int i4 = j3 & 0xf;
-                        int i5 = j2 & 0xf;
-                        f2 += red[i4 + i5 * 16];
+                        int i4 = j3 & tileSizeMask;
+                        int i5 = j2 & tileSizeMask;
+                        f2 += red[i4 + i5 * tileSizeBase];
                     }
 
-                    green[i1 + j2 * 16] = f2 / 3.3F + blue[i1 + j2 * 16] * 0.8F;
+                    green[i1 + j2 * tileSizeBase] = f2 / 3.3F + blue[i1 + j2 * tileSizeBase] * 0.8F;
                 }
 
             }
 
-            for(int j1 = 0; j1 < 16; j1++)
+            for(int j1 = 0; j1 < tileSizeBase; j1++)
             {
-                for(int k2 = 0; k2 < 16; k2++)
+                for(int k2 = 0; k2 < tileSizeBase; k2++)
                 {
-                    blue[j1 + k2 * 16] += alpha[j1 + k2 * 16] * 0.05F;
-                    if(blue[j1 + k2 * 16] < 0.0F)
+                    blue[j1 + k2 * tileSizeBase] += alpha[j1 + k2 * tileSizeBase] * 0.05F;
+                    if(blue[j1 + k2 * tileSizeBase] < 0.0F)
                     {
-                        blue[j1 + k2 * 16] = 0.0F;
+                        blue[j1 + k2 * tileSizeBase] = 0.0F;
                     }
-                    alpha[j1 + k2 * 16] -= 0.1F;
+                    alpha[j1 + k2 * tileSizeBase] -= 0.1F;
                     if(Math.random() < 0.050000000000000003D)
                     {
-                        alpha[j1 + k2 * 16] = 0.5F;
+                        alpha[j1 + k2 * tileSizeBase] = 0.5F;
                     }
                 }
 
@@ -164,7 +169,7 @@ public class ZooSaltwaterTextureFX extends TextureFX
             float af1[] = green;
             green = red;
             red = af1;
-            for(int l2 = 0; l2 < 256; l2++)
+            for(int l2 = 0; l2 < tileSizeSquare; l2++)
             {
                 float f3 = red[l2];
                 if(f3 > 1.0F)

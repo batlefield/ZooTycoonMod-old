@@ -13,6 +13,7 @@ public class ZooGenDeciTree extends WorldGenerator
     public boolean generate(World world, Random random, int i, int j, int k)
     {
         int l = random.nextInt(5) + 4;
+        int md = random.nextInt(3);
         if(l == 4 || l == 5 || l == 6)
         {
         	l = l + 2;
@@ -40,7 +41,7 @@ public class ZooGenDeciTree extends WorldGenerator
                     if (i1 >= 0 && i1 < 256)
                     {
                         int j3 = world.getBlockId(i2, i1, l2);
-                        if (j3 != 0 && j3 != Block.leaves.blockID)
+                        if (j3 != 0 && j3 != Zoo.deciLeaves.blockID)
                         {
                             flag = false;
                         }
@@ -75,7 +76,7 @@ public class ZooGenDeciTree extends WorldGenerator
                     int j4 = i4 - k;
                     if ((Math.abs(l3) != i3 || Math.abs(j4) != i3 || random.nextInt(2) != 0 && j2 != 0) && !Block.opaqueCubeLookup[world.getBlockId(k3, k1, i4)])
                     {
-                        setBlockAndMetadata(world, k3, k1, i4, Block.leaves.blockID, 0);
+                        setBlockAndMetadata(world, k3, k1, i4, Zoo.deciLeaves.blockID, md);
                     }
                 }
             }
@@ -84,7 +85,7 @@ public class ZooGenDeciTree extends WorldGenerator
         for (int l1 = 0; l1 < l; l1++)
         {
             int k2 = world.getBlockId(i, j + l1, k);
-            if (k2 == 0 || k2 == Block.leaves.blockID)
+            if (k2 == 0 || k2 == Zoo.deciLeaves.blockID)
             {
                 setBlockAndMetadata(world, i, j + l1, k, Block.wood.blockID, 0);
             }

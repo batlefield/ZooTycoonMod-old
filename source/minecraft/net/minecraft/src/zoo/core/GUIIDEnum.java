@@ -18,7 +18,8 @@ public enum GUIIDEnum {
 	SAFE_LOCKED(mod_ZooCore.getGeneralInt("GUI SAFE LOCKED", 11)),
 	SAFE_UNLOCKED(mod_ZooCore.getGeneralInt("GUI SAFE UNLOCKED", 12)),
 	EXHIBIT_TOOL(mod_ZooCore.getGeneralInt("GUI EXHIBIT TOOL", 13)),
-	OPTIONS(mod_ZooCore.getGeneralInt("GUI OPTIONS", 14));
+	OPTIONS(mod_ZooCore.getGeneralInt("GUI OPTIONS", 14)),
+	SHOP_ANIMALS(mod_ZooCore.getGeneralInt("GUI ANIMALS", 15));
 	
 	
 	public int ID;

@@ -1,8 +1,12 @@
 package net.minecraft.src.zoo.core.entities;
 
-import net.minecraft.src.*;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.NBTTagCompound;
+import net.minecraft.src.World;
+import net.minecraft.src.Zoo;
 
-public class ZooEntityBighorn extends ZooEntityAnimal
+public class ZooEntityBighorn extends ZooNeutralMob
 {
 
     public ZooEntityBighorn(World world)
@@ -49,7 +53,7 @@ public class ZooEntityBighorn extends ZooEntityAnimal
         return new ItemStack(Zoo.meat, 1, 2);
     }
 
-	protected ZooEntityAnimal spawnBabyAnimal(ZooEntityAnimal entityanimal) {
+	protected ZooNeutralMob spawnBabyAnimal(ZooNeutralMob entityanimal) {
 		return new ZooEntityBighorn(worldObj);
 	}
 

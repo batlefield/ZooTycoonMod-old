@@ -10,7 +10,7 @@ import net.minecraft.src.forge.MinecraftForgeClient;
 import net.minecraft.src.forge.NetworkMod;
 import net.minecraft.src.zoo.core.EntityHandeler;
 import net.minecraft.src.zoo.core.ZooSettings;
-import net.minecraft.src.zoo.trading.Trade;
+import net.minecraft.src.zoo.core.gen.ZooGenMesa;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -18,9 +18,10 @@ import org.lwjgl.opengl.GL11;
 public class mod_ZooCore extends NetworkMod
 {
 
-	public static String version = "Alpha 1.0.0";
-	public static String mcVersion = "1.1.0";
-	public static String author = "Battlefield and AndrewSherman";
+	public static final String version = "Alpha 1.0.1";
+	public static final String mcVersion = "1.2.5";
+	public static final String author = "Battlefield and AndrewSherman";
+	public static final String modname = "ZooCraftia";
 	public static int renderMode;
 	public static KeyBinding options = new KeyBinding("Zoo options", Keyboard.KEY_P);
 	public static ZooSettings settings = new ZooSettings();
@@ -142,7 +143,7 @@ public class mod_ZooCore extends NetworkMod
 
 	public String getVersion()
 	{
-		return new StringBuilder().append("Zoo Tycoon ").append(mod_ZooCore.version).append(" Core for Minecraft ").append(mod_ZooCore.mcVersion).append(" by ").append(mod_ZooCore.author).toString();
+		return new StringBuilder().append(mod_ZooCore.modname).append(" ").append(mod_ZooCore.version).append(" Core for Minecraft ").append(mod_ZooCore.mcVersion).toString();
 	}
 
 	static Configuration config = new Configuration(new File(Minecraft.getMinecraftDir(), "Zoo/Core/Config.cfg"));

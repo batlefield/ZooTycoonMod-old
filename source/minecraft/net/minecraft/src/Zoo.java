@@ -4,20 +4,22 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.BAPI.BAPI;
 import net.minecraft.src.BAPI.VersionCheck;
 import net.minecraft.src.forge.MinecraftForge;
-import net.minecraft.src.zoo.api.Fence;
+import net.minecraft.src.forge.oredict.OreDictionary;
 import net.minecraft.src.zoo.api.ZAPI;
 import net.minecraft.src.zoo.core.CoreBlocksCreative;
 import net.minecraft.src.zoo.core.EntityHandeler;
 import net.minecraft.src.zoo.core.GuiHandlerCore;
 import net.minecraft.src.zoo.core.ItemSaltwaterBucket;
+import net.minecraft.src.zoo.core.TMIHelper;
+import net.minecraft.src.zoo.core.TaggedEntitiesSave;
 import net.minecraft.src.zoo.core.TileEntityFencer;
 import net.minecraft.src.zoo.core.ZooAcorns;
 import net.minecraft.src.zoo.core.ZooAxe;
 import net.minecraft.src.zoo.core.ZooBlock;
 import net.minecraft.src.zoo.core.ZooBlockFencer;
 import net.minecraft.src.zoo.core.ZooBlockGlass;
-import net.minecraft.src.zoo.core.ZooBlockQuicksand;
 import net.minecraft.src.zoo.core.ZooBlockGrounder;
+import net.minecraft.src.zoo.core.ZooBlockQuicksand;
 import net.minecraft.src.zoo.core.ZooBonemealHandler;
 import net.minecraft.src.zoo.core.ZooCrafting;
 import net.minecraft.src.zoo.core.ZooEnumTool;
@@ -37,6 +39,7 @@ import net.minecraft.src.zoo.core.ZooSaltwaterTextureFX;
 import net.minecraft.src.zoo.core.ZooSapling;
 import net.minecraft.src.zoo.core.ZooShovel;
 import net.minecraft.src.zoo.core.ZooSword;
+import net.minecraft.src.zoo.core.ZooTagGun;
 import net.minecraft.src.zoo.core.ZooTallGrass;
 
 public class Zoo {
@@ -79,14 +82,15 @@ public class Zoo {
 	private int saplingB = 232;
 	private int grounder = 233;
 	private int portal = 234;
-	private int portalTool = 235;**/
+	private int portalTool = 235;
+	private int deciLeaves = 236;**/
 
 	public static boolean versionCheck()
 	{
 		String s = VersionCheck.run("http://www2.arnes.si/~pmati/ZTUC.html");
 		if(versionCheck && !s.equals(mod_ZooCore.version))
         {
-        	mc.thePlayer.addChatMessage(BAPI.getCustomStringColor() + "New version of Zoo Tycoon Available (" + s + ")");
+        	mc.thePlayer.addChatMessage(BAPI.getCustomStringColor() + "New version of " + mod_ZooCore.modname + " Available (" + s + ")");
         }
 		return false;
 	}
@@ -94,6 +98,9 @@ public class Zoo {
 	
 	public static void init()
 	{
+		TMIHelper.hideItem(0);
+		TMIHelper.hideItem(10, 10);
+		
 		ZAPI.registerDirt(ZooDirts.coniferous);
 		ZAPI.registerDirt(ZooDirts.coniPeat);
 		ZAPI.registerDirt(ZooDirts.deciduous);
@@ -114,6 +121,7 @@ public class Zoo {
 		ZAPI.registerFence(Ofence);
 		ZAPI.registerFence(fence);
         
+		BAPI.registerNBT(new TaggedEntitiesSave());
 		BAPI.registerPlacableHandler(new ZooPlaceableHandler());
 		BAPI.registerCreativeHandler(new CoreBlocksCreative());
 		BAPI.registerModAuthor("Zoo Tycoon mod " + mod_ZooCore.version, mod_ZooCore.author);
@@ -138,6 +146,8 @@ public class Zoo {
 		ModLoader.addName(bsShovel, "Brownstone Shovel");
 		ModLoader.addName(bsAxe, "Brownstone Axe");
 		ModLoader.addName(lasso, "Lasso");
+		ModLoader.addName(tagGun, "Tag gun");
+		ModLoader.addName(dart, "Dart");
 		
 		
 		//blocks
@@ -157,8 +167,6 @@ public class Zoo {
 		registerBlock(savannahgrass, "Savannah grass");
 		registerBlock(coniferousgrass, "Coniferous Grass");
 		registerBlock(acorns, "Acorns");
-		registerBlock(acaciaLeaves, "Acacia leaves");
-		registerBlock(blueLeaves, "Blue pine leaves");
 		registerBlock(ZooDirts.savannah, "Savannah");
 		registerBlock(ZooDirts.deciduous, "Deciduous");
 		registerBlock(ZooDirts.coniferous, "Coniferous");
@@ -175,11 +183,20 @@ public class Zoo {
 		//blocks with metadata
 		ModLoader.registerBlock(grounder, net.minecraft.src.zoo.core.ZooItemGrounder.class);
 		ModLoader.addName(new ItemStack(grounder, 1, 0), "Grounder 128x128");
+		
 		ModLoader.registerBlock(sapling, net.minecraft.src.zoo.core.ZooItemSapling.class);
 		ModLoader.addName(new ItemStack(sapling, 1, 0), "Acacia sapling");
 		ModLoader.addName(new ItemStack(sapling, 1, 1), "Blue pine sapling");
 		ModLoader.addName(new ItemStack(sapling, 1, 2), "Deciduous sapling");
 		
+		ModLoader.registerBlock(blueLeaves, net.minecraft.src.zoo.core.ZooItemLeaves.class);
+		ModLoader.addName(new ItemStack(blueLeaves, 1, 8), "Blue pine leaves");
+		
+		ModLoader.registerBlock(acaciaLeaves, net.minecraft.src.zoo.core.ZooItemLeaves.class);
+		ModLoader.addName(new ItemStack(acaciaLeaves, 1, 8), "Acacia leaves");
+		
+		ModLoader.registerBlock(deciLeaves, net.minecraft.src.zoo.core.ZooItemLeaves.class);
+		ModLoader.addName(new ItemStack(deciLeaves), "Deciduous leaves");
 		
 		//items with metadata
 		ModLoader.addName(new ItemStack(meat, 1, 0), "Raw carnivore meat");
@@ -191,6 +208,7 @@ public class Zoo {
 		ModLoader.registerTileEntity(TileEntityFencer.class, "Exhibit tool");
 		
 		//other stuff
+		Block.setBurnProperties(deciLeaves.blockID, 30, 60);
 		Block.setBurnProperties(acaciaLeaves.blockID, 30, 60);
 		Block.setBurnProperties(blueLeaves.blockID, 30, 60);
 		mc.renderEngine.registerTextureFX(new ZooSaltwaterTextureFX(saltwaterStill.blockIndexInTexture, false));
@@ -199,7 +217,7 @@ public class Zoo {
 		      throw new RuntimeException("Still saltwater id must be moving saltwater id + 1");
 		}
 		
-		MinecraftForge.registerOre("brownstone", new ItemStack(brownStone, 1, 0));
+		OreDictionary.registerOre("brownstone", new ItemStack(brownStone, 1, 0));
 		MinecraftForge.setToolClass(fenceDestroyer, "zoofencedestroyer", 6);
 		MinecraftForge.setBlockHarvestLevel(fence,"pickaxe",6);
 		MinecraftForge.setBlockHarvestLevel(Gfence,"pickaxe",6);
@@ -218,22 +236,22 @@ public class Zoo {
 		MinecraftForge.setBlockHarvestLevel(Block.fence, "zoofencedestroyer", 1);
 		MinecraftForge.registerCustomBucketHandler(saltBucket);
 		MinecraftForge.setGuiHandler(mod_ZooCore.instance, new GuiHandlerCore());
-		MinecraftForge.versionDetect("Zoo Tycoon", 3, 1, 3);
+		MinecraftForge.versionDetect(mod_ZooCore.modname, 3, 2, 5);
 		MinecraftForge.registerBonemealHandler(new ZooBonemealHandler());
 		
 		FurnaceRecipes.smelting().addSmelting(meat.shiftedIndex, 0, new ItemStack(meat, 1, 1));
 		FurnaceRecipes.smelting().addSmelting(meat.shiftedIndex, 2, new ItemStack(meat, 1, 3));
 		
 		//test recipes
-        ModLoader.addRecipe(new ItemStack(Block.stoneOvenIdle, 1), new Object[] {
+        ModLoader.addRecipe(new ItemStack(tagGun, 1), new Object[] {
 		     "X", Character.valueOf('X'), Block.dirt
 		});
         
-        ModLoader.addRecipe(new ItemStack(meat, 1, 0), new Object[] {
+        ModLoader.addRecipe(new ItemStack(dart, 64), new Object[] {
 		     "XX", Character.valueOf('X'), Block.dirt
 		});
         
-        ModLoader.addRecipe(new ItemStack(meat, 1, 2), new Object[] {
+        ModLoader.addRecipe(new ItemStack(meat, 64, 3), new Object[] {
 		     "X", "X", Character.valueOf('X'), Block.dirt
 		});
 		
@@ -269,6 +287,7 @@ public class Zoo {
 	public static final Block Bfence = (new ZooFence(mod_ZooCore.getBlockIdFor("Brownstone Fence", 222), 10, Material.rock).setHardness(3F).setResistance(6F).setBlockName("bfence").setStepSound(Block.soundStoneFootstep));
 	public static final Block plexiglass = (new ZooBlockGlass(mod_ZooCore.getBlockIdFor("Plexi glass pane", 207), 12, 31, Material.glass, true).setHardness(0.5F).setResistance(20000F).setBlockName("plexiglasspane").setStepSound(Block.soundGlassFootstep));
 	public static final Block plexiglassBlock = (new ZooGlass(mod_ZooCore.getBlockIdFor("Plexi glass", 223), 12, Material.glass, false).setHardness(0.5F).setResistance(20000F).setBlockName("plexiglass").setStepSound(Block.soundGlassFootstep));
+	public static final Block deciLeaves = new ZooLeaves(mod_ZooCore.getBlockIdFor("Deciduous leaves", 236), 48).setHardness(0.2F).setBlockName("decileaves").setStepSound(Block.soundGrassFootstep);
 		
 	//items
 	public static ItemSaltwaterBucket saltBucket = (ItemSaltwaterBucket)(new ItemSaltwaterBucket(mod_ZooCore.getItemIdFor("Saltwater bucket", 2267), Zoo.saltwaterMoving.blockID, 1).setItemName("saltbucket").setContainerItem(Item.bucketEmpty));
@@ -280,6 +299,8 @@ public class Zoo {
 	public static Item bsAxe = (new ZooAxe(mod_ZooCore.getItemIdFor("Brownstone Axe", 2271), ZooEnumTool.BS).setIconIndex(3).setItemName("bsa"));
 	public static Item bsHoe = (new ZooHoe(mod_ZooCore.getItemIdFor("Brownstone Hoe", 2272), ZooEnumTool.BS).setIconIndex(4).setItemName("bsh"));
 	public static Item bsShovel = (new ZooShovel(mod_ZooCore.getItemIdFor("Brownstone Shovel", 2273), ZooEnumTool.BS).setIconIndex(5).setItemName("bssh"));
+	public static Item dart = new ZooItem(mod_ZooCore.getItemIdFor("Dart", 2278)).setItemName("dart").setIconIndex(17);
+	public static Item tagGun = new ZooTagGun(mod_ZooCore.getItemIdFor("Tag gun", 2279)).setItemName("tag gun").setIconIndex(16);
 	
 	
 	//biomes

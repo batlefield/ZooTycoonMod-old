@@ -1,14 +1,14 @@
 package net.minecraft.src.zoo.core.entities;
 import net.minecraft.src.*;
 
-public class ZooEntityPrimate extends ZooEntityAnimal
+public class ZooEntityPrimate extends ZooNeutralMob
 {
 
     public ZooEntityPrimate(World world)
     {
         super(world);
         texture = "/zoo/modells/chimp.png";
-        setSize(1.5F, 1.9F);
+        setSize(1.5F, 1.8F);
     }
 
     public EntityLiving roped;
@@ -48,7 +48,7 @@ public class ZooEntityPrimate extends ZooEntityAnimal
         return new ItemStack(Zoo.meat, 1, 2);
     }
     
-    protected ZooEntityAnimal spawnBabyAnimal(ZooEntityAnimal entityanimal) {
+    protected ZooNeutralMob spawnBabyAnimal(ZooNeutralMob entityanimal) {
 		return new ZooEntityPrimate(worldObj);
 	}
 

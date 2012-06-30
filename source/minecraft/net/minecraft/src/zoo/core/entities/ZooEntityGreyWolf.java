@@ -369,12 +369,12 @@ public class ZooEntityGreyWolf extends EntityTameable
                         this.aiSit.setIsSitting(true);
                         this.setEntityHealth(20);
                         this.setOwner(par1EntityPlayer.username);
-                        this.func_48142_a(true);
+                        this.playTameEffect(true);
                         this.worldObj.setEntityState(this, (byte)7);
                     }
                     else
                     {
-                        this.func_48142_a(false);
+                        this.playTameEffect(false);
                         this.worldObj.setEntityState(this, (byte)6);
                     }
                 }

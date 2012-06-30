@@ -92,6 +92,6 @@ public class mod_ZooFurniture extends NetworkMod
 
 	public String getVersion()
 	{
-		return new StringBuilder().append("Zoo Tycoon ").append(mod_ZooCore.version).append(" Furniture for Minecraft ").append(mod_ZooCore.mcVersion).append(" by ").append(author).append(" modified by ").append(mod_ZooCore.author).toString();
+		return new StringBuilder().append(mod_ZooCore.modname).append(" ").append(mod_ZooCore.version).append(" Furniture for Minecraft ").append(mod_ZooCore.mcVersion).toString();
 	}
 }

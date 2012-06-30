@@ -37,6 +37,27 @@ public class ZooLeaves extends Block implements ITextureProvider, IShearable
 
     }
     
+    public int getBlockTextureFromSideAndMetadata(int i, int j)
+    {
+    	if(blockID == Zoo.deciLeaves.blockID)
+    	{
+    		switch(j & 3)
+    		{
+    			case 0:
+    				return 47;
+    			case 1:
+    				return 48;
+    			case 2:
+    				return 49;
+				default:
+					return 48;
+    			
+    		}
+    	}else{
+    		return blockIndexInTexture;
+    	}
+    }
+    
     public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         int var6 = par1IBlockAccess.getBlockId(par2, par3, par4);
@@ -62,7 +83,7 @@ public class ZooLeaves extends Block implements ITextureProvider, IShearable
                     for(int l1 = -l; l1 <= l; l1++)
                     {
                         int i2 = world.getBlockId(i + j1, j + k1, k + l1);
-                        if(i2 == Zoo.blueLeaves.blockID)
+                        if(i2 == Zoo.blueLeaves.blockID || i2 == Zoo.deciLeaves.blockID)
                         {
                             int j2 = world.getBlockMetadata(i + j1, j + k1, k + l1);
                             world.setBlockMetadata(i + j1, j + k1, k + l1, j2 | 8);
@@ -108,7 +129,7 @@ public class ZooLeaves extends Block implements ITextureProvider, IShearable
                                 adjacentTreeBlocks[(l1 + k1) * j1 + (k2 + k1) * byte1 + (i3 + k1)] = 0;
                                 continue;
                             }
-                            if(k3 == Zoo.blueLeaves.blockID)
+                            if(k3 == Zoo.blueLeaves.blockID || k3 == Zoo.deciLeaves.blockID)
                             {
                                 adjacentTreeBlocks[(l1 + k1) * j1 + (k2 + k1) * byte1 + (i3 + k1)] = -2;
                             } else
@@ -192,27 +213,7 @@ public class ZooLeaves extends Block implements ITextureProvider, IShearable
     {
         return Block.sapling.blockID;
     }
-
-    public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-    {
-        if(!world.isRemote && entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().itemID == Item.shears.shiftedIndex)
-        {
-        	if(blockID == Zoo.acaciaLeaves.blockID)
-        	{
-	            entityplayer.addStat(StatList.mineBlockStatArray[blockID], 1);
-	            dropBlockAsItem_do(world, i, j, k, new ItemStack(Zoo.acaciaLeaves.blockID, 1, l & 3));
-        	}
-        	if(blockID == Zoo.blueLeaves.blockID)
-        	{
-	            entityplayer.addStat(StatList.mineBlockStatArray[blockID], 1);
-	            dropBlockAsItem_do(world, i, j, k, new ItemStack(Zoo.blueLeaves.blockID, 1, l & 3));
-        	}
-        } else
-        {
-            super.harvestBlock(world, entityplayer, i, j, k, l);
-        }
-    }
-
+    
     public boolean isOpaqueCube()
     {
     	return false;
@@ -242,6 +243,10 @@ public class ZooLeaves extends Block implements ITextureProvider, IShearable
     	if(blockID == Zoo.acaciaLeaves.blockID)
     	{
     		ret.add(new ItemStack(Zoo.acaciaLeaves.blockID, 1, 0));
+    	}
+    	if(blockID == Zoo.deciLeaves.blockID)
+    	{
+    		ret.add(new ItemStack(Zoo.deciLeaves.blockID, 1, 0));
     	}
         return ret;
     }

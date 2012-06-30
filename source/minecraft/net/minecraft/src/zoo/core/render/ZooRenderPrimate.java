@@ -5,7 +5,7 @@ import net.minecraft.src.FontRenderer;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.RenderLiving;
 import net.minecraft.src.Tessellator;
-import net.minecraft.src.zoo.core.entities.ZooEntityAnimal;
+import net.minecraft.src.zoo.core.entities.ZooNeutralMob;
 import net.minecraft.src.zoo.core.models.ZooModelPrimate;
 
 import org.lwjgl.opengl.GL11;
@@ -27,10 +27,10 @@ public class ZooRenderPrimate extends RenderLiving
 
     public void doRender(Entity entity, double d, double d1, double d2, float f, float f1)
     {
-        doRenderAnimal((ZooEntityAnimal)entity, d, d1, d2, f, f1);
+        doRenderAnimal((ZooNeutralMob)entity, d, d1, d2, f, f1);
     }
     
-    public void doRenderAnimal(ZooEntityAnimal animal, double d, double d1, double d2, float f, float f1)
+    public void doRenderAnimal(ZooNeutralMob animal, double d, double d1, double d2, float f, float f1)
     {
         super.doRender(animal, d, d1, d2, f, f1);
         
@@ -78,9 +78,9 @@ public class ZooRenderPrimate extends RenderLiving
 		        GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
 		        
 		        //hunger
-		        Tessellator tessellator2 = Tessellator.instance;
+		        /*Tessellator tessellator2 = Tessellator.instance;
 		        byte0 -= 5;
-		        GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
+		        GL11.glDisable(3553 /*GL_TEXTURE_2D*//*);
 		        tessellator2.startDrawingQuads();
 		        float f12 = animal.getHunger();
 		        float f13 = animal.getMaxHunger();
@@ -97,7 +97,7 @@ public class ZooRenderPrimate extends RenderLiving
 		        tessellator1.addVertex(f15 - 20F, -6 + byte0, 0.0D);
 		        tessellator1.addVertex(f15 - 20F, -10 + byte0, 0.0D);
 		        tessellator2.draw();
-		        GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
+		        GL11.glEnable(3553 /*GL_TEXTURE_2D*//*);*/
 		        
 		        GL11.glEnable(2896 /*GL_LIGHTING*/);
 	            GL11.glPopMatrix();

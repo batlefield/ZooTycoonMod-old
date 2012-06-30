@@ -2,14 +2,13 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-import net.minecraft.src.zoo.core.*;
-import net.minecraft.src.zoo.core.gen.ZooGenDeciTree;
+import net.minecraft.src.zoo.core.gen.ZooGenMesa;
 
 
-public class BiomeGenMesa extends BiomeGenBase
+public class ZooDimMesa extends ZooBiomeBase
 {
 
-	public BiomeGenMesa(int i)
+	public ZooDimMesa(int i)
     {
         super(i);
         biomeDecorator.treesPerChunk = -999;

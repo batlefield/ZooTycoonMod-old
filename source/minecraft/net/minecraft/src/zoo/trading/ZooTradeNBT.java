@@ -22,4 +22,6 @@ public class ZooTradeNBT implements INBT {
         int i =  (int) (d / 3.14159265);
         Trade.setMoney(i);
 	}
+
+	public void beforeWorldLoad(){}
 }

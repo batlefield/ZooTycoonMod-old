@@ -43,24 +43,23 @@ public abstract class ZooEntityAnimal extends EntityCreature
     {
         dataWatcher.updateObject(12, Integer.valueOf(i));
     }
-
-    public EntityItem entityDropItem(ItemStack par1ItemStack, float par2)
-    {
-    	EntityItem var3;
-    	
-    	if(dropMeat() != null)
-    	{
-    		var3 = new EntityItem(this.worldObj, this.posX, this.posY + (double)par2, this.posZ, dropMeat());
-    	}else{
-    		var3 = new EntityItem(this.worldObj, this.posX, this.posY + (double)par2, this.posZ, par1ItemStack);
-    	}
-    	
-        var3.delayBeforeCanPickup = 10;
-        this.worldObj.spawnEntityInWorld(var3);
-        return var3;
-    }
     
     public abstract ItemStack dropMeat();
+    
+    protected void dropFewItems(boolean par1, int par2)
+    {
+        int var4 = this.rand.nextInt(3);
+
+        if (par2 > 0)
+        {
+            var4 += this.rand.nextInt(par2 + 1);
+        }
+
+        for (int var5 = 0; var5 < var4; ++var5)
+        {
+            entityDropItem(dropMeat(), 0.0F);
+        }
+    }
     
     public void onLivingUpdate()
     {
